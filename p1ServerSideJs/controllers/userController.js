@@ -1,4 +1,5 @@
 const { User } = require("../models/userModel");
+const bcrypt = require("bcrypt");
 
 const registerController = async (req, res) => {
   try {
@@ -11,7 +12,7 @@ const registerController = async (req, res) => {
       });
     }
 
-    const findUser = await User.findOne({ email });
+    const findUser = await User.findOne({ email }); // db query which finds user in data base
 
     if (findUser) {
       return res.json({
@@ -19,11 +20,12 @@ const registerController = async (req, res) => {
         message: "User Already exits!",
       });
     }
+    const encryptPass = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
       username: username,
       email: email,
-      password: password,
+      password: encryptPass,
     });
 
     if (newUser) {
@@ -34,7 +36,7 @@ const registerController = async (req, res) => {
     } else {
       return res.json({
         success: false,
-        message: "Some Error ",
+        message: "Some Error . please try after sometime!",
       });
     }
   } catch (error) {
@@ -42,9 +44,47 @@ const registerController = async (req, res) => {
   }
 };
 
-const loginController = (req, res) => {
-  res.send("something to login thuis is login");
+const loginController = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (email === "" || password === "") {
+      return res.json({
+        success: false,
+        message: "All credentials Required !",
+      });
+    }
+
+    const finduser = await User.findOne({ email });
+
+    if (!finduser) {
+      return res.json({
+        success: false,
+        message: "User Not Found!",
+      });
+    }
+
+    const comparePass = await bcrypt.compare(password, finduser.password);
+
+    if (comparePass) {
+      return res.json({
+        success: true,
+        message: "Logged in succesfully!",
+      });
+    } else {
+      return res.json({
+        success: false,
+        message: "PassWord Incorrect",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
+
+
+
+
 
 const userProfileController = (req, res) => {
   res.send("This is userProfile");

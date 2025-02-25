@@ -11,7 +11,7 @@ const { connectDb } = require("./config/connectDb");
 const app = express();    // new instance of express intailized
 const Port = 4004
 
-connectDb()
+connectDb()     // connecting mongo db 
 
 
 //middle ware // helping functions which parses incoming data in json  and destructures it for controller 
@@ -27,21 +27,19 @@ app.use(bodyParser.json())
 
 
 app.get("/" , (req,res)=>{res.sendFile(path.join(__dirname , "views" , "index.html"))})
-app.get("/register" , (req,res)=>{res.sendFile(path.join(__dirname , "views" , "register.html"))})
-
-
-
-
-app.get("/login" , (req,res)=>{res.sendFile(path.join(__dirname , "views" , "login.html"))})
+app.get("/register" , (req,res)=>{res.sendFile(path.join(__dirname , "views" , "register.html"))})    // done 
+app.get("/login" , (req,res)=>{res.sendFile(path.join(__dirname , "views" , "login.html"))})      // done 
 app.get("/about" , (req,res)=>{res.sendFile(path.join(__dirname , "views" , "about.html"))})
 app.get("/contact" , (req,res)=>{res.sendFile(path.join(__dirname , "views" , "contact.html"))})
 
 
 
-app.post("/register" , registerController)
+app.post("/register" , registerController)     // done 
+app.post("/login" , loginController)        // done 
 
-app.post("/login" , loginController)
-app.post("/userProfile" , userProfileController)
+
+
+// app.post("/userProfile" , userProfileController)
 
 
 
