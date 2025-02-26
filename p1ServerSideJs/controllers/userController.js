@@ -1,6 +1,10 @@
 const { User } = require("../models/userModel");
 const bcrypt = require("bcrypt");
 
+
+
+
+
 const registerController = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -43,6 +47,9 @@ const registerController = async (req, res) => {
     console.log(error);
   }
 };
+
+
+
 
 const loginController = async (req, res) => {
   try {
