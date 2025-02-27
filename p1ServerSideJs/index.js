@@ -8,6 +8,7 @@ const {
   userProfileController,
 } = require("./controllers/userController"); // import function from userController
 const { connectDb } = require("./config/connectDb");
+const getUser = require("./controllers/getUserControllers");
 
 // node module standard libarary hai node js ki     // 3rd party libarary
 
@@ -41,26 +42,19 @@ app.engine(
 app.use(bodyParser.urlencoded({ extended: true })); // relevant for post methods
 // app.use(express.json()); //parsing  json data
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname ,"public")))   // statics files are in public folder  // css // js // assets
 
 // client tries to get a page and server sends page in response
 
-app.get("/", (req, res) => {
-  res.render("index", { title: "Techytechs | Home "  , name : "madhat"});
-});
+app.get("/", (req, res) => {res.render("index", { title: "Techytechs | Home "   });});
 
-app.get("/register", (req, res) => {
-  res.render("register", { title: "Techytechs | Register" });
-}); // done
+app.get("/register", (req, res) => {res.render("register", { title: "Techytechs | Register" });}); // done
+app.get("/login", (req, res) => {res.render("login", { title: "Techytechs | Login" });}); // done
+app.get("/about", (req, res) => {res.render("about", { title: "Techytechs | About" });});
+app.get("/contact",(req, res) => {res.render("contact", { title: "Techytechs | Contact" });});
 
-app.get("/login", (req, res) => {
-  res.render("login", { title: "Techytechs | Login" });
-}); // done
-app.get("/about", (req, res) => {
-  res.render("about", { title: "Techytechs | About" });
-});
-app.get("/contact", (req, res) => {
-  res.render("contact", { title: "Techytechs | Contact" });
-});
+app.get("/user/profile", getUser);
+
 
 app.post("/register", registerController); // done
 app.post("/login", loginController); // done

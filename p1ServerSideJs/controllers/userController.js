@@ -10,19 +10,13 @@ const registerController = async (req, res) => {
     const { username, email, password } = req.body;
 
     if (username === "" || email === "" || password === "") {
-      return res.json({
-        success: false,
-        message: "All credentials Required !",
-      });
-    }
+      return res.render("register" , {errorMessage : "All credentials required!"})
+    } 
 
     const findUser = await User.findOne({ email }); // db query which finds user in data base
 
     if (findUser) {
-      return res.json({
-        success: true,
-        message: "User Already exits!",
-      });
+      return res.render("register" , {errorMessage : "User Already Exists"})
     }
     const encryptPass = await bcrypt.hash(password, 10);
 
@@ -33,15 +27,11 @@ const registerController = async (req, res) => {
     });
 
     if (newUser) {
-      return res.json({
-        success: true,
-        message: "User account Created succesfully",
-      });
+      // return res.render("register" , {successMessage : "user created Succesfully"})
+      return res.redirect("/login")
+
     } else {
-      return res.json({
-        success: false,
-        message: "Some Error . please try after sometime!",
-      });
+      return res.render("register" , {errorMessage : "Some Error!"})
     }
   } catch (error) {
     console.log(error);
@@ -56,33 +46,35 @@ const loginController = async (req, res) => {
     const { email, password } = req.body;
 
     if (email === "" || password === "") {
-      return res.json({
-        success: false,
-        message: "All credentials Required !",
-      });
+      return res.render("login" , {errorMessage : "All credentials required!"})
     }
 
     const finduser = await User.findOne({ email });
 
     if (!finduser) {
-      return res.json({
-        success: false,
-        message: "User Not Found!",
-      });
+      return res.render("login" , {errorMessage : "User Not Found!"})
     }
 
     const comparePass = await bcrypt.compare(password, finduser.password);
 
     if (comparePass) {
-      return res.json({
-        success: true,
-        message: "Logged in succesfully!",
-      });
+
+
+        // you have to create a token // jwt token 
+
+
+
+
+    //  return res.render("login" , {successMessage : "Logged in succesfully"})     OR
+     return res.redirect("userProfile" )
+
+      // setTimeout(() => {
+      //  return res.redirect("/userProfile")
+      // }, 3000);
+
+
     } else {
-      return res.json({
-        success: false,
-        message: "PassWord Incorrect",
-      });
+      return res.render("login" , {errorMessage : "Password incorrect!"})
     }
   } catch (error) {
     console.log(error);
