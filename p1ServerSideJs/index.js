@@ -42,7 +42,7 @@ app.engine(
 app.use(bodyParser.urlencoded({ extended: true })); // relevant for post methods
 // app.use(express.json()); //parsing  json data
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname ,"public")))   // statics files are in public folder  // css // js // assets
+app.use(express.static(path.join(__dirname ,"public")))   // serving statics files  tfrom the server which are in public folder  // css // js // assets
 
 // client tries to get a page and server sends page in response
 
