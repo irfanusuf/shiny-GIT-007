@@ -10,6 +10,7 @@ const {
 } = require("./controllers/userController"); // import function from userController
 const { connectDb } = require("./config/connectDb");
 const getUser = require("./controllers/getUserControllers");
+const { createBlog, getallBlogs } = require("./controllers/blogController");
 
 // node module standard libarary hai node js ki     // 3rd party libarary
 
@@ -48,17 +49,27 @@ app.use(cookieParser())    // now can get and accept  cookies from  browser
 // client tries to get a page and server sends page in response
 
 app.get("/", (req, res) => {res.render("index", { title: "Techytechs | Home "   });});
-
 app.get("/register", (req, res) => {res.render("register", { title: "Techytechs | Register" });}); // done
 app.get("/login", (req, res) => {res.render("login", { title: "Techytechs | Login" });}); // done
 app.get("/about", (req, res) => {res.render("about", { title: "Techytechs | About" });});
 app.get("/contact",(req, res) => {res.render("contact", { title: "Techytechs | Contact" });});
 
+
 app.get("/user/profile", getUser);
 
 
+
+// user routes
 app.post("/register", registerController); // done
 app.post("/login", loginController); // done
+
+
+//user blog Routes
+app.get("/blogs", getallBlogs )
+app.get("/user/blog/create" , (req,res) => {res.render("createBlog")} )
+app.post("/user/blog/create" , createBlog)
+
+
 
 // app.post("/userProfile" , userProfileController)
 

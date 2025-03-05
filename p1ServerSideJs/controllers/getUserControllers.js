@@ -19,10 +19,7 @@ const getUser = async (req, res) => {
     const verifytoken = jwt.verify(authToken , secretKey)
     const userId = verifytoken.payload
 
-
-
-   
-    const findUser  = await User.findById(userId)   // logged in user object 
+    const findUser  = await User.findById(userId)   // logged in user object //
 
     // const findUser = await User.findOne({ email: "irfanusuf33@gmail.com" }); // db query which returns user Object
 
