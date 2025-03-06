@@ -2,3 +2,31 @@
 
 
 
+
+<div class="create-blog-container">
+    <form method="post" action="/user/blog/create">
+
+
+    <input placeholder="Enter Blog Title " name="blogTitle" type="text">
+    <textarea placeholder="Enter Blog Description " name="blogDescription" type="text" rows="5"></textarea>
+
+    <button> Create Blog</button>
+
+
+
+    </form>
+
+
+
+ {{#if errorMessage}}
+    <p style="color: rgb(255, 94, 0);"> Warning : {{errorMessage}} </p>
+  {{/if}}
+
+
+  {{#if successMessage}}
+  <p style="color: rgb(14, 84, 4);"> {{successMessage}} </p>
+  {{/if}}
+
+
+
+</div>

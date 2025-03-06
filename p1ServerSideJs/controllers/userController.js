@@ -59,7 +59,7 @@ const loginController = async (req, res) => {
       const secretKey = "thisislekjgoimsecretKey"; // digital signtaure
       const token = jwt.sign({ payload }, secretKey); // identity card
 
-      res.cookie("authToken", token, {
+      res.cookie("authTokenBlogs", token, {
         maxAge: 30* 24 * 60 * 60 * 1000,    // 30 days
       });
 

@@ -11,6 +11,7 @@ const {
 const { connectDb } = require("./config/connectDb");
 const getUser = require("./controllers/getUserControllers");
 const { createBlog, getallBlogs } = require("./controllers/blogController");
+const { isAuthenticated } = require("./middlewares/isAuthenticated");
 
 // node module standard libarary hai node js ki     // 3rd party libarary
 
@@ -55,7 +56,10 @@ app.get("/about", (req, res) => {res.render("about", { title: "Techytechs | Abou
 app.get("/contact",(req, res) => {res.render("contact", { title: "Techytechs | Contact" });});
 
 
-app.get("/user/profile", getUser);
+
+
+
+app.get("/user/profile", isAuthenticated,  getUser);
 
 
 
@@ -67,7 +71,9 @@ app.post("/login", loginController); // done
 //user blog Routes
 app.get("/blogs", getallBlogs )
 app.get("/user/blog/create" , (req,res) => {res.render("createBlog")} )
-app.post("/user/blog/create" , createBlog)
+
+
+app.post("/user/blog/create" ,isAuthenticated ,  createBlog)
 
 
 
