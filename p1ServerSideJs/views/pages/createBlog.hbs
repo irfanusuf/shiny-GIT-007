@@ -1,32 +1,101 @@
+<link rel="stylesheet" href="/css/blogs.css">
+
+{{!-- froala css --}}
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
+  type="text/css" />
+
+
+<div class="blog-container">
+
+
+  <form class="form">
+
+    <h1> Publish Your Blog </h1>
+
+    <div class="form-input">
+      <label> Title :</label>
+      <input placeholder="Blog title goes here" id="blogTitle">
+    </div>
+
+    <div class="form-group">
+
+      <div class="form-input">
+      <label> Upload Picture :</label>
+      <input type="file">
+    </div>
+
+    <div class="form-input">
+
+      <label> Category:</label>
+      <input placeholder="Category goes here e.g #blog #travel" id="category">
+    </div>
+</div>
 
 
 
+<textarea id="froala-editor" placeholder="Blog description goes here "></textarea>
 
 
-<div class="create-blog-container">
-    <form method="post" action="/user/blog/create">
+<div class="button">
+  <button id="submit"> Submit </button>
+</div>
 
 
-    <input placeholder="Enter Blog Title " name="blogTitle" type="text">
-    <textarea placeholder="Enter Blog Description " name="blogDescription" type="text" rows="5"></textarea>
-
-    <button> Create Blog</button>
-
-
-
-    </form>
+</form>
 
 
 
- {{#if errorMessage}}
-    <p style="color: rgb(255, 94, 0);"> Warning : {{errorMessage}} </p>
-  {{/if}}
+{{#if errorMessage}}
+<p style="color: rgb(255, 94, 0);"> Warning : {{errorMessage}} </p>
+{{/if}}
 
-
-  {{#if successMessage}}
-  <p style="color: rgb(14, 84, 4);"> {{successMessage}} </p>
-  {{/if}}
-
-
+{{#if successMessage}}
+<p style="color: rgb(14, 84, 4);"> {{successMessage}} </p>
+{{/if}}
 
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+
+
+
+
+<script>
+
+  const editor = new FroalaEditor('#froala-editor')
+
+  document.getElementById("submit").addEventListener("click", async (event) => {
+
+    event.preventDefault()
+    const blogTitle = document.getElementById("blogTitle").value
+    const blogDescription = editor.html.get();
+    const category = document.getElementById("category").value
+
+    try {
+      const response = await fetch('/user/blog/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ blogTitle, blogDescription, category }),
+      });
+
+      const data = await response.json()
+
+      if (data.success) {
+        alert(data.message);
+        window.location.href = "/blogs"
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while saving content.');
+    }
+  })
+
+
+
+
+</script>

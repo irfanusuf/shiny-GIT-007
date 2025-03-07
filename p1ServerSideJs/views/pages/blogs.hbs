@@ -10,8 +10,6 @@
         padding-top: 50px;
 
         >.blog {
-
-
             width: 400px;
             height: 600px;
             border: 1px solid black;
@@ -22,25 +20,14 @@
 </style>
 
 
-
-
-
-
 <div class="blog-container">
-
     {{#each blogs}}
-
     <div class="blog">
-
         <img src="{{this.blogPicture}}" alt="{{this._id}}" width="400">
         <h1> {{this.blogTitle}} </h1>
-        <p> {{this.blogDescription}}</p>
-
-
+        <p> {{{this.blogDescription}}}</p>
         <a href="/blog/{{this._id}}"> Read more </a>
-
     </div>
-
     {{/each}}
 
 </div>

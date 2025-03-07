@@ -1,0 +1,66 @@
+.blog-container {
+  width: 90%;
+  margin: auto;
+  height: 90vh;
+}
+
+h1 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.form {
+  padding-top: 20px;
+  width: 100%;
+}
+
+
+.form-group{
+  display:  flex;
+  /* justify-content: space-between; */
+  align-items: center;  
+  gap: 20px;
+}
+
+
+.form-input {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  > label {
+    font-weight: 800;
+    letter-spacing: 3px;
+    font-size: 20px;
+    min-width: 220px;
+    color: rgb(54, 53, 53);
+  }
+  > input {
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 90%;
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+
+
+  > button {
+    background-color: rgb(101, 101, 225);
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    width: 200px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    margin-top: 30px;
+    &:hover {
+      background-color: rgb(77, 77, 223);
+      cursor: pointer;
+    }
+  }
+}

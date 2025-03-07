@@ -6,36 +6,31 @@ const createBlog = async (req, res) => {
   try {
     const userId = req.userId; // this userid is coming from middle wares
 
-    let user = await User.findById(userId);   // db se user ko dondo 
+    let user = await User.findById(userId); // db se user ko dondo
 
     if (user !== null) {
+      const { blogTitle, blogDescription, category } = req.body;
 
-      const { blogTitle, blogDescription } = req.body;
-
-      if (blogTitle === "" || blogDescription === "") {
-        return res.render("createBlog", {
-          title: "create blog",
-          errorMessage: "Both Feilds are required",
+      if (blogTitle === "" || blogDescription === "" || category === "") {
+        return res.json({
+          success: false,
+          message: "All feilds are required!",
         });
       }
 
       const newBlog = await Blog.create({
         blogTitle,
         blogDescription,
+        category,
         author: userId,
       });
 
-
-    
       if (newBlog) {
-
-       user.blogs.push(newBlog._id)
-       await user.save()
-        // return res.json({success : true})     // tesing purpose
-        return res.redirect("/blogs");
+        user.blogs.push(newBlog._id);
+        await user.save();
+        return res.status(200).json({ success: true , message : "Blog Saved Succesfully"}); // tesing purpose
       }
     }
-
   } catch (error) {
     console.log(error);
   }

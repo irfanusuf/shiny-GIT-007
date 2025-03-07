@@ -5,6 +5,7 @@ const Blog = mongoose.model("Blog", {
   blogDescription: { type: String, require: true },
   blogPicture: { type: String },
   author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  category : {type : String},
 
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   comments: [
