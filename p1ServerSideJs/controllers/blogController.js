@@ -28,7 +28,9 @@ const createBlog = async (req, res) => {
       if (newBlog) {
         user.blogs.push(newBlog._id);
         await user.save();
-        return res.status(200).json({ success: true , message : "Blog Saved Succesfully"}); // tesing purpose
+        return res
+          .status(200)
+          .json({ success: true, message: "Blog Saved Succesfully" }); // tesing purpose
       }
     }
   } catch (error) {
@@ -55,4 +57,25 @@ const getallBlogs = async (req, res) => {
   }
 };
 
-module.exports = { createBlog, getallBlogs };
+const getBlogById = async (req, res) => {
+  try {
+
+    const {blogId} = req.params
+
+    const findBlog = await Blog.findById(blogId)
+
+    if(findBlog){
+      return res.render("blog" , {title : findBlog.blogTitle , desc : findBlog.blogDescription })
+    }
+
+    else{
+      return res.render("error" ,{ title :  "Error"})
+    }
+
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createBlog, getallBlogs , getBlogById};

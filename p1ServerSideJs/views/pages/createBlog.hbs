@@ -20,38 +20,38 @@
     <div class="form-group">
 
       <div class="form-input">
-      <label> Upload Picture :</label>
-      <input type="file">
+        <label> Upload Picture :</label>
+        <input type="file">
+      </div>
+
+      <div class="form-input">
+
+        <label> Category:</label>
+        <input placeholder="Category goes here e.g #blog #travel" id="category">
+      </div>
     </div>
 
-    <div class="form-input">
 
-      <label> Category:</label>
-      <input placeholder="Category goes here e.g #blog #travel" id="category">
+
+    <textarea id="froala-editor" placeholder="Blog description goes here "></textarea>
+
+
+    <div class="button">
+      <button id="submit"> Submit </button>
     </div>
-</div>
+
+
+  </form>
 
 
 
-<textarea id="froala-editor" placeholder="Blog description goes here "></textarea>
+  {{#if errorMessage}}
+  <p style="color: rgb(255, 94, 0);"> Warning : {{errorMessage}} </p>
+  {{/if}}
 
-
-<div class="button">
-  <button id="submit"> Submit </button>
-</div>
-
-
-</form>
-
-
-
-{{#if errorMessage}}
-<p style="color: rgb(255, 94, 0);"> Warning : {{errorMessage}} </p>
-{{/if}}
-
-{{#if successMessage}}
-<p style="color: rgb(14, 84, 4);"> {{successMessage}} </p>
-{{/if}}
+  {{#if successMessage}}
+  <p style="color: rgb(14, 84, 4);"> {{successMessage}} </p>
+  {{/if}}
 
 </div>
 
@@ -63,11 +63,16 @@
 
 <script>
 
-  const editor = new FroalaEditor('#froala-editor')
+  const editor = new FroalaEditor('#froala-editor') 
+
+
+
+
 
   document.getElementById("submit").addEventListener("click", async (event) => {
 
     event.preventDefault()
+    
     const blogTitle = document.getElementById("blogTitle").value
     const blogDescription = editor.html.get();
     const category = document.getElementById("category").value

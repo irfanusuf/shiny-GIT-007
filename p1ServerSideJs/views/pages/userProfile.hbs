@@ -1,21 +1,25 @@
-<div>
 
+
+<style>
+.profile-container{
+width: 80%;
+margin: auto;
+
+}
+
+</style>
+
+
+<div class="profile-container ">
     <h1>
-        This is user Profile
-
-        <h2> welcome {{username}} </h2>
-
-        <h2>
-            your email is {{email}}
-        </h2>
-
-
-        <p> {{password}}</p>
-
-
-
+        User Dashboard
     </h1>
 
-
+    <h2> Welcome {{username}} </h2>
+    
+    <p> <a href="/user/blog/create"> Create Blog</a> </p>
+    <p> <a href="/user/blog/list"> Blogs List</a> </p>
+    <p> <a href="/user/blog/archived"> Archived Blogs</a> </p>
+    <p> <a href="/user/blog/deleted"> Deleted Blogs</a> </p>
 
 </div>

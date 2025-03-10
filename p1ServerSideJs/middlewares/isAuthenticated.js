@@ -8,8 +8,8 @@ const isAuthenticated = async (req, res, next) => {
     if (authTokenBlogs === undefined) {
       return res
         .status(401)
-        .render("error", {
-          error: "Forbidden Your are not authentcated to view this page ",
+        .render("login", {
+          errorMessage: "Your are not authorized to view this page, Kindly Login First!  ",
         }); // unAuthenticated
     }
     const secretKey = "thisislekjgoimsecretKey"; // digital signtaure
