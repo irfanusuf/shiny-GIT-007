@@ -77,8 +77,6 @@ const loginController = async (req, res) => {
   }
 };
 
-const userProfileController = (req, res) => {
-  res.send("This is userProfile");
-};
 
-module.exports = { registerController, loginController, userProfileController };
+
+module.exports = { registerController, loginController,  };

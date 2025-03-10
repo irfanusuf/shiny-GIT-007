@@ -3,18 +3,21 @@ const path = require("path"); // import from node modules
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const xhbs = require("express-handlebars");
+
 const {
   registerController,
   loginController,
-  userProfileController,
 } = require("./controllers/userController"); // import function from userController
+
 const { connectDb } = require("./config/connectDb");
 const getUser = require("./controllers/getUserControllers");
+
 const {
   createBlog,
   getallBlogs,
   getBlogById,
 } = require("./controllers/blogController");
+
 const { isAuthenticated } = require("./middlewares/isAuthenticated");
 
 // node module standard libarary hai node js ki     // 3rd party libarary
@@ -49,47 +52,31 @@ app.use(express.static(path.join(__dirname, "public"))); // serving statics file
 app.use(cookieParser()); // now can get and accept  cookies from  browser
 // client tries to get a page and server sends page in response
 
-app.get("/", (req, res) => {
-  res.render("index", { title: "Techytechs | Home " });
-});
-app.get("/register", (req, res) => {
-  res.render("register", { title: "Techytechs | Register" });
-}); // done
-app.get("/login", (req, res) => {
-  res.render("login", { title: "Techytechs | Login" });
-}); // done
-app.get("/about", (req, res) => {
-  res.render("about", { title: "Techytechs | About" });
-});
-app.get("/contact", (req, res) => {
-  res.render("contact", { title: "Techytechs | Contact" });
-});
 
-app.get("/user/profile", isAuthenticated, getUser);
+
+app.get("/", (req, res) => {res.render("index", { title: "Techytechs | Home " });});
+app.get("/register", (req, res) => { res.render("register", { title: "Techytechs | Register" });}); // done
+app.get("/login", (req, res) => { res.render("login", { title: "Techytechs | Login" });}); // done
+app.get("/about", (req, res) => {res.render("about", { title: "Techytechs | About" });});
+app.get("/contact", (req, res) => {res.render("contact", { title: "Techytechs | Contact" });});
+
+
 
 // user routes
 app.post("/register", registerController); // done
 app.post("/login", loginController); // done
+app.get("/user/profile", isAuthenticated, getUser);
+
 
 //user blog Routes
+
+app.get("/user/blog/create", isAuthenticated, (req, res) => {res.render("createBlog");});
 app.get("/blogs", getallBlogs);
 app.get("/blog/:blogId", getBlogById);
 
-
-
-
-
-app.get("/user/blog/create", isAuthenticated, (req, res) => {
-  res.render("createBlog");
-});
-
-
-
-
-
 app.post("/user/blog/create", isAuthenticated, createBlog);
 
-// app.post("/userProfile" , userProfileController)
+
 
 app.listen(Port, () => {
   console.log(`Server started listening on Port ${Port}`);
