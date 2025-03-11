@@ -5,19 +5,19 @@
 }
 
 h1 {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .form {
-  padding-top: 20px;
+  padding-top: 10px;  
   width: 100%;
 }
 
 
 .form-group{
   display:  flex;
-  /* justify-content: space-between; */
+  justify-content: space-between; 
   align-items: center;  
   gap: 20px;
 }
@@ -29,9 +29,9 @@ h1 {
   align-items: center;
   > label {
     font-weight: 800;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     font-size: 20px;
-    min-width: 220px;
+    margin-right: 2px;
     color: rgb(54, 53, 53);
   }
   > input {
@@ -39,7 +39,7 @@ h1 {
     padding: 5px 10px;
     border-radius: 5px;
     border: 1px solid black;
-    width: 90%;
+    width: 400px;
   }
 }
 
@@ -57,10 +57,32 @@ h1 {
     border: none;
     border-radius: 10px;
     transition: all 0.3s linear;
-    margin-top: 30px;
+    margin-top: 20px;
     &:hover {
       background-color: rgb(77, 77, 223);
       cursor: pointer;
     }
   }
+}
+
+
+
+@media only screen and (max-width : 500px) {
+ 
+
+  .form-group{
+    flex-direction: column;
+  }
+  
+
+  .form-input{
+    flex-direction: column;
+    align-items: flex-start;
+    >label{
+      margin-bottom: 10px;
+    }
+  }
+
+
+
 }

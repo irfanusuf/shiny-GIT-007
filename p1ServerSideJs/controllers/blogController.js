@@ -9,9 +9,9 @@ const createBlog = async (req, res) => {
     let user = await User.findById(userId); // db se user ko dondo
 
     if (user !== null) {
-      const { blogTitle, blogDescription, category } = req.body;
+      const { blogTitle, blogDescription, category , shortDesc , blogPicture } = req.body;
 
-      if (blogTitle === "" || blogDescription === "" || category === "") {
+      if (blogTitle === "" || blogDescription === "" || category === "" || shortDesc ==="" || blogPicture ==="") {
         return res.json({
           success: false,
           message: "All feilds are required!",
@@ -22,7 +22,10 @@ const createBlog = async (req, res) => {
         blogTitle,
         blogDescription,
         category,
+        shortDesc,
+        blogPicture,
         author: userId,
+
       });
 
       if (newBlog) {
@@ -40,7 +43,7 @@ const createBlog = async (req, res) => {
 
 const getallBlogs = async (req, res) => {
   try {
-    const getBlogs = await Blog.find().lean(); /// reading all the blogs from db // lean is comptabile with hbs
+    const getBlogs = await Blog.find({ isArchived : false}).lean(); /// reading all the blogs from db // lean is comptabile with hbs
 
     if (getBlogs) {
       // return res.json({getBlogs})
@@ -65,7 +68,7 @@ const getBlogById = async (req, res) => {
     const findBlog = await Blog.findById(blogId)
 
     if(findBlog){
-      return res.render("blog" , {title : findBlog.blogTitle , desc : findBlog.blogDescription })
+      return res.render("blog" , {title : findBlog.blogTitle , desc : findBlog.blogDescription , url : findBlog.blogPicture })
     }
 
     else{
@@ -78,4 +81,15 @@ const getBlogById = async (req, res) => {
   }
 };
 
-module.exports = { createBlog, getallBlogs , getBlogById};
+
+const listBlogs = async (req,res) => {
+
+  const userId = req.userId
+  const blogs = await Blog.find({author : userId}).lean()
+
+
+  res.render("listBlogs" , {blogsARR : blogs})
+
+}
+
+module.exports = { createBlog, getallBlogs , getBlogById , listBlogs} ;

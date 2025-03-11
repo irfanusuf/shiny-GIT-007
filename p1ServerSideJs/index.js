@@ -16,6 +16,7 @@ const {
   createBlog,
   getallBlogs,
   getBlogById,
+  listBlogs,
 } = require("./controllers/blogController");
 
 const { isAuthenticated } = require("./middlewares/isAuthenticated");
@@ -68,13 +69,16 @@ app.post("/login", loginController); // done
 app.get("/user/profile", isAuthenticated, getUser);
 
 
-//user blog Routes
+//blog Routes
 
-app.get("/user/blog/create", isAuthenticated, (req, res) => {res.render("createBlog");});
+app.get("/blog/create", isAuthenticated, (req, res) => {res.render("createBlog");});
+app.post("/blog/create", isAuthenticated, createBlog);
+app.get("/blogs/list" ,isAuthenticated , listBlogs)
+
+
+
 app.get("/blogs", getallBlogs);
 app.get("/blog/:blogId", getBlogById);
-
-app.post("/user/blog/create", isAuthenticated, createBlog);
 
 
 

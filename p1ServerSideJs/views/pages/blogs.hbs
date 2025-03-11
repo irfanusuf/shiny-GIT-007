@@ -25,7 +25,7 @@
     <div class="blog">
         <img src="{{this.blogPicture}}" alt="{{this._id}}" width="400">
         <h1> {{this.blogTitle}} </h1>
-        {{!-- <p> {{{this.blogDescription}}}</p> --}}
+        <p> {{this.shortDesc}}</p>
         <a href="/blog/{{this._id}}"> Read more </a>
     </div>
     {{/each}}
