@@ -17,6 +17,8 @@ const {
   getallBlogs,
   getBlogById,
   listBlogs,
+  getEditBlog,
+  editBlog,
 } = require("./controllers/blogController");
 
 const { isAuthenticated } = require("./middlewares/isAuthenticated");
@@ -73,6 +75,15 @@ app.get("/user/profile", isAuthenticated, getUser);
 
 app.get("/blog/create", isAuthenticated, (req, res) => {res.render("createBlog");});
 app.post("/blog/create", isAuthenticated, createBlog);
+
+
+app.get("/blog/edit/:blogId", isAuthenticated, getEditBlog);
+app.put("/blog/edit/:blogId", isAuthenticated, editBlog);
+
+
+
+
+
 app.get("/blogs/list" ,isAuthenticated , listBlogs)
 
 

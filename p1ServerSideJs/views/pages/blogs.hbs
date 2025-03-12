@@ -1,33 +1,21 @@
-<style>
-    .blog-container {
-
-        width: 80%;
-        margin: auto;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        padding-top: 50px;
-
-        >.blog {
-            width: 400px;
-           
-       
-        }
 
 
-    }
-</style>
+<div class="container mt-5">
 
+    <h1 class="text-center my-3" > Our Latest Blogs </h1>
 
-<div class="blog-container">
+  <div class="row">
     {{#each blogs}}
-    <div class="blog">
-        <img src="{{this.blogPicture}}" alt="{{this._id}}" width="400">
-        <h1> {{this.blogTitle}} </h1>
-        <p> {{this.shortDesc}}</p>
-        <a href="/blog/{{this._id}}"> Read more </a>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <img src="{{this.blogPicture}}" class="card-img-top" alt="{{this.blogTitle}}" style="height: 300px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">{{this.blogTitle}}</h5>
+          <p class="card-text">{{this.shortDesc}}</p>
+          <a href="/blog/{{this._id}}" class="btn btn-primary">Read More</a>
+        </div>
+      </div>
     </div>
     {{/each}}
-
+  </div>
 </div>
