@@ -57,7 +57,7 @@ app.use(cookieParser()); // now can get and accept  cookies from  browser
 
 
 
-app.get("/", (req, res) => {res.render("index", { title: "Techytechs | Home " });});
+app.get("/", getallBlogs );
 app.get("/register", (req, res) => { res.render("register", { title: "Techytechs | Register" });}); // done
 app.get("/login", (req, res) => { res.render("login", { title: "Techytechs | Login" });}); // done
 app.get("/about", (req, res) => {res.render("about", { title: "Techytechs | About" });});
@@ -71,7 +71,7 @@ app.post("/login", loginController); // done
 app.get("/user/profile", isAuthenticated, getUser);
 
 
-//blog Routes
+//blog Routes 
 
 app.get("/blog/create", isAuthenticated, (req, res) => {res.render("createBlog");});
 app.post("/blog/create", isAuthenticated, createBlog);
