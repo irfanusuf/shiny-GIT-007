@@ -1,7 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using P2WebMVC.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// service injection 
+builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("main")));
+
+
+
+
+
+
+
 
 var app = builder.Build();
 
