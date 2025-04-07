@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P2WebMVC.Data;
 using P2WebMVC.Models;
+using P2WebMVC.Models.ViewModels;
 
 namespace P2WebMVC.Controllers
 {
@@ -12,7 +14,7 @@ namespace P2WebMVC.Controllers
 
         public UserController(SqlDbContext sqlDbContext)
         {
-            this.sqlDbContext  = sqlDbContext;
+            this.sqlDbContext = sqlDbContext;
         }
 
 
@@ -22,39 +24,126 @@ namespace P2WebMVC.Controllers
             return View();
         }
 
+
+
         [HttpPost]
-         public async Task<ActionResult> Register(User model)
+        public async Task<ActionResult> Register(User user)
         {
-            // register logic
-            if(!ModelState.IsValid){
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.errorMessage = "All details Required!";
+                    return View();
+                }
+                //   var existingUser = await sqlDbContext.Users.FindAsync(user.UserId);   // findAsync is for PK
 
-                ViewBag.errorMessage ="All the input feilds are required!" ;
-                 return View();
+                var existingUser = await sqlDbContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email);   // findAsync is for PK
+
+                if (existingUser != null)
+                {
+
+                    ViewBag.errorMessage = "User Already Exists";
+                    return View();
+
+                }
+
+                var encryptPass = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
+                user.Password = encryptPass;
+
+
+
+                var newUser = await sqlDbContext.Users.AddAsync(user);
+                await sqlDbContext.SaveChangesAsync();
+
+
+                // ViewBag.successMessage = "User Created Succefully!";
+
+                return RedirectToAction("Login");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.errorMessage = ex.Message;
+                return View("Error");
             }
 
-            var user = await sqlDbContext.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
 
-            if(user != null){
+        }
 
-                ViewBag.errorMessage ="User Already Exists!" ;
-                 return View();
 
-            }
 
-            await sqlDbContext.Users.AddAsync(model);
-            await sqlDbContext.SaveChangesAsync();
 
-            ViewBag.successMessage ="User created Succesfully!" ;
+        [HttpGet]
 
+        public ActionResult Login()
+        {
             return View();
         }
 
 
 
-          public ActionResult Login()
+        [HttpPost]
+
+        public async Task<ActionResult> Login(LoginView user)
         {
-            return View();
+
+            try
+            {
+
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.errorMessage = "All credentials Required!";
+                    return View();
+                }
+
+                var existingUser = await sqlDbContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+
+
+                if (existingUser == null)
+                {
+
+                    ViewBag.errorMessage = "User not Found!";
+                    return View();
+
+                }
+
+                var checkPass = BCrypt.Net.BCrypt.Verify(user.Password, existingUser.Password);
+
+                if (checkPass)
+                {
+
+
+                    return RedirectToAction("Dashboard", "Admin");
+
+                }
+                else
+                {
+                    ViewBag.errorMessage = "PassWord incorrect!";
+                    return View();
+                }
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.errorMessage = ex.Message;
+                return View("Error");
+            }
+
+
+
+
         }
+
 
     }
 }
+
+
+
+
+
