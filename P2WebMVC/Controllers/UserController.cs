@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P2WebMVC.Data;
+using P2WebMVC.Interfaces;
 using P2WebMVC.Models;
 using P2WebMVC.Models.ViewModels;
 
@@ -11,10 +12,12 @@ namespace P2WebMVC.Controllers
     {
 
         private readonly SqlDbContext sqlDbContext;    // encapsulated feilds
+        private readonly ITokenService tokenService;
 
-        public UserController(SqlDbContext sqlDbContext)
+        public UserController(SqlDbContext sqlDbContext , ITokenService tokenService)
         {
             this.sqlDbContext = sqlDbContext;
+            this.tokenService = tokenService;
         }
 
 
@@ -113,6 +116,9 @@ namespace P2WebMVC.Controllers
                 if (checkPass)
                 {
 
+                    tokenService.CreateToken(existingUser.UserId ,user.Email , existingUser.Username , 60*24*30);
+
+                    // token ko cookies may save kerna .... 
 
                     return RedirectToAction("Dashboard", "Admin");
 

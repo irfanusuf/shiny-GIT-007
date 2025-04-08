@@ -6,7 +6,9 @@ public interface ITokenService
 {
 
 
-public string CreateToken(string UserName , Guid UserId , string Email , int Time);
+public string CreateToken(Guid userId, string email, string username, int time);
+
+public Guid VerifyTokenAndGetId(string token);
 
 
 
