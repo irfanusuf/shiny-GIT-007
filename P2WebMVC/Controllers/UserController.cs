@@ -14,7 +14,7 @@ namespace P2WebMVC.Controllers
         private readonly SqlDbContext sqlDbContext;    // encapsulated feilds
         private readonly ITokenService tokenService;
 
-        public UserController(SqlDbContext sqlDbContext , ITokenService tokenService)
+        public UserController(SqlDbContext sqlDbContext, ITokenService tokenService)
         {
             this.sqlDbContext = sqlDbContext;
             this.tokenService = tokenService;
@@ -116,9 +116,19 @@ namespace P2WebMVC.Controllers
                 if (checkPass)
                 {
 
-                    tokenService.CreateToken(existingUser.UserId ,user.Email , existingUser.Username , 60*24*30);
+                    var token = tokenService.CreateToken(existingUser.UserId, user.Email, existingUser.Username, 60 * 24);
 
-                    // token ko cookies may save kerna .... 
+                    //    Console.WriteLine(token);
+
+                    HttpContext.Response.Cookies.Append("GradSchoolAuthToken", token, new CookieOptions
+                    {
+                        HttpOnly = true,
+                        Secure = false,
+                        SameSite = SameSiteMode.Lax,
+                        Expires = DateTimeOffset.UtcNow.AddHours(24)
+                    });
+
+                    // token ko cookies may save kerna .... // done 9 april 
 
                     return RedirectToAction("Dashboard", "Admin");
 

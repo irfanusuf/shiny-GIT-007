@@ -10,7 +10,7 @@ builder.Services.AddControllersWithViews();
 
 
 // dependency injection
-builder.Services.AddSingleton<ITokenService>();
+builder.Services.AddSingleton<ITokenService , TokenService>();
 
 // service injection 
 builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("main")));

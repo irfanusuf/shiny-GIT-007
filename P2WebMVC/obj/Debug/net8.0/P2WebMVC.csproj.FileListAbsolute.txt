@@ -168,3 +168,4 @@
 /home/irfan_usuf/ILS/GIT007/P2WebMVC/obj/Debug/net8.0/P2WebMVC.csproj.AssemblyReference.cache
 /home/irfan_usuf/ILS/GIT007/P2WebMVC/obj/Debug/net8.0/P2WebMVC.csproj.CopyComplete
 /home/irfan_usuf/ILS/GIT007/P2WebMVC/bin/Debug/net8.0/BCrypt.Net-Next.dll
+/home/irfan_usuf/ILS/GIT007/P2WebMVC/bin/Debug/net8.0/Microsoft.Bcl.Memory.dll
