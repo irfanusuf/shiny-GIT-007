@@ -43,6 +43,8 @@ namespace P2WebMVC.Controllers
 
                 var existingUser = await sqlDbContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email);   // findAsync is for PK
 
+            
+
                 if (existingUser != null)
                 {
 
@@ -120,7 +122,7 @@ namespace P2WebMVC.Controllers
 
                     //    Console.WriteLine(token);
 
-                    HttpContext.Response.Cookies.Append("GradSchoolAuthToken", token, new CookieOptions
+                    HttpContext.Response.Cookies.Append("GradSchoolAuthorizationToken", token, new CookieOptions
                     {
                         HttpOnly = true,
                         Secure = false,

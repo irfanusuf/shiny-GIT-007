@@ -1,10 +1,12 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace P2WebMVC.Models;
 
 public class User
 {
 
+    [Key]
     public  Guid UserId {get;set;} = Guid.NewGuid();
     public required string  Username {get ;set;}
     public required string  Email {get ;set;}

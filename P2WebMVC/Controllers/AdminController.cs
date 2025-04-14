@@ -27,7 +27,7 @@ namespace P2WebMVC.Controllers
         public ActionResult Dashboard()
         {
 
-            var token = Request.Cookies["GradSchoolAuthToken"];
+            var token = Request.Cookies["GradSchoolAuthorizationToken"];
 
             if (string.IsNullOrEmpty(token))
             {
