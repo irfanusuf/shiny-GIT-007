@@ -27,8 +27,6 @@ namespace P2WebMVC.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         public async Task<ActionResult> Register(User user)
         {
@@ -76,21 +74,14 @@ namespace P2WebMVC.Controllers
 
         }
 
-
-
-
         [HttpGet]
-
         public ActionResult Login()
         {
             return View();
         }
 
-
-
-        [HttpPost]
-
-        public async Task<ActionResult> Login(LoginView user)
+        [HttpPost]     
+         public async Task<ActionResult> Login(LoginView user)
         {
 
             try

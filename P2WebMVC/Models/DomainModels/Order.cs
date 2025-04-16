@@ -16,12 +16,24 @@ public required Guid OrderId { get; set; } = Guid.NewGuid();
 
 public required Guid UserId { get; set; }  // Fk 
 
-public User? User { get; set; }
+[ForeignKey("UserId")]
+public User? Buyer { get; set; }  // navigation property 
+
+
+
+
 
 public required Guid ProductId { get; set; }  // Fk
-public Product? Product { get; set; }
+public List<Product>? Products { get; set; } = [];
 public required int Quantity { get; set; } = 1;
 public required decimal TotalPrice { get; set; } = 0;
+
+
+
+
+
+
+
 public required DateTime DateCreated { get; set; } = DateTime.UtcNow;
 public required OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
 public required DateTime? ShippedDate { get; set; } =DateTime.UtcNow.AddDays(7);
