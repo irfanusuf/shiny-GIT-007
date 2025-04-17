@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using P2WebMVC.Models.JunctionModels;
 using P2WebMVC.Types;
 
 namespace P2WebMVC.Models.DomainModels;
@@ -15,6 +16,11 @@ public required string ProductImage { get; set; }
 public required decimal ProductPrice { get; set; }
 public required int ProductStock { get; set; }
 public required ProductCategory Category { get; set; } = ProductCategory.General;
+
+
+public ICollection<CartProduct>? ProductsInCarts { get; set; } = [];   // navigation property //  collection of products in the cart
+public ICollection<OrderProduct>? ProductsInOrders { get; set; } = []; //  collection of products in the order
+
 public required bool IsDeleted { get; set; } = false;
 public required bool IsActive { get; set; } = true;
 public required DateTime CreatedAt { get; set; } = DateTime.UtcNow;

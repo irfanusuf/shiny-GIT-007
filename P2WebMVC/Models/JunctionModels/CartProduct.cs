@@ -19,7 +19,6 @@ public class CartProduct
 
 
     public required Guid ProductId { get; set; } // Fk
-
     [ForeignKey("ProductId")]   
     public Product? Product { get; set; } // navigation property //  belonging to a product
 
@@ -27,8 +26,9 @@ public class CartProduct
 
     public required int Quantity { get; set; } = 1;
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedOn { get; set; } = DateTime.UtcNow;
 
 }

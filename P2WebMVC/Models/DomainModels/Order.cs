@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.NetworkInformation;
+using P2WebMVC.Models.JunctionModels;
 using P2WebMVC.Types;
 
 namespace P2WebMVC.Models.DomainModels;
@@ -21,15 +22,11 @@ public User? Buyer { get; set; }  // navigation property
 
 
 
+public ICollection<OrderProduct>? Products { get; set; } = []; //  collection of products in the order
 
 
-public required Guid ProductId { get; set; }  // Fk
-public List<Product>? Products { get; set; } = [];
 public required int Quantity { get; set; } = 1;
 public required decimal TotalPrice { get; set; } = 0;
-
-
-
 
 
 

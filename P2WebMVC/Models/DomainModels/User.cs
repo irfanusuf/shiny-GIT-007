@@ -14,10 +14,12 @@ public class User
     public required string  Password {get ;set;}
     public string?  ProfilePicUrl {get ;set;}
     public string? Phone {get; set ; }
-    public Address? Address  {get; set ; }
-    public ICollection<Order>? Orders {get;set;} =[]; 
+    public Address? Address  {get; set ; }   //  navigation property 
+    public Cart?  Cart {get;set;}    // navigation property
 
-    public Cart?  Cart {get;set;} 
+    public ICollection<Order>? Orders {get;set;} =[]; // navigation property //  collection of orders placed by the user
+
+   
 
 
 

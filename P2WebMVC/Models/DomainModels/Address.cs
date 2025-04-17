@@ -1,12 +1,13 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace P2WebMVC.Models.DomainModels;
 
 public class Address
 {
-
-
+    [Key]
+    public Guid AddressId { get; set; } = Guid.NewGuid(); //pk
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
     public required string Street { get; set; }
