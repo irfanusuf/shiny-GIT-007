@@ -248,6 +248,9 @@ namespace P2WebMVC.Migrations
                     b.Property<string>("ProfilePicUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
