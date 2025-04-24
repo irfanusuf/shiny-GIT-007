@@ -11,7 +11,7 @@
 
     <h3> Create product </h3>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
             <label for="ProductName" class="form-label">Product Name <span class="text-danger">*</span></label>
@@ -19,8 +19,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="ProductImage" class="form-label">Product Image Url</label>
-            <input type="text" class="form-control" name="ProductImage">
+            <label for="ProductImage" class="form-label">Product Image</label>
+            <input type="file" class="form-control" name="file">
         </div>
 
         <div class="mb-3">

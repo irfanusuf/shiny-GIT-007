@@ -9,13 +9,16 @@ namespace P2WebMVC.Controllers
     public class AdminController : Controller
     {
 
-      private readonly SqlDbContext dbContext;    // encapsulated feilds
+        private readonly SqlDbContext dbContext;    // encapsulated feilds
         private readonly ITokenService tokenService;
 
-        public AdminController(ITokenService tokenService , SqlDbContext dbContext)
+        private readonly ICloudinaryService cloudinaryService;
+
+        public AdminController(ITokenService tokenService, SqlDbContext dbContext , ICloudinaryService cloudinaryService)
         {
             this.tokenService = tokenService;
             this.dbContext = dbContext;
+            this.cloudinaryService = cloudinaryService;
         }
 
 
@@ -56,24 +59,35 @@ namespace P2WebMVC.Controllers
         [HttpGet]
         public ActionResult Createproduct()
         {
-
-
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Createproduct(Product req)
+        public async Task<ActionResult> Createproduct(Product req, IFormFile file)
         {
 
             try
             {
-                if (string.IsNullOrEmpty(req.ProductName) || 
-                string.IsNullOrEmpty(req.ProductDescription) || 
-                string.IsNullOrEmpty(req.ProductImage))
+
+                if (file == null || file.Length == 0)
+                {
+                    ViewBag.ErrorMessage = "Kindly Select the image File";
+                    return View();
+                }
+
+                var SecureUrl = await cloudinaryService.UploadImage(file);
+
+
+                if (string.IsNullOrEmpty(req.ProductName) ||
+                string.IsNullOrEmpty(req.ProductDescription))
+                // string.IsNullOrEmpty(req.ProductImage))
                 {
                     ViewBag.ErrorMessage = "All details with * are required";
                     return View();
                 }
+
+
+                req.ProductImage = SecureUrl;
 
                 await dbContext.Products.AddAsync(req);
                 await dbContext.SaveChangesAsync();

@@ -8,7 +8,7 @@
 
          dotnet add package BCrypt.Net-Next --version 4.0.3
         
-        dotnet add package CloudinaryDotNet --version 1.27.2
+        dotnet add package CloudinaryDotNet --version 1.27.5
 
 
         dotnet add package System.IdentityModel.Tokens.Jwt --version 8.3.1
