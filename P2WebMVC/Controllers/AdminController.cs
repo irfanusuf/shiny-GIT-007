@@ -63,19 +63,18 @@ namespace P2WebMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Createproduct(Product req, IFormFile file)
+        public async Task<ActionResult> Createproduct(Product req, IFormFile image)
         {
 
             try
             {
-
-                if (file == null || file.Length == 0)
+                if (image == null || image.Length == 0)
                 {
                     ViewBag.ErrorMessage = "Kindly Select the image File";
                     return View();
                 }
 
-                var SecureUrl = await cloudinaryService.UploadImage(file);
+                var SecureUrl = await cloudinaryService.UploadImageAsync(image);
 
 
                 if (string.IsNullOrEmpty(req.ProductName) ||

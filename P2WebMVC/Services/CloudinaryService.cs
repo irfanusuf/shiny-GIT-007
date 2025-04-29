@@ -17,19 +17,19 @@ public class CloudinaryService : ICloudinaryService
         // this.cloudinary = cloudinary;
 
         // this.url = configuration["Cloudinary:CLOUDINARY_URL"] ?? throw new ArgumentNullException("Cloudinary Url is not configured.");
-      
+
 
         try
         {
-            DotEnv.Load(options: new DotEnvOptions(probeForEnv : true));
+            DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
         }
         catch (System.Exception ex)
         {
-            
+
             throw new InvalidOperationException("Failed to load .env file.", ex);
         }
 
-      
+
         var CloudinaryUrl = Environment.GetEnvironmentVariable("CLOUDINARY_URL");
 
         this.cloudinary = new Cloudinary(CloudinaryUrl) { Api = { Secure = true } };
@@ -39,19 +39,19 @@ public class CloudinaryService : ICloudinaryService
 
 
 
-    public async Task<string> UploadImage(IFormFile file)
+    public async Task<string> UploadImageAsync(IFormFile image)
     {
-        if (file == null || file.Length == 0)
+        if (image == null || image.Length == 0)
         {
-            throw new ArgumentException("File is invalid.");
+            throw new ArgumentException("Image is missing.");
         }
 
-        using var stream = file.OpenReadStream();
+        using var stream = image.OpenReadStream();
 
 
         var uploadParams = new ImageUploadParams
         {
-            File = new FileDescription(file.FileName, stream),
+            File = new FileDescription(image.FileName, stream),
             UseFilename = true,
             UniqueFilename = false,
             Overwrite = true,
@@ -59,7 +59,7 @@ public class CloudinaryService : ICloudinaryService
             // Transformation = new Transformation().Width(150).Height(150).Crop("fill")
         };
 
-      var uploadResult =  await cloudinary.UploadAsync(uploadParams);
+        var uploadResult = await cloudinary.UploadAsync(uploadParams);
 
         if (uploadResult.Error != null)
         {
@@ -69,5 +69,50 @@ public class CloudinaryService : ICloudinaryService
         return uploadResult.SecureUrl.ToString();
     }
 
+    public Task<string> UploadMultipleImageAsync(IFormFile imgArr)
+    {
+        throw new NotImplementedException();
+    }
 
+    public async Task<string> UploadVideoAsync(IFormFile video)
+    {
+        try
+        {
+            if (video == null || video.Length == 0)
+            {
+                throw new ArgumentException("video is missing.");
+            }
+
+
+            using var stream = video.OpenReadStream();
+
+
+            var uploadParams = new VideoUploadParams()
+            {
+                File = new FileDescription(video.FileName, stream),
+                UseFilename = true,
+                UniqueFilename = false,
+                Overwrite = true,
+                Folder = "Trinkle"
+            };
+
+            var uploadResult = await cloudinary.UploadAsync(uploadParams);
+
+            if (uploadResult.Error != null)
+            {
+                throw new InvalidOperationException($"Cloudinary upload failed: {uploadResult.Error.Message}");
+            }
+
+
+            return uploadResult.SecureUrl.ToString();
+
+
+
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+    }
 }
