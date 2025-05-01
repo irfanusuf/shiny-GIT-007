@@ -13,6 +13,8 @@ public enum ProductCategory
     Beauty,
     Automotive,
     Health,
-    Grocery
+    Grocery ,
+
+    Accesories
 
 }

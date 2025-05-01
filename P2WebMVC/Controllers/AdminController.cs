@@ -1,8 +1,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using P2WebMVC.Data;
 using P2WebMVC.Interfaces;
 using P2WebMVC.Models.DomainModels;
+using P2WebMVC.Types;
 
 namespace P2WebMVC.Controllers
 {
@@ -14,7 +17,7 @@ namespace P2WebMVC.Controllers
 
         private readonly ICloudinaryService cloudinaryService;
 
-        public AdminController(ITokenService tokenService, SqlDbContext dbContext , ICloudinaryService cloudinaryService)
+        public AdminController(ITokenService tokenService, SqlDbContext dbContext, ICloudinaryService cloudinaryService)
         {
             this.tokenService = tokenService;
             this.dbContext = dbContext;
@@ -31,27 +34,56 @@ namespace P2WebMVC.Controllers
 
 
         [HttpGet]
-        public ActionResult Dashboard()
+        public async Task<ActionResult> Dashboard()
         {
 
-            var token = Request.Cookies["GradSchoolAuthorizationToken"];
-
-            if (string.IsNullOrEmpty(token))
+            try
             {
-                return RedirectToAction("login", "user");
+                var token = Request.Cookies["GradSchoolAuthorizationToken"];
+
+                if (string.IsNullOrEmpty(token))
+                {
+                    return RedirectToAction("login", "user");
+                }
+
+
+                var userId = tokenService.VerifyTokenAndGetId(token);
+
+                if (Guid.Empty == userId)
+                {
+                    return RedirectToAction("login", "user");
+                }
+
+                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+
+                if (user?.Role == Role.User)
+                {
+                    return RedirectToAction("Dashboard", "User");
+                }
+                else if (user?.Role == Role.StoreKeeper)
+                {
+                    return RedirectToAction("Dashboard", "StoreKeeper");
+                }
+                else if (user?.Role == Role.Admin)
+                {
+
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Login", "User");
+                }
+
+
+            }
+            catch (System.Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Error");
+
             }
 
 
-            var userId = tokenService.VerifyTokenAndGetId(token);
-
-            if (userId == null)
-            {
-                return RedirectToAction("login", "user");
-            }
-
-
-
-            return View();
         }
 
 
@@ -59,6 +91,7 @@ namespace P2WebMVC.Controllers
         [HttpGet]
         public ActionResult Createproduct()
         {
+            ViewBag.CategoryList = new SelectList(Enum.GetValues(typeof(ProductCategory)));
             return View();
         }
 

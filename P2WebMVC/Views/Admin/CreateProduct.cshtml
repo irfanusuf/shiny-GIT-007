@@ -47,7 +47,11 @@
 
         <div class="mb-3">
             <label for="Category" class="form-label">Category</label>
-            <input type="text" class="form-control" name="Category">
+
+
+                @Html.DropDownList("Category", (SelectList)ViewBag.CategoryList, "Select Category", new { @class =
+            "form-control" }) 
+
         </div>
 
 
