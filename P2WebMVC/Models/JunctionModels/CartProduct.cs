@@ -19,13 +19,16 @@ public class CartProduct
 
 
     public required Guid ProductId { get; set; } // Fk
-    [ForeignKey("ProductId")]   
+    [ForeignKey("ProductId")]
     public Product? Product { get; set; } // navigation property //  belonging to a product
 
 
 
     public required int Quantity { get; set; } = 1;
 
+    public string? Size { get; set; }
+    public string? Color { get; set; }
+    public string? Weight { get; set; }
 
 
     public DateTime CreatedOn { get; set; } = DateTime.UtcNow;

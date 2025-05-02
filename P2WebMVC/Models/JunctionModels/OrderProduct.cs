@@ -25,6 +25,12 @@ public class OrderProduct
 
     public required int Quantity { get; set; } = 1;
 
+
+    public string? Size { get; set; }
+    public string? Color { get; set; }
+    public string? Weight { get; set; }
+
+
     public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedOn { get; set; } = DateTime.UtcNow;
 

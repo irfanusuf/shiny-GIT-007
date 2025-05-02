@@ -17,6 +17,10 @@ public required decimal ProductPrice { get; set; }
 public required int ProductStock { get; set; }
 public required ProductCategory Category { get; set; } = ProductCategory.General;
 
+public string? Size {get;set;}
+public string? Color {get ;set;}
+public string? Weight {get;set;}
+
 
 public ICollection<CartProduct>? ProductsInCarts { get; set; } = [];   // navigation property //  collection of products in the cart
 public ICollection<OrderProduct>? ProductsInOrders { get; set; } = []; //  collection of products in the order
