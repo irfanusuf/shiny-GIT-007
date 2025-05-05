@@ -8,7 +8,7 @@ namespace P2WebMVC.Models.JunctionModels;
 public class CartProduct
 {
     [Key]
-    public required Guid CartProductId { get; set; } = Guid.NewGuid();   // pk 
+    public  Guid CartProductId { get; set; } = Guid.NewGuid();   // pk 
 
 
     public required Guid CartId { get; set; } // Fk

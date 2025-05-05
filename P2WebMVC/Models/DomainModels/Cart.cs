@@ -7,7 +7,7 @@ namespace P2WebMVC.Models.DomainModels;
 public class Cart
 {
 
-public required Guid CartId { get; set; } = Guid.NewGuid();
+public  Guid CartId { get; set; } = Guid.NewGuid();
 public required Guid UserId { get; set; }  // Fk
 [ForeignKey("UserId")]
 public User? Buyer { get; set; }  // navigation property //  belonging to a user
