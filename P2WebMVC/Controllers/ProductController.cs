@@ -144,107 +144,77 @@ namespace P2WebMVC.Controllers
     }
 
 
-
-    [HttpPost]
-    public async Task<IActionResult> AddToCart(Guid ProductId, string? Color, int Qunatity, string? Size)
+[HttpPost]
+public async Task<IActionResult> AddToCart(Guid ProductId, string? Color, int Quantity, string? Size)
+{
+    try
     {
-
-
-      try
-      {
-        // token fetch from cookies 
+        
         var token = Request.Cookies["GradSchoolAuthorizationToken"];
-        // not token 
-        var product = await dbContext.Products.FindAsync(ProductId);
+        if (string.IsNullOrEmpty(token))
+            return RedirectToAction("Login", "User");
 
-        if (product == null)
-        {
-
-        }
-
-        if (token == null)
-        {
-          RedirectToAction("login", "user");
-        }
-
-        // user id 
+    
         var userId = tokenService.VerifyTokenAndGetId(token);
+        if (userId == Guid.Empty)
+            return RedirectToAction("Login", "User");
 
-        if (Guid.Empty == userId)
-        {
-          RedirectToAction("login", "user");
-        }
+    
+        var product = await dbContext.Products.FindAsync(ProductId);
+        if (product == null)
+            return NotFound("Product not found");
 
+     
         var cart = await dbContext.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
-
-
+        
         if (cart == null)
         {
-
-          cart = new Cart
-          {
-            UserId = userId,
-            CartTotal = 0
-
-          };
+            cart = new Cart
+            {
+                UserId = userId,
+                CartTotal = 0,
+                Products = []
+            };
+            dbContext.Carts.Add(cart);
         }
 
-        var existingCartItems = await dbContext.CartProducts.Where(cp => cp.CartId == cart.CartId).ToListAsync();
+    
+        var existingItem = await dbContext.CartProducts
+            .FirstOrDefaultAsync(cp => cp.CartId == cart.CartId );
 
-        if (existingCartItems == null)
+        if (existingItem == null)
         {
-
-          var cartItem = new CartProduct
-          {
-
-            CartId = cart.CartId,
-            ProductId = ProductId,
-            Quantity = Qunatity,
-            Color = Color,
-            Size = Size
-          };
-
-          cart?.Products?.Add(cartItem);
-
-          cart?.CartTotal = product?.ProductPrice * Qunatity;
-
-          await dbContext.SaveChangesAsync();
-
-
-
+           var cartItem = new CartProduct
+            {
+                CartId = cart.CartId,
+                ProductId = ProductId,
+                Quantity = Quantity,
+                Color = Color,
+                Size = Size
+            };
+            dbContext.CartProducts.Add(cartItem);
+       
         }
         else
         {
-
-
-          cart.CartTotal = product.ProductPrice;
-          await dbContext.SaveChangesAsync();
-
+              existingItem.Quantity += Quantity;
         }
 
-        // find product 
+    
+        cart.CartTotal = await dbContext.CartProducts
+            .Where(cp => cp.CartId == cart.CartId)
+            .SumAsync(cp => cp.Quantity * product.ProductPrice);
 
-
-        // product color // size // weight  // qty // paramerters
-
-
-        // find cart 
-
-        return RedirectToAction("Cart" , "User");
-
-
-      }
-      catch (System.Exception ex)
-      {
-
+        await dbContext.SaveChangesAsync();
+        return RedirectToAction("Cart", "User");
+    }
+    catch (Exception ex)
+    {
         ViewBag.ErrorMessage = ex.Message;
         return View("Error");
-
-      }
-
-
-
     }
+}
+
 
 
 
