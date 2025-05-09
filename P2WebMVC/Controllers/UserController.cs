@@ -41,7 +41,7 @@ namespace P2WebMVC.Controllers
 
                 var existingUser = await sqlDbContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email);   // findAsync is for PK
 
-            
+
 
                 if (existingUser != null)
                 {
@@ -80,8 +80,8 @@ namespace P2WebMVC.Controllers
             return View();
         }
 
-        [HttpPost]     
-         public async Task<ActionResult> Login(LoginView user)
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginView user)
         {
 
             try
@@ -148,6 +148,45 @@ namespace P2WebMVC.Controllers
 
         }
 
+        [HttpGet]
+
+        public async Task<ActionResult> Cart()
+        {
+
+
+            var token = Request.Cookies["GradSchoolAuthorizationToken"];
+            if (string.IsNullOrEmpty(token))
+                return RedirectToAction("Login", "User");
+
+
+            var userId = tokenService.VerifyTokenAndGetId(token);
+
+            if (userId == Guid.Empty)
+                return RedirectToAction("Login", "User");
+
+
+            var cart = await sqlDbContext.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null )
+            {
+                return NotFound();
+            }
+
+            var products = await sqlDbContext.CartProducts.Include(cp => cp.Product).Where(cp => cp.CartId == cart.CartId).ToListAsync();
+
+
+            var viewModel = new CartView
+            {
+                Cart = cart,
+                Products = products
+
+            };
+
+            return View(viewModel);
+
+
+
+        }
 
     }
 }
