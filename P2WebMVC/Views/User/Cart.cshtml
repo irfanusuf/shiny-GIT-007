@@ -19,13 +19,14 @@
     <b class="col-2"> Qty x Price</b>
 
     <b class="col-2"> Product total</b>
+
     <b class="col-2 d-flex justify-content-end"> Remove</b>
 </div>
 
 
 
 
-@foreach(var product in Model?.Products){
+@foreach(var product in Model?.CartProducts){
 
 
 
@@ -75,6 +76,6 @@
 
 
 <div class="d-flex justify-content-end mt-3 ">
-<a class="btn btn-outline-success"> Procced To CheckOut</a>
+<a class="btn btn-outline-success" asp-controller="Order" asp-action="Checkout" asp-route-CartId = "@Model?.Cart?.CartId"> Procced To CheckOut</a>
 </div>
 

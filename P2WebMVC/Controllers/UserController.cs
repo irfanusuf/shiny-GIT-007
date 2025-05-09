@@ -172,13 +172,13 @@ namespace P2WebMVC.Controllers
                 return NotFound();
             }
 
-            var products = await sqlDbContext.CartProducts.Include(cp => cp.Product).Where(cp => cp.CartId == cart.CartId).ToListAsync();
+            var cartProducts = await sqlDbContext.CartProducts.Include(cp => cp.Product).Where(cp => cp.CartId == cart.CartId).ToListAsync();
 
 
             var viewModel = new CartView
             {
                 Cart = cart,
-                Products = products
+                CartProducts = cartProducts
 
             };
 
