@@ -34,6 +34,9 @@ namespace P2WebMVC.Controllers
             if (userId == Guid.Empty)
                 return RedirectToAction("Login", "User");
 
+
+
+                // list // in future 
             var address = await dbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId); // slow   // n log n 
 
 
@@ -47,7 +50,7 @@ namespace P2WebMVC.Controllers
             }
 
 
-            
+        
             var viewmodel = new CartView
             {
 

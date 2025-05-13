@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using P2WebMVC.Data;
 using P2WebMVC.Interfaces;
 using P2WebMVC.Models;
+using P2WebMVC.Models.DomainModels;
 using P2WebMVC.Models.ViewModels;
 
 namespace P2WebMVC.Controllers
@@ -167,7 +168,7 @@ namespace P2WebMVC.Controllers
 
             var cart = await sqlDbContext.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
 
-            if (cart == null )
+            if (cart == null)
             {
                 return NotFound();
             }
@@ -187,6 +188,78 @@ namespace P2WebMVC.Controllers
 
 
         }
+
+
+        [HttpPost]
+
+        public async Task<ActionResult> CreateAddress(Address address , Guid CartId)
+        {
+
+
+             var token = Request.Cookies["GradSchoolAuthorizationToken"];
+            if (string.IsNullOrEmpty(token))
+                return RedirectToAction("Login", "User");
+
+
+            var userId = tokenService.VerifyTokenAndGetId(token);
+
+            if (userId == Guid.Empty)
+                return RedirectToAction("Login", "User");
+
+
+
+            if (!ModelState.IsValid)
+            {
+
+                TempData["ErrorMessage"] = "All the  feilds with the * are required ";
+                return RedirectToAction("CheckOut", "Order" , new { CartId});
+
+            }
+
+
+            var existingAddress = await sqlDbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId);
+
+            if(existingAddress == null){
+
+
+                // create 
+             address.UserId = userId;    // required 
+            await sqlDbContext.Addresses.AddAsync(address);
+       
+
+
+
+            }else{
+                // update 
+
+                existingAddress.FirstName = address.FirstName;
+                existingAddress.LastName = address.LastName;
+                existingAddress.Street = address.Street;
+                existingAddress.City = address.City;
+                existingAddress.District = address.District;
+                existingAddress.State = address.State;
+                existingAddress.Country = address.Country;
+                existingAddress.Pincode = address.Pincode;
+                existingAddress.Phone = address.Phone;
+                existingAddress.Landmark = address.Landmark;
+
+
+              
+            
+            }
+
+          
+   await sqlDbContext.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Address Updated!";
+            return RedirectToAction("CheckOut", "Order" , new { CartId});
+
+
+
+        }
+
+
+
 
     }
 }

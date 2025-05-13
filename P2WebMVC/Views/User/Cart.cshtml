@@ -41,7 +41,7 @@
    
     <p class="text-muted col-2"> Rs.  @(product?.Quantity * product?.Product?.ProductPrice )  </p>
 
-    <p class="text-muted col-2 d-flex justify-content-end"> <a asp-controller="Product" asp-action="removeFromCart" asp-route-ProductId ="@product?.ProductId" class="btn btn-sm btn-danger">Remove</a> </p>
+    <p class="text-muted col-2 d-flex justify-content-end"> <a asp-controller="Product" asp-action="removeFromCart" asp-route-ProductId ="@product?.ProductId" class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i>  </a> </p>
 
 
 </div>

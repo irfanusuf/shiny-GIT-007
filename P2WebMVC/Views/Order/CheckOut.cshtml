@@ -1,4 +1,6 @@
-﻿
+﻿@model P2WebMVC.Models.ViewModels.CartView
+
+
 @{
     ViewData["Title"] = "CheckOut";
 }
@@ -8,3 +10,101 @@
 <h1> this is CheckOut</h1>
 
 <p class="text-danger"> @ViewBag.ErrorMessage</p>
+
+@if(TempData["ErrorMessage"] != null  ){
+
+<p class="text-danger"> @TempData["ErrorMessage"]</p>
+
+}
+
+
+@if(TempData["SuccessMessage"] != null  ){
+
+<p class="text-success"> @TempData["SuccessMessage"]</p>
+
+}
+
+
+
+
+
+<div class="container "> 
+
+<form method="post" asp-controller="User" asp-action="CreateAddress" asp-route-CartId ="@Model?.Cart?.CartId" > 
+
+  <div class="mb-3">
+    <label class="form-label"> First Name</label>
+    <input type="text" class="form-control"  name="FirstName" value="@Model?.Address?.FirstName">
+    
+  </div>
+
+
+    <div class="mb-3">
+    <label class="form-label"> Last Name</label>
+    <input type="text" class="form-control"  name="LastName" value="@Model?.Address?.LastName">
+    
+  </div>
+
+
+    <div class="mb-3">
+    <label class="form-label"> Street</label>
+    <input type="text" class="form-control"  name="Street" value="@Model?.Address?.Street">
+    
+  </div>
+
+
+    <div class="mb-3">
+    <label class="form-label"> City </label>
+    <input type="text" class="form-control"  name="City" value="@Model?.Address?.City">
+    
+  </div>
+
+
+   <div class="mb-3">
+    <label class="form-label"> District </label>
+    <input type="text" class="form-control"  name="District" value="@Model?.Address?.District">
+    
+  </div>
+
+
+   <div class="mb-3">
+    <label class="form-label"> State </label>
+    <input type="text" class="form-control"  name="State" value="@Model?.Address?.State">
+    
+  </div>
+
+
+  <div class="mb-3">
+    <label class="form-label"> Country </label>
+    <input type="text" class="form-control"  name="Country" value="@Model?.Address?.Country">
+    
+  </div>
+
+
+  <div class="mb-3">
+    <label class="form-label"> Pincode </label>
+    <input type="text" class="form-control"  name="Pincode" value="@Model?.Address?.Pincode">
+    
+  </div>
+
+
+    <div class="mb-3">
+    <label class="form-label"> Phone </label>
+    <input type="text" class="form-control"  name="Phone" value="@Model?.Address?.Phone">
+    
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label"> Landmark </label>
+    <input type="text" class="form-control"  name="Landmark" value="@Model?.Address?.Landmark">
+    
+  </div>
+
+
+<button type="submit" class="btn btn-outline-secondary"> Create Address </button>
+
+
+</form>
+
+
+</div>
