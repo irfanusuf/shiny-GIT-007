@@ -24,38 +24,40 @@ namespace P2WebMVC.Controllers
         [HttpGet]
         public async Task<ActionResult> CheckOut(Guid CartId)
         {
-            var token = Request.Cookies["GradSchoolAuthorizationToken"];
-            if (string.IsNullOrEmpty(token))
-                return RedirectToAction("Login", "User");
+            // var token = Request.Cookies["GradSchoolAuthorizationToken"];
+            // if (string.IsNullOrEmpty(token))
+            //     return RedirectToAction("Login", "User");
 
 
-            var userId = tokenService.VerifyTokenAndGetId(token);
+            // var userId = tokenService.VerifyTokenAndGetId(token);
 
-            if (userId == Guid.Empty)
-                return RedirectToAction("Login", "User");
-
-
-
-                // list // in future 
-            var address = await dbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId); // slow   // n log n 
+            // if (userId == Guid.Empty)
+            //     return RedirectToAction("Login", "User");
 
 
-            var cart = await dbContext.Carts.FindAsync(CartId);// fast    O(1)
+
+            //     // list // in future 
+            // var address = await dbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId); // slow   // n log n 
 
 
-            if (cart == null)
-            {
-                ViewBag.errorMessage = "No Cart Found!";
-                return View();
-            }
+            // var cart = await dbContext.Carts.FindAsync(CartId);// fast    O(1)
+
+            // if (cart == null)
+            // {
+            //     ViewBag.errorMessage = "No Cart Found!";
+            //     return View();
+            // }
 
 
-        
+            // var cartProducts = await dbContext.CartProducts.Include(cp => cp.Product).Where(cp => cp.CartId == cart.CartId).ToListAsync();
+
+
             var viewmodel = new CartView
             {
 
-                Cart = cart,
-                Address = address
+                // Cart = cart,
+                // Address = address,
+                // CartProducts = cartProducts
 
             };
 

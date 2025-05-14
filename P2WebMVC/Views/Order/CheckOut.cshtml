@@ -2,109 +2,239 @@
 
 
 @{
-    ViewData["Title"] = "CheckOut";
+  ViewData["Title"] = "CheckOut";
 }
 
 
+<style>
+  .notification_bar{
 
-<h1> this is CheckOut</h1>
+    position: absolute;
+    top: 80px;
+    padding: 0;
+  }
 
-<p class="text-danger"> @ViewBag.ErrorMessage</p>
+  .checkout{
 
-@if(TempData["ErrorMessage"] != null  ){
+    margin-top: 80px;
+  }
 
-<p class="text-danger"> @TempData["ErrorMessage"]</p>
 
+  .address-section,
+  .address-form,
+  .checkout_heading,
+  .order_summary {
+    box-shadow: 2px 2px 10px 10px rgba(0, 0, 0, 0.095);
+    padding: 20px;
+    border-radius: 7px;
+  }
+
+  .address-form {}
+
+  .checkout_heading {}
+</style>
+
+
+
+<div class="container notification_bar">
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage as string))
+{
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    @ViewBag.ErrorMessage
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 }
 
-
-@if(TempData["SuccessMessage"] != null  ){
-
-<p class="text-success"> @TempData["SuccessMessage"]</p>
-
+@if (TempData["ErrorMessage"] != null)
+{
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    @TempData["ErrorMessage"]
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 }
 
+@if (TempData["SuccessMessage"] != null)
+{
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    @TempData["SuccessMessage"]
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+}
+
+</div>
 
 
 
 
-<div class="container "> 
 
-<form method="post" asp-controller="User" asp-action="CreateAddress" asp-route-CartId ="@Model?.Cart?.CartId" > 
+<div class="checkout">
 
-  <div class="mb-3">
-    <label class="form-label"> First Name</label>
-    <input type="text" class="form-control"  name="FirstName" value="@Model?.Address?.FirstName">
-    
+
+  <div class="checkout_heading mb-5">
+    <span class="display-6 text-success"> <i class="bi bi-cart-check"></i> </span>
+    <span class="h4">CheckOut</span>
+    <span class="text-success ms-md-4"> * Kindly fill the address or update the existing one.</span>
+
   </div>
 
 
-    <div class="mb-3">
-    <label class="form-label"> Last Name</label>
-    <input type="text" class="form-control"  name="LastName" value="@Model?.Address?.LastName">
-    
+
+  <div class="row">
+
+    <div class="col-md-8">
+
+      <form class="address-form" method="post" asp-controller="User" asp-action="CreateAddress"
+        asp-route-CartId="@Model?.Cart?.CartId">
+
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label"> First Name</label>
+            <input type="text" class="form-control" name="FirstName" value="@Model?.Address?.FirstName"placeholder ="your First name" >
+          </div>
+
+
+          <div class="col-md-6">
+            <label class="form-label"> Last Name</label>
+            <input type="text" class="form-control" name="LastName" value="@Model?.Address?.LastName">
+          </div>
+
+        </div>
+
+        <div class="row mb-3">
+
+          <div class=" col-4">
+            <label class="form-label"> Street</label>
+            <input type="text" class="form-control" name="Street" value="@Model?.Address?.Street">
+
+          </div>
+
+
+          <div class="col-4">
+            <label class="form-label"> City </label>
+            <input type="text" class="form-control" name="City" value="@Model?.Address?.City">
+
+          </div>
+
+
+          <div class="col-4">
+            <label class="form-label"> District </label>
+            <input type="text" class="form-control" name="District" value="@Model?.Address?.District">
+
+          </div>
+
+        </div>
+
+        <div class="row mb-3">
+
+
+          <div class="col-md-4">
+            <label class="form-label"> Pincode </label>
+            <input type="text" class="form-control" name="Pincode" value="@Model?.Address?.Pincode">
+
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label"> State </label>
+            <input type="text" class="form-control" name="State" value="@Model?.Address?.State">
+
+          </div>
+
+
+          <div class="col-md-4">
+            <label class="form-label"> Country </label>
+            <input type="text" class="form-control" name="Country" value="@Model?.Address?.Country">
+
+          </div>
+        </div>
+
+
+
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label"> Phone </label>
+            <input type="text" class="form-control" name="Phone" value="@Model?.Address?.Phone">
+
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label"> Landmark </label>
+            <input type="text" class="form-control" name="Landmark" value="@Model?.Address?.Landmark">
+
+          </div>
+
+
+        </div>
+
+
+
+
+
+        <button type="submit" class="btn btn-outline-success"> Create Address </button>
+
+
+      </form>
+
+
+    </div>
+
+
+
+
+    <div class="col-md-4 ">
+
+      @if (Model?.Address == null)
+      {
+        <div class="address-section mt-4">
+
+          <h3>
+            Shipping Address
+          </h3>
+
+          <p>@Model?.Address?.FirstName @Model?.Address?.LastName </p>
+          <p> @Model?.Address?.Street , @Model?.Address?.City , @Model?.Address?.District , @Model?.Address?.Pincode </p>
+
+          <p>@Model?.Address?.State , @Model?.Address?.Country </p>
+
+
+        </div>
+
+
+
+      }
+
+
+      <div class="order_summary mt-4">
+
+
+        <h4> Order summary</h4>
+
+
+        @foreach (var product in Model.CartProducts)
+        {
+
+          <a>
+            <p> @product?.Product?.ProductName (@product?.Color ) </p>
+            <p> <img src="@product?.Product?.ProductImage" class="img-thumbnail" width="100"> </p>
+            <p> @product?.Quantity x @product?.Product?.ProductPrice </p>
+
+
+          </a>
+
+
+
+        }
+
+
+
+      </div>
+
+    </div>
+
   </div>
 
-
-    <div class="mb-3">
-    <label class="form-label"> Street</label>
-    <input type="text" class="form-control"  name="Street" value="@Model?.Address?.Street">
-    
-  </div>
-
-
-    <div class="mb-3">
-    <label class="form-label"> City </label>
-    <input type="text" class="form-control"  name="City" value="@Model?.Address?.City">
-    
-  </div>
-
-
-   <div class="mb-3">
-    <label class="form-label"> District </label>
-    <input type="text" class="form-control"  name="District" value="@Model?.Address?.District">
-    
-  </div>
-
-
-   <div class="mb-3">
-    <label class="form-label"> State </label>
-    <input type="text" class="form-control"  name="State" value="@Model?.Address?.State">
-    
-  </div>
-
-
-  <div class="mb-3">
-    <label class="form-label"> Country </label>
-    <input type="text" class="form-control"  name="Country" value="@Model?.Address?.Country">
-    
-  </div>
-
-
-  <div class="mb-3">
-    <label class="form-label"> Pincode </label>
-    <input type="text" class="form-control"  name="Pincode" value="@Model?.Address?.Pincode">
-    
-  </div>
-
-
-    <div class="mb-3">
-    <label class="form-label"> Phone </label>
-    <input type="text" class="form-control"  name="Phone" value="@Model?.Address?.Phone">
-    
-  </div>
-
-  <div class="mb-3">
-    <label class="form-label"> Landmark </label>
-    <input type="text" class="form-control"  name="Landmark" value="@Model?.Address?.Landmark">
-    
-  </div>
-
-
-<button type="submit" class="btn btn-outline-secondary"> Create Address </button>
-
-
-</form>
 
 
 </div>

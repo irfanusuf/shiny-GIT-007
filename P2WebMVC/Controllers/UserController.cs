@@ -192,11 +192,11 @@ namespace P2WebMVC.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult> CreateAddress(Address address , Guid CartId)
+        public async Task<ActionResult> CreateAddress(Address address, Guid CartId)
         {
 
 
-             var token = Request.Cookies["GradSchoolAuthorizationToken"];
+            var token = Request.Cookies["GradSchoolAuthorizationToken"];
             if (string.IsNullOrEmpty(token))
                 return RedirectToAction("Login", "User");
 
@@ -212,26 +212,23 @@ namespace P2WebMVC.Controllers
             {
 
                 TempData["ErrorMessage"] = "All the  feilds with the * are required ";
-                return RedirectToAction("CheckOut", "Order" , new { CartId});
+                return RedirectToAction("CheckOut", "Order", new { CartId });
 
             }
 
 
             var existingAddress = await sqlDbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId);
 
-            if(existingAddress == null){
-
-
+            if (existingAddress == null)
+            {
                 // create 
-             address.UserId = userId;    // required 
-            await sqlDbContext.Addresses.AddAsync(address);
-       
+                address.UserId = userId;    // required 
+                await sqlDbContext.Addresses.AddAsync(address);
 
-
-
-            }else{
+            }
+            else
+            {
                 // update 
-
                 existingAddress.FirstName = address.FirstName;
                 existingAddress.LastName = address.LastName;
                 existingAddress.Street = address.Street;
@@ -243,24 +240,14 @@ namespace P2WebMVC.Controllers
                 existingAddress.Phone = address.Phone;
                 existingAddress.Landmark = address.Landmark;
 
-
-              
-            
             }
 
-          
-   await sqlDbContext.SaveChangesAsync();
+
+            await sqlDbContext.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Address Updated!";
-            return RedirectToAction("CheckOut", "Order" , new { CartId});
-
-
-
+            return RedirectToAction("CheckOut", "Order", new { CartId });
         }
-
-
-
-
     }
 }
 
