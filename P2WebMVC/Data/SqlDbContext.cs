@@ -47,6 +47,13 @@ public class SqlDbContext : DbContext
         .HasForeignKey(o => o.UserId)
         .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
 
+        modelBuilder.Entity<Order>()
+        .HasOne(o => o.Address)
+        .WithMany(a => a.Orders)
+        .HasForeignKey(o => o.AddressId)
+        .OnDelete(DeleteBehavior.Restrict);
+
+
 
 
         modelBuilder.Entity<CartProduct>()
@@ -55,14 +62,14 @@ public class SqlDbContext : DbContext
 
         modelBuilder.Entity<CartProduct>()
         .HasOne(cp => cp.Cart)
-        .WithMany(c => c.Products) // cart can have many products
+        .WithMany(c => c.CartProducts) // cart can have many products
         .HasForeignKey(cp => cp.CartId)
         .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
 
 
         modelBuilder.Entity<CartProduct>()
         .HasOne(cp => cp.Product)       // every carTproduct is having product with many carts having the same product
-        .WithMany(p => p.ProductsInCarts)
+        .WithMany(p => p.ProductInCarts)
         .HasForeignKey(cp => cp.ProductId)
         .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
 
@@ -75,13 +82,13 @@ public class SqlDbContext : DbContext
 
         modelBuilder.Entity<OrderProduct>()
         .HasOne(op => op.Order)
-        .WithMany(o => o.Products)
+        .WithMany(o => o.OrderProducts)
         .HasForeignKey(op => op.OrderId)
         .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
 
         modelBuilder.Entity<OrderProduct>()
         .HasOne(op => op.Product)       // every orderproduct is having product with many orders having the same product
-        .WithMany(p => p.ProductsInOrders)
+        .WithMany(p => p.ProductInOrders)
         .HasForeignKey(op => op.ProductId)
         .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
 

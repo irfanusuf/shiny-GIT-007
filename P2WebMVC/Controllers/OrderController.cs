@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P2WebMVC.Data;
 using P2WebMVC.Interfaces;
+using P2WebMVC.Models.DomainModels;
+using P2WebMVC.Models.JunctionModels;
 using P2WebMVC.Models.ViewModels;
 
 namespace P2WebMVC.Controllers
@@ -36,7 +38,7 @@ namespace P2WebMVC.Controllers
 
 
 
-                // list // in future 
+            // list // in future 
             var address = await dbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId); // slow   // n log n 
 
 
@@ -66,11 +68,82 @@ namespace P2WebMVC.Controllers
         }
 
 
-        [HttpGet]
 
-        public ActionResult Create()
+
+        [HttpPost]
+        public async Task<ActionResult> Create(Guid CartId)
         {
-            return View();
+            try
+            {
+                var token = Request.Cookies["GradSchoolAuthorizationToken"];
+                if (string.IsNullOrEmpty(token))
+                    return RedirectToAction("Login", "User");
+
+
+                var userId = tokenService.VerifyTokenAndGetId(token);
+
+                if (userId == Guid.Empty)
+                    return RedirectToAction("Login", "User");
+
+                var address = await dbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId);
+
+
+                var cart = await dbContext.Carts
+                    .Include(c => c.CartProducts)
+                    .ThenInclude(cp => cp.Product)
+                    .FirstOrDefaultAsync(c => c.CartId == CartId);
+
+                if (cart != null && address != null)
+                {
+             
+                    var order = new Order
+                    {
+                        UserId = userId,
+                        TotalPrice = cart.CartTotal,
+                        AddressId = address.AddressId,
+                        OrderProducts = []
+                    };
+
+                    var orderProducts = cart?.CartProducts?.Select(cp => new OrderProduct
+                    {
+                        OrderId = order.OrderId,
+                        ProductId = cp.ProductId,
+                        Quantity = cp.Quantity,
+                        Size = cp.Size,
+                        Color = cp.Color,
+                        Weight = cp.Weight
+                    }).ToList();
+
+                    order.OrderProducts = orderProducts;
+
+                    await dbContext.Orders.AddAsync(order);
+
+                    if (cart?.CartProducts != null)
+                    {
+                        dbContext.CartProducts.RemoveRange(cart.CartProducts);
+                        cart.CartTotal = 0;
+                    }
+
+                    await dbContext.SaveChangesAsync();
+
+
+                    TempData["SuccessMessage"] = "order created Succesfully";
+                    return RedirectToAction("CheckOut", "Order", new { CartId });
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Some Error with Cart!.try again!";
+                    return RedirectToAction("checkout", new { CartId });
+                }
+
+            }
+            catch (System.Exception ex)
+            {
+                ViewBag.errorMessage = ex.Message;
+                return View("Error");
+                throw;
+            }
+
         }
 
     }

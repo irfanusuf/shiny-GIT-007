@@ -13,7 +13,7 @@ public required Guid UserId { get; set; }  // Fk
 public User? Buyer { get; set; }  // navigation property //  belonging to a user
 
 
-public ICollection<CartProduct>? Products { get; set; } = []; //  collection of products in the cart
+public ICollection<CartProduct> CartProducts { get; set; } = []; //  collection of products in the cart
 
 public required decimal CartTotal { get; set; } = 0; // total price of all products in the cart
 

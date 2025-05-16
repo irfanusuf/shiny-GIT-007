@@ -64,8 +64,6 @@ namespace P2WebMVC.Controllers
         else
         {
 
-
-
           var products = await dbContext.Products.Where(p => p.IsActive == true && p.Category == category).ToListAsync();  // db query 
 
           if (products == null || products.Count == 0)
@@ -88,16 +86,7 @@ namespace P2WebMVC.Controllers
             return View(viewModel);
 
           }
-
-
         }
-
-
-
-
-
-
-
       }
       catch (System.Exception ex)
       {
@@ -107,7 +96,6 @@ namespace P2WebMVC.Controllers
       }
 
     }
-
 
 
     [HttpGet]
@@ -143,7 +131,6 @@ namespace P2WebMVC.Controllers
 
     }
 
-
     [HttpPost]
     public async Task<IActionResult> AddToCart(Guid ProductId, string? Color, int Quantity, string? Size)
     {
@@ -173,7 +160,7 @@ namespace P2WebMVC.Controllers
           {
             UserId = userId,
             CartTotal = 0,
-            Products = []
+            CartProducts = []
           };
           await dbContext.Carts.AddAsync(cart);
         }
@@ -184,7 +171,7 @@ namespace P2WebMVC.Controllers
 
         if (existingItem == null)
         {
-          var cartItem = new CartProduct
+          var cartProduct = new CartProduct
           {
             CartId = cart.CartId,
             ProductId = ProductId,
@@ -192,7 +179,7 @@ namespace P2WebMVC.Controllers
             Color = Color,
             Size = Size
           };
-          await dbContext.CartProducts.AddAsync(cartItem);
+          await dbContext.CartProducts.AddAsync(cartProduct);
 
         }
         else
@@ -200,8 +187,6 @@ namespace P2WebMVC.Controllers
           existingItem.Quantity += Quantity;
 
         }
-
-
         cart.CartTotal += Quantity * product.ProductPrice;
         await dbContext.SaveChangesAsync();
 

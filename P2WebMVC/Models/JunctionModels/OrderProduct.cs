@@ -10,7 +10,7 @@ public class OrderProduct
 
     [Key]
 
-    public required Guid OrderProductId { get; set; } = Guid.NewGuid();   // pk
+    public Guid OrderProductId { get; set; } = Guid.NewGuid();   // pk
 
 
     public required Guid OrderId { get; set; } // Fk

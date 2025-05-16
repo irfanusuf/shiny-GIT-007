@@ -25,5 +25,8 @@ public class Address
     public User? Buyer { get; set; } // Navigation property
 
 
+    public ICollection<Order> Orders { get; set; } = [];// naviagtion property
+
+
 
 }
