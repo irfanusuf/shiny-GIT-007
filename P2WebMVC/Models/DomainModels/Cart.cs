@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using P2WebMVC.Models.JunctionModels;
 
@@ -6,7 +7,7 @@ namespace P2WebMVC.Models.DomainModels;
 
 public class Cart
 {
-
+[Key]
 public  Guid CartId { get; set; } = Guid.NewGuid();
 public required Guid UserId { get; set; }  // Fk
 [ForeignKey("UserId")]

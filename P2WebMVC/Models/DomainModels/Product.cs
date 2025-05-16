@@ -27,8 +27,8 @@ public ICollection<OrderProduct> ProductInOrders { get; set; } = []; //  collect
 
 public  bool IsDeleted { get; set; } = false;
 public  bool IsActive { get; set; } = true;
-public required DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-public required DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+public  DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+public  DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
 
 

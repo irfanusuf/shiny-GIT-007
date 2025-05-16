@@ -17,7 +17,7 @@ public class User
     public string? Phone {get; set ; }
 
     public Role Role {get; set;} = Role.User;
-    public Address? Address  {get; set ; }   //  navigation property 
+    public ICollection<Address> Addresses { get; set; } = []; //  navigation property 
     public Cart?  Cart {get;set;}    // navigation property
     public ICollection<Order>? Orders {get;set;} =[]; // navigation property //  collection of orders placed by the user
 

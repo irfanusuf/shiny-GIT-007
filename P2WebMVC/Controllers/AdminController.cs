@@ -89,14 +89,14 @@ namespace P2WebMVC.Controllers
 
 
         [HttpGet]
-        public ActionResult Createproduct()
+        public ActionResult Createproduct(Product product)
         {
             ViewBag.CategoryList = new SelectList(Enum.GetValues(typeof(ProductCategory)));
-            return View();
+            return View(product);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Createproduct(Product req, IFormFile image)
+        public async Task<ActionResult> Createproduct(Product product, IFormFile image)
         {
 
             try
@@ -109,28 +109,24 @@ namespace P2WebMVC.Controllers
 
                 var SecureUrl = await cloudinaryService.UploadImageAsync(image);
 
+                product.ProductImage = SecureUrl;
 
-                if (string.IsNullOrEmpty(req.ProductName) ||
-                string.IsNullOrEmpty(req.ProductDescription))
-                // string.IsNullOrEmpty(req.ProductImage))
+                if (!ModelState.IsValid)
                 {
                     ViewBag.ErrorMessage = "All details with * are required";
-                    return View();
+                    return View(product);
                 }
 
-
-                req.ProductImage = SecureUrl;
-
-                await dbContext.Products.AddAsync(req);
+                await dbContext.Products.AddAsync(product);
                 await dbContext.SaveChangesAsync();
-                return RedirectToAction("Dashboard");
+                TempData["SuccessMessage"] = "Product created SuccesFully!";
+                return View(product);
 
             }
             catch (System.Exception ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
                 return View("Error");
-                throw;
             }
 
         }

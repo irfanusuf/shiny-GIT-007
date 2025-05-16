@@ -10,9 +10,7 @@ namespace P2WebMVC.Models.DomainModels;
 public class Order
 {
 
-
 [Key]
-
 public  Guid OrderId { get; set; } = Guid.NewGuid();
 
 public required Guid UserId { get; set; }  // Fk 
@@ -23,20 +21,18 @@ public User? Buyer { get; set; }  // navigation property
 
 public required Guid AddressId { get; set; }  // Fk 
 [ForeignKey("AddressId")]
-public  Address? Address { get; set; }   // navigation property
+public Address? Address { get; set; }   // navigation property
 
 
+public required ICollection<OrderProduct> OrderProducts { get; set; } = []; //  collection of products in the order
 
-public ICollection<OrderProduct>? OrderProducts { get; set; } = []; //  collection of products in the order
-public  int Quantity { get; set; } = 1;
 public required decimal TotalPrice { get; set; } = 0;
-
 
 
 
 public  DateTime DateCreated { get; set; } = DateTime.UtcNow;
 public  OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
-public  DateTime? ShippedDate { get; set; } =DateTime.UtcNow.AddDays(7);
+public  DateTime? ShippingDate { get; set; } =DateTime.UtcNow.AddDays(7);
 
 
 }

@@ -19,6 +19,7 @@ public class Address
     public required string Phone { get; set; }
     public required string Landmark { get; set; }
 
+    
     public required Guid UserId { get; set; } // Fk 
 
     [ForeignKey("UserId")]
@@ -26,7 +27,4 @@ public class Address
 
 
     public ICollection<Order> Orders { get; set; } = [];// naviagtion property
-
-
-
 }

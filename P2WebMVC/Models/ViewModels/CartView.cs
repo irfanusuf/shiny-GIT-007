@@ -10,7 +10,7 @@ public class CartView
 
 public Cart? Cart {get;set;}
 
-public Address ? Address {get;set;}
+public Address? Address { get; set; } 
 
 public ICollection <CartProduct> CartProducts {get;set;}=[];
 

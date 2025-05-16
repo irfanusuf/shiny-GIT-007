@@ -97,17 +97,12 @@ namespace P2WebMVC.Controllers
 
     }
 
-
     [HttpGet]
     public async Task<IActionResult> Details(Guid ProductId)
     {
-
-
-      try
+     try
       {
-
         var product = await dbContext.Products.FindAsync(ProductId);
-
 
         var viewModel = new ProductView
         {
@@ -126,9 +121,6 @@ namespace P2WebMVC.Controllers
         return View("Error");
 
       }
-
-
-
     }
 
     [HttpPost]
@@ -199,20 +191,5 @@ namespace P2WebMVC.Controllers
         return View("Error");
       }
     }
-
-
-
-
-
-
-
-
-
-
   }
 }
-//   cart.CartTotal = await dbContext.CartProducts
-// .Where(cp => cp.CartId == cart.CartId)
-// .SumAsync(cp => cp.Quantity * product.ProductPrice);
-
-//  cart.CartTotal +=  Quantity * product.ProductPrice;

@@ -11,7 +11,6 @@ namespace P2WebMVC.Controllers
 {
     public class OrderController : Controller
     {
-        // GET: OrderController
 
         private readonly SqlDbContext dbContext;    // encapsulated feilds
         private readonly ITokenService tokenService;
@@ -30,45 +29,29 @@ namespace P2WebMVC.Controllers
             if (string.IsNullOrEmpty(token))
                 return RedirectToAction("Login", "User");
 
-
             var userId = tokenService.VerifyTokenAndGetId(token);
 
             if (userId == Guid.Empty)
                 return RedirectToAction("Login", "User");
 
-
-
             // list // in future 
             var address = await dbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId); // slow   // n log n 
-
-
             var cart = await dbContext.Carts.FindAsync(CartId);// fast    O(1)
 
-            if (cart == null)
+            if (cart != null )
             {
-                ViewBag.errorMessage = "No Cart Found!";
-                return View();
+                var cartProducts = await dbContext.CartProducts.Include(cp => cp.Product).Where(cp => cp.CartId == cart.CartId).ToListAsync();
+                var viewmodel = new CartView
+                {
+                    Cart = cart,
+                    Address = address,
+                    CartProducts = cartProducts
+                };
+                return View(viewmodel);
             }
-
-
-            var cartProducts = await dbContext.CartProducts.Include(cp => cp.Product).Where(cp => cp.CartId == cart.CartId).ToListAsync();
-
-
-            var viewmodel = new CartView
-            {
-
-                Cart = cart,
-                Address = address,
-                CartProducts = cartProducts
-
-            };
-
-            return View(viewmodel);
-
+            ViewBag.errorMessage = "No Cart Found!";
+            return View();
         }
-
-
-
 
         [HttpPost]
         public async Task<ActionResult> Create(Guid CartId)
@@ -79,23 +62,19 @@ namespace P2WebMVC.Controllers
                 if (string.IsNullOrEmpty(token))
                     return RedirectToAction("Login", "User");
 
-
                 var userId = tokenService.VerifyTokenAndGetId(token);
-
                 if (userId == Guid.Empty)
                     return RedirectToAction("Login", "User");
 
                 var address = await dbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId);
-
 
                 var cart = await dbContext.Carts
                     .Include(c => c.CartProducts)
                     .ThenInclude(cp => cp.Product)
                     .FirstOrDefaultAsync(c => c.CartId == CartId);
 
-                if (cart != null && address != null)
+                if (cart != null && address != null && cart.CartProducts.Count > 0)
                 {
-             
                     var order = new Order
                     {
                         UserId = userId,
@@ -104,7 +83,7 @@ namespace P2WebMVC.Controllers
                         OrderProducts = []
                     };
 
-                    var orderProducts = cart?.CartProducts?.Select(cp => new OrderProduct
+                    var orderProducts = cart.CartProducts.Select(cp => new OrderProduct
                     {
                         OrderId = order.OrderId,
                         ProductId = cp.ProductId,
@@ -115,7 +94,6 @@ namespace P2WebMVC.Controllers
                     }).ToList();
 
                     order.OrderProducts = orderProducts;
-
                     await dbContext.Orders.AddAsync(order);
 
                     if (cart?.CartProducts != null)
@@ -132,7 +110,7 @@ namespace P2WebMVC.Controllers
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "Some Error with Cart!.try again!";
+                    TempData["ErrorMessage"] = "Some Error with Cart!.Try again!";
                     return RedirectToAction("checkout", new { CartId });
                 }
 
