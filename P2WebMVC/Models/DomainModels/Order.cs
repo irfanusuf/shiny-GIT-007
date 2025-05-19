@@ -32,6 +32,8 @@ public required decimal TotalPrice { get; set; } = 0;
 
 public  DateTime DateCreated { get; set; } = DateTime.UtcNow;
 public  OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
+public  PaymentMode PaymentMode { get; set; } = PaymentMode.None;
+public  PaymentStatus PaymentStatus { get; set; } = PaymentStatus.pending;
 public  DateTime? ShippingDate { get; set; } =DateTime.UtcNow.AddDays(7);
 
 

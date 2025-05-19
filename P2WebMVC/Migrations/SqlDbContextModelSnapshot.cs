@@ -73,8 +73,7 @@ namespace P2WebMVC.Migrations
 
                     b.HasKey("AddressId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
                 });
@@ -105,16 +104,22 @@ namespace P2WebMVC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("OrderStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("PaymentMode")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("ShippedDate")
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ShippingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("TotalPrice")
@@ -124,6 +129,8 @@ namespace P2WebMVC.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("UserId");
 
@@ -290,9 +297,9 @@ namespace P2WebMVC.Migrations
             modelBuilder.Entity("P2WebMVC.Models.DomainModels.Address", b =>
                 {
                     b.HasOne("P2WebMVC.Models.User", "Buyer")
-                        .WithOne("Address")
-                        .HasForeignKey("P2WebMVC.Models.DomainModels.Address", "UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany("Addresses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Buyer");
@@ -303,7 +310,7 @@ namespace P2WebMVC.Migrations
                     b.HasOne("P2WebMVC.Models.User", "Buyer")
                         .WithOne("Cart")
                         .HasForeignKey("P2WebMVC.Models.DomainModels.Cart", "UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Buyer");
@@ -311,11 +318,19 @@ namespace P2WebMVC.Migrations
 
             modelBuilder.Entity("P2WebMVC.Models.DomainModels.Order", b =>
                 {
+                    b.HasOne("P2WebMVC.Models.DomainModels.Address", "Address")
+                        .WithMany("Orders")
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("P2WebMVC.Models.User", "Buyer")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("Buyer");
                 });
@@ -323,15 +338,15 @@ namespace P2WebMVC.Migrations
             modelBuilder.Entity("P2WebMVC.Models.JunctionModels.CartProduct", b =>
                 {
                     b.HasOne("P2WebMVC.Models.DomainModels.Cart", "Cart")
-                        .WithMany("Products")
+                        .WithMany("CartProducts")
                         .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("P2WebMVC.Models.DomainModels.Product", "Product")
-                        .WithMany("ProductsInCarts")
+                        .WithMany("ProductInCarts")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cart");
@@ -342,15 +357,15 @@ namespace P2WebMVC.Migrations
             modelBuilder.Entity("P2WebMVC.Models.JunctionModels.OrderProduct", b =>
                 {
                     b.HasOne("P2WebMVC.Models.DomainModels.Order", "Order")
-                        .WithMany("Products")
+                        .WithMany("OrderProducts")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("P2WebMVC.Models.DomainModels.Product", "Product")
-                        .WithMany("ProductsInOrders")
+                        .WithMany("ProductInOrders")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -358,26 +373,31 @@ namespace P2WebMVC.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("P2WebMVC.Models.DomainModels.Address", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("P2WebMVC.Models.DomainModels.Cart", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("CartProducts");
                 });
 
             modelBuilder.Entity("P2WebMVC.Models.DomainModels.Order", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("OrderProducts");
                 });
 
             modelBuilder.Entity("P2WebMVC.Models.DomainModels.Product", b =>
                 {
-                    b.Navigation("ProductsInCarts");
+                    b.Navigation("ProductInCarts");
 
-                    b.Navigation("ProductsInOrders");
+                    b.Navigation("ProductInOrders");
                 });
 
             modelBuilder.Entity("P2WebMVC.Models.User", b =>
                 {
-                    b.Navigation("Address");
+                    b.Navigation("Addresses");
 
                     b.Navigation("Cart");
 

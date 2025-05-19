@@ -53,7 +53,7 @@ namespace P2WebMVC.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<ActionResult> Create(Guid CartId)
         {
             try
@@ -80,7 +80,8 @@ namespace P2WebMVC.Controllers
                         UserId = userId,
                         TotalPrice = cart.CartTotal,
                         AddressId = address.AddressId,
-                        OrderProducts = []
+                        OrderProducts = [],
+                        OrderStatus = Types.OrderStatus.Pending
                     };
 
                     var orderProducts = cart.CartProducts.Select(cp => new OrderProduct
@@ -94,6 +95,7 @@ namespace P2WebMVC.Controllers
                     }).ToList();
 
                     order.OrderProducts = orderProducts;
+
                     await dbContext.Orders.AddAsync(order);
 
                     if (cart?.CartProducts != null)

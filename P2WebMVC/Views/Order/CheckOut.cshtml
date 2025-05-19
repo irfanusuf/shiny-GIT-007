@@ -63,16 +63,36 @@
 
 
 
-<div class="checkout">
 
 
-  <div class="checkout_heading mb-5">
-    <span class="display-6 text-success"> <i class="bi bi-cart-check"></i> </span>
-    <span class="h4">CheckOut</span>
-    <span class="text-success ms-md-4"> * Kindly fill the address or update the existing one.</span>
 
+@if (Model?.Cart?.CartTotal == 0)
+{
+
+  <div>
+    <p class="text-danger"> Your Cart is empty </p>
+
+    <p> <a asp-controller="product" asp-action="index" > Explore our new Products  </a></p>
+
+    <p> <a asp-controller="order" asp-action="recent"> view Recent orders</a> </p>
+
+    
   </div>
 
+}
+else
+{
+
+
+
+  <div class="checkout">
+    <div class="checkout_heading mb-5">
+      <span class="display-6 text-success"> <i class="bi bi-cart-check"></i> </span>
+      <span class="h4">CheckOut</span>
+      <span class="text-success ms-md-4"> * Kindly fill the address or update the existing one.</span>
+
+    </div>
+  </div>
 
 
   <div class="row">
@@ -83,9 +103,9 @@
         asp-route-CartId="@Model?.Cart?.CartId">
 
 
-        <p class="h4 mb-3">   
+        <p class="h4 mb-3">
           <i class="bi bi-geo-alt display-6 text-success"></i>
-       <span style="margin-left: 10px;">@(Model?.Address == null ? "Create Address" : "Update Address")</span>   
+          <span style="margin-left: 10px;">@(Model?.Address == null ? "Create Address" : "Update Address")</span>
         </p>
 
 
@@ -169,7 +189,7 @@
         </div>
 
         <button type="submit" class="btn btn-outline-success">
-         <span>@(Model?.Address == null ? "Create Address" : "Update Address")</span>   
+          <span>@(Model?.Address == null ? "Create Address" : "Update Address")</span>
         </button>
 
 
@@ -186,8 +206,8 @@
           <div class=" col-6 display-5 "> @Model?.Cart?.CartTotal Rs.</div>
 
           <div class="col-6">
-            <a class="btn btn-outline-success " asp-controller="order" asp-action="create"
-              asp-route-CartId="@Model?.Cart?.CartId"> Order </a>
+            <a class="btn btn-outline-success " asp-controller="Order" asp-action="Create"
+              asp-route-CartId="@Model?.Cart?.CartId"> complete Order    </a>
           </div>
         </div>
       </div>
@@ -221,20 +241,27 @@
             Order summary</span> </p>
 
 
-        @foreach (var product in Model.CartProducts)
+        @if (Model?.CartProducts != null)
         {
 
-          <a asp-controller="product" asp-action="details" asp-route-ProductId="@product?.ProductId">
-            <div class="row mb-3 single_product">
+          @foreach (var product in Model.CartProducts)
+          {
 
-              <p class="col-6 m-0"> @product?.Product?.ProductName @product?.Color </p>
-              <p class="col-3 m-0"> <img src="@product?.Product?.ProductImage" width="100"> </p>
-              <p class="col-3 m-0"> @product?.Quantity x @product?.Product?.ProductPrice </p>
+            <a asp-controller="product" asp-action="details" asp-route-ProductId="@product?.ProductId">
+              <div class="row mb-3 single_product">
 
-            </div>
+                <p class="col-6 m-0"> @product?.Product?.ProductName @product?.Color </p>
+                <p class="col-3 m-0"> <img src="@product?.Product?.ProductImage" width="100"> </p>
+                <p class="col-3 m-0"> @product?.Quantity x @product?.Product?.ProductPrice </p>
 
-          </a>
+              </div>
+
+            </a>
+          }
+
         }
+
+
 
       </div>
 
@@ -242,6 +269,6 @@
 
   </div>
 
-
+}
 
 </div>
