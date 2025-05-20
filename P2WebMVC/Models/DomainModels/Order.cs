@@ -28,8 +28,6 @@ public required ICollection<OrderProduct> OrderProducts { get; set; } = []; //  
 
 public required decimal TotalPrice { get; set; } = 0;
 
-
-
 public  DateTime DateCreated { get; set; } = DateTime.UtcNow;
 public  OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
 public  PaymentMode PaymentMode { get; set; } = PaymentMode.None;
