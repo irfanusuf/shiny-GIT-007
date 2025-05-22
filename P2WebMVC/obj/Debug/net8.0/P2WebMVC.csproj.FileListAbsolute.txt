@@ -172,3 +172,5 @@
 /home/irfan_usuf/ILS/GIT007/P2WebMVC/bin/Debug/net8.0/CloudinaryDotNet.dll
 /home/irfan_usuf/ILS/GIT007/P2WebMVC/bin/Debug/net8.0/Newtonsoft.Json.dll
 /home/irfan_usuf/ILS/GIT007/P2WebMVC/bin/Debug/net8.0/dotenv.net.dll
+/home/irfan_usuf/ILS/GIT007/P2WebMVC/bin/Debug/net8.0/BouncyCastle.Crypto.dll
+/home/irfan_usuf/ILS/GIT007/P2WebMVC/bin/Debug/net8.0/Razorpay.dll

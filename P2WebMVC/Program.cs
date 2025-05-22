@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 
 
 
+
 // dependency injection
 builder.Services.AddSingleton<ITokenService , TokenService>();
 builder.Services.AddSingleton<ICloudinaryService , CloudinaryService >();
@@ -44,6 +45,8 @@ app.UseStaticFiles();   // use static files present in wwwwroot
 app.UseRouting();
 
 app.UseAuthorization();
+
+
 
 app.MapControllerRoute(
     name: "default",

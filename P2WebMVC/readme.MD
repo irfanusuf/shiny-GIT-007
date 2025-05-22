@@ -10,6 +10,8 @@
         
         dotnet add package CloudinaryDotNet --version 1.27.5
 
+        dotnet add package Razorpay --version 3.1.4
+
 
         dotnet add package System.IdentityModel.Tokens.Jwt --version 8.3.1
 

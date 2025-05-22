@@ -72,11 +72,11 @@
   <div>
     <p class="text-danger"> Your Cart is empty </p>
 
-    <p> <a asp-controller="product" asp-action="index" > Explore our new Products  </a></p>
+    <p> <a asp-controller="product" asp-action="index"> Explore our new Products </a></p>
 
     <p> <a asp-controller="order" asp-action="recent"> view Recent orders</a> </p>
 
-    
+
   </div>
 
 }
@@ -203,11 +203,19 @@ else
 
         <div class="row">
 
-          <div class=" col-6 display-5 "> @Model?.Cart?.CartTotal Rs.</div>
+          <div class=" col-6 display-5 ">
+            <p id="amount"> @Model?.Cart?.CartTotal </p> Rs.
+          </div>
 
           <div class="col-6">
             <a class="btn btn-outline-success " asp-controller="Order" asp-action="Create"
-              asp-route-CartId="@Model?.Cart?.CartId"> complete Order    </a>
+              asp-route-CartId="@Model?.Cart?.CartId"> complete Order </a>
+
+            <button onclick="payNow()" type="button">
+              Pay Now
+            </button>
+
+
           </div>
         </div>
       </div>
@@ -261,8 +269,6 @@ else
 
         }
 
-
-
       </div>
 
     </div>
@@ -272,3 +278,40 @@ else
 }
 
 </div>
+
+
+<script>
+
+
+
+async function payNow() {
+  console.log("pay button clicked ");
+  const OrderId = "484c8577-e454-497f-aa53-2228b78e23e3"; // guid
+  const Amount = document.getElementById("amount").innerText.trim();
+  const Currency = "INR";
+
+  console.log(Amount);
+
+  const formBody = { Amount, Currency, OrderId };
+@* 
+  try {
+    const res = await fetch("/PaymentApi/CreatePaymentIntent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formBody),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+
+      console.log(data);
+    } else {
+      window.alert("something went Wrong");
+    }
+  } catch (error) {
+    console.log(error);
+  } *@
+}
+</script>

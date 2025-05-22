@@ -8,7 +8,7 @@ using P2WebMVC.Services;
 
 namespace P2WebMVC.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class PaymentApiController : ControllerBase
     {
@@ -24,7 +24,20 @@ namespace P2WebMVC.Controllers
             this.tokenService = tokenService;
         }
 
-        [HttpGet]
+
+
+        [HttpGet("test")]
+
+        public IActionResult Test()
+        {
+            return Ok(new { message = "Api server Working" });
+        }
+
+
+
+       // api 
+
+        [HttpPost("CreatePaymentIntent")]
         public IActionResult CreatePaymentIntent(PaymentIntentModel request)
         {
 
@@ -33,7 +46,7 @@ namespace P2WebMVC.Controllers
                 return BadRequest("Invalid payment details.");   // status code 400 
             }
 
-            //  call payment gateway to create reciept 
+            //  call payment gateway to create order // gernarate reciept id === our  orderid
             var order = razorpayService.CreateOrder(request.Amount, request.Currency, request.OrderId);
 
 
