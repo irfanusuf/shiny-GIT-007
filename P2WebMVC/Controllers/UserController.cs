@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P2WebMVC.Data;
@@ -122,11 +123,23 @@ namespace P2WebMVC.Controllers
                         Expires = DateTimeOffset.UtcNow.AddHours(24)
                     });
 
-                    // token ko cookies may save kerna .... // done 9 april 
 
-                    return RedirectToAction("Dashboard", "Admin");
+                    var returnUrl = HttpContext.Session.GetString("ReturnUrl");
+                    // token ko cookies may save kerna .... // done 9 april 
+                    if (string.IsNullOrEmpty(returnUrl))
+                    {
+                        return RedirectToAction("Dashboard", "Admin");
+                    }
+                    else
+                    {
+                        // redirect to return Url 
+                        HttpContext.Session.Remove("ReturnUrl");
+                        return Redirect(returnUrl);
+                    }
 
                 }
+
+
                 else
                 {
                     ViewBag.errorMessage = "PassWord incorrect!";
@@ -149,22 +162,17 @@ namespace P2WebMVC.Controllers
 
         }
 
+
+
+
+        [Authorize]
         [HttpGet]
 
         public async Task<ActionResult> Cart()
         {
 
 
-            var token = Request.Cookies["GradSchoolAuthorizationToken"];
-            if (string.IsNullOrEmpty(token))
-                return RedirectToAction("Login", "User");
-
-
-            var userId = tokenService.VerifyTokenAndGetId(token);
-
-            if (userId == Guid.Empty)
-                return RedirectToAction("Login", "User");
-
+            Guid? userId = HttpContext.Items["UserId"] as Guid?;
 
             var cart = await sqlDbContext.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
 
@@ -190,23 +198,13 @@ namespace P2WebMVC.Controllers
         }
 
 
+        [Authorize]    // middlewares
         [HttpPost]
 
         public async Task<ActionResult> CreateAddress(Address address, Guid CartId)
         {
 
-
-            var token = Request.Cookies["GradSchoolAuthorizationToken"];
-            if (string.IsNullOrEmpty(token))
-                return RedirectToAction("Login", "User");
-
-
-            var userId = tokenService.VerifyTokenAndGetId(token);
-
-            if (userId == Guid.Empty)
-                return RedirectToAction("Login", "User");
-
-
+            Guid? userId = HttpContext.Items["UserId"] as Guid?;
 
             if (!ModelState.IsValid)
             {
@@ -216,13 +214,12 @@ namespace P2WebMVC.Controllers
 
             }
 
-
             var existingAddress = await sqlDbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId);
 
             if (existingAddress == null)
             {
                 // create 
-                address.UserId = userId;    // required 
+                address.UserId = (Guid)userId;    // required 
                 await sqlDbContext.Addresses.AddAsync(address);
 
             }

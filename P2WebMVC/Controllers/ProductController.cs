@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P2WebMVC.Data;
@@ -123,21 +124,16 @@ namespace P2WebMVC.Controllers
       }
     }
 
+
+
+     [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddToCart(Guid ProductId, string? Color, int Quantity, string? Size)
     {
       try
       {
 
-        var token = Request.Cookies["GradSchoolAuthorizationToken"];
-        if (string.IsNullOrEmpty(token))
-          return RedirectToAction("Login", "User");
-
-
-        var userId = tokenService.VerifyTokenAndGetId(token);
-        if (userId == Guid.Empty)
-          return RedirectToAction("Login", "User");
-
+        Guid ? userId = HttpContext.Items["UserId"] as Guid?;
 
         var product = await dbContext.Products.FindAsync(ProductId);
         if (product == null)
@@ -150,7 +146,7 @@ namespace P2WebMVC.Controllers
         {
           cart = new Cart
           {
-            UserId = userId,
+            UserId = (Guid) userId,
             CartTotal = 0,
             CartProducts = []
           };

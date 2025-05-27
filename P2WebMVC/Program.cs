@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession();
+builder.Services.AddDistributedMemoryCache();
 
 
 
@@ -39,6 +41,9 @@ if (app.Environment.IsProduction())
 
 app.UseExceptionHandler("/Error");
 
+
+
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();   // use static files present in wwwwroot 
 

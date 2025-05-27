@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P2WebMVC.Data;
@@ -21,7 +22,7 @@ namespace P2WebMVC.Controllers
             this.tokenService = tokenService;
         }
 
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult> CheckOut(Guid CartId)
         {
@@ -53,6 +54,9 @@ namespace P2WebMVC.Controllers
             return View();
         }
 
+
+
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult> Create(Guid CartId)
         {
