@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +25,6 @@ namespace P2WebMVC.Controllers
             this.cloudinaryService = cloudinaryService;
         }
 
-
-
         [HttpGet]
         public ActionResult Index()
         {
@@ -33,26 +32,14 @@ namespace P2WebMVC.Controllers
         }
 
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult> Dashboard()
         {
 
             try
             {
-                var token = Request.Cookies["GradSchoolAuthorizationToken"];
-
-                if (string.IsNullOrEmpty(token))
-                {
-                    return RedirectToAction("login", "user");
-                }
-
-
-                var userId = tokenService.VerifyTokenAndGetId(token);
-
-                if (Guid.Empty == userId)
-                {
-                    return RedirectToAction("login", "user");
-                }
+                  Guid? userId = HttpContext.Items["UserId"] as Guid?;
 
                 var user = await dbContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
 
@@ -86,8 +73,7 @@ namespace P2WebMVC.Controllers
 
         }
 
-
-
+        [Authorize]
         [HttpGet]
         public ActionResult Createproduct(Product product)
         {
@@ -95,6 +81,7 @@ namespace P2WebMVC.Controllers
             return View(product);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Createproduct(Product product, IFormFile image)
         {

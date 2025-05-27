@@ -5,17 +5,20 @@ using P2WebMVC.Interfaces;
 
 namespace P2WebMVC.Middlewares;
 
+
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class AuthorizeAttribute : Attribute, IAuthorizationFilter
 {
+
     public void OnAuthorization(AuthorizationFilterContext context)
     {
 
+        // token from cookies 
+        var token = context.HttpContext.Request.Cookies["Authorization_Token_Trinkle"];
 
-            // token from cookies 
-        var token = context.HttpContext.Request.Cookies["GradSchoolAuthorizationToken"];
-
-           // service injection 
+        // service injection 
         var tokenService = context.HttpContext.RequestServices.GetService(typeof(ITokenService)) as ITokenService;
+        
 
         if (string.IsNullOrEmpty(token) || tokenService?.VerifyTokenAndGetId(token) == null)
         {

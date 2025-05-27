@@ -21,7 +21,7 @@ builder.Services.AddSingleton<ICloudinaryService , CloudinaryService >();
 builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("main")));
 
 
-
+builder.Services.AddAuthentication();
 
 
 var app = builder.Build();
@@ -44,10 +44,14 @@ app.UseExceptionHandler("/Error");
 
 
 app.UseSession();
+
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();   // use static files present in wwwwroot 
 
 app.UseRouting();
+
+app.UseAuthentication(); 
 
 app.UseAuthorization();
 

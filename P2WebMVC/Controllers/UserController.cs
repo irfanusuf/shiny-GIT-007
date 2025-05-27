@@ -115,7 +115,7 @@ namespace P2WebMVC.Controllers
 
                     //    Console.WriteLine(token);
 
-                    HttpContext.Response.Cookies.Append("GradSchoolAuthorizationToken", token, new CookieOptions
+                    HttpContext.Response.Cookies.Append("Authorization_Token_Trinkle", token, new CookieOptions
                     {
                         HttpOnly = true,
                         Secure = false,
@@ -162,45 +162,48 @@ namespace P2WebMVC.Controllers
 
         }
 
-
-
-
         [Authorize]
         [HttpGet]
-
         public async Task<ActionResult> Cart()
         {
 
-
-            Guid? userId = HttpContext.Items["UserId"] as Guid?;
-
-            var cart = await sqlDbContext.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
-
-            if (cart == null)
+            try
             {
-                return NotFound();
+                Guid? userId = HttpContext.Items["UserId"] as Guid?;
+
+                var cart = await sqlDbContext.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
+
+                if (cart == null)
+                {
+                    return NotFound();
+                }
+
+                var cartProducts = await sqlDbContext.CartProducts.Include(cp => cp.Product).Where(cp => cp.CartId == cart.CartId).ToListAsync();
+
+
+                var viewModel = new CartView
+                {
+                    Cart = cart,
+                    CartProducts = cartProducts
+
+                };
+
+                return View(viewModel);
+
             }
-
-            var cartProducts = await sqlDbContext.CartProducts.Include(cp => cp.Product).Where(cp => cp.CartId == cart.CartId).ToListAsync();
-
-
-            var viewModel = new CartView
+            catch (System.Exception ex)
             {
-                Cart = cart,
-                CartProducts = cartProducts
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Error");
 
-            };
-
-            return View(viewModel);
+            }
 
 
 
         }
 
-
         [Authorize]    // middlewares
         [HttpPost]
-
         public async Task<ActionResult> CreateAddress(Address address, Guid CartId)
         {
 
