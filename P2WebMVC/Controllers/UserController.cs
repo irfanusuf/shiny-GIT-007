@@ -125,6 +125,9 @@ namespace P2WebMVC.Controllers
 
 
                     var returnUrl = HttpContext.Session.GetString("ReturnUrl");
+
+                    HttpContext.Session.Remove("ReturnUrl");
+
                     // token ko cookies may save kerna .... // done 9 april 
                     if (string.IsNullOrEmpty(returnUrl))
                     {
@@ -132,8 +135,7 @@ namespace P2WebMVC.Controllers
                     }
                     else
                     {
-                        // redirect to return Url 
-                        HttpContext.Session.Remove("ReturnUrl");
+                       // redirect to return Url 
                         return Redirect(returnUrl);
                     }
 
@@ -162,6 +164,10 @@ namespace P2WebMVC.Controllers
 
         }
 
+
+
+
+
         [Authorize]
         [HttpGet]
         public async Task<ActionResult> Cart()
@@ -175,7 +181,8 @@ namespace P2WebMVC.Controllers
 
                 if (cart == null)
                 {
-                    return NotFound();
+                    ViewBag.ErrorMessage = "Cart Not Found!";
+                    return View();
                 }
 
                 var cartProducts = await sqlDbContext.CartProducts.Include(cp => cp.Product).Where(cp => cp.CartId == cart.CartId).ToListAsync();
@@ -194,13 +201,17 @@ namespace P2WebMVC.Controllers
             catch (System.Exception ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
-                return View("Error");
+                return View();
 
             }
 
 
 
         }
+
+
+
+
 
         [Authorize]    // middlewares
         [HttpPost]

@@ -126,7 +126,7 @@ namespace P2WebMVC.Controllers
 
 
 
-     [Authorize]
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddToCart(Guid ProductId, string? Color, int Quantity, string? Size)
     {

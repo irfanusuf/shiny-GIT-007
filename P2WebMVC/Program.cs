@@ -3,12 +3,15 @@ using P2WebMVC.Data;
 using P2WebMVC.Interfaces;
 using P2WebMVC.Services;
 
+
+// container
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddAuthentication();    // policy add in future
 
 
 
@@ -21,7 +24,7 @@ builder.Services.AddSingleton<ICloudinaryService , CloudinaryService >();
 builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("main")));
 
 
-builder.Services.AddAuthentication();
+
 
 
 var app = builder.Build();
