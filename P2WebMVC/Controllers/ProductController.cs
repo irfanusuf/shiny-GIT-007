@@ -101,7 +101,7 @@ namespace P2WebMVC.Controllers
     [HttpGet]
     public async Task<IActionResult> Details(Guid ProductId)
     {
-     try
+      try
       {
         var product = await dbContext.Products.FindAsync(ProductId);
 
@@ -125,7 +125,6 @@ namespace P2WebMVC.Controllers
     }
 
 
-
     [Authorize]
     [HttpPost]
     public async Task<IActionResult> AddToCart(Guid ProductId, string? Color, int Quantity, string? Size)
@@ -133,11 +132,20 @@ namespace P2WebMVC.Controllers
       try
       {
 
-        Guid ? userId = HttpContext.Items["UserId"] as Guid?;
+        if (HttpContext.Items["UserId"] is not  Guid userId)
+        {
+          TempData["ErrorMessage"] = "User not Found!";
+          return RedirectToAction("Login", "User");
+        }
 
         var product = await dbContext.Products.FindAsync(ProductId);
+
         if (product == null)
-          return NotFound("Product not found");
+        {
+          TempData["ErrorMessage"] = "Product Not Found!";
+          return RedirectToAction("Cart", "User");
+        }
+
 
 
         var cart = await dbContext.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
@@ -146,7 +154,7 @@ namespace P2WebMVC.Controllers
         {
           cart = new Cart
           {
-            UserId = (Guid) userId,
+            UserId = (Guid)userId,
             CartTotal = 0,
             CartProducts = []
           };

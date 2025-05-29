@@ -135,7 +135,7 @@ namespace P2WebMVC.Controllers
                     }
                     else
                     {
-                       // redirect to return Url 
+                        // redirect to return Url 
                         return Redirect(returnUrl);
                     }
 
@@ -163,9 +163,6 @@ namespace P2WebMVC.Controllers
 
 
         }
-
-
-
 
 
         [Authorize]
@@ -208,9 +205,6 @@ namespace P2WebMVC.Controllers
 
 
         }
-
-
-
 
 
         [Authorize]    // middlewares
@@ -259,6 +253,18 @@ namespace P2WebMVC.Controllers
             TempData["SuccessMessage"] = "Address Updated!";
             return RedirectToAction("CheckOut", "Order", new { CartId });
         }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Orders(Guid UserId)
+        {
+
+            return View();
+
+
+        } 
+
+
     }
 }
 

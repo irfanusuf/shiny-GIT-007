@@ -10,6 +10,7 @@ using P2WebMVC.Models.ViewModels;
 
 namespace P2WebMVC.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
 
@@ -22,18 +23,18 @@ namespace P2WebMVC.Controllers
             this.tokenService = tokenService;
         }
 
-        [Authorize]
+
         [HttpGet]
         public async Task<ActionResult> CheckOut(Guid CartId)
         {
-       
+
 
             Guid? userId = HttpContext.Items["UserId"] as Guid?;
             // list // in future 
             var address = await dbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId); // slow   // n log n 
             var cart = await dbContext.Carts.FindAsync(CartId);// fast    O(1)
 
-            if (cart != null )
+            if (cart != null)
             {
                 var cartProducts = await dbContext.CartProducts.Include(cp => cp.Product).Where(cp => cp.CartId == cart.CartId).ToListAsync();
                 var viewmodel = new CartView
@@ -50,13 +51,12 @@ namespace P2WebMVC.Controllers
 
 
 
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult> Create(Guid CartId)
         {
             try
             {
-                  Guid? userId = HttpContext.Items["UserId"] as Guid?;
+                Guid? userId = HttpContext.Items["UserId"] as Guid?;
 
                 var address = await dbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId);
 
@@ -73,7 +73,8 @@ namespace P2WebMVC.Controllers
                         TotalPrice = cart.CartTotal,
                         AddressId = address.AddressId,
                         OrderProducts = [],
-                        OrderStatus = Types.OrderStatus.Pending
+                        OrderStatus = Types.OrderStatus.Pending,
+                        PaymentStatus = Types.PaymentStatus.pending
                     };
 
                     var orderProducts = cart.CartProducts.Select(cp => new OrderProduct
@@ -100,7 +101,7 @@ namespace P2WebMVC.Controllers
 
 
                     TempData["SuccessMessage"] = "order created Succesfully";
-                    return RedirectToAction("CheckOut", "Order", new { CartId });
+                    return RedirectToAction("Payment", "Order", new { order.OrderId });
                 }
                 else
                 {
@@ -111,12 +112,114 @@ namespace P2WebMVC.Controllers
             }
             catch (System.Exception ex)
             {
-                ViewBag.errorMessage = ex.Message;
-                return View("Error");
-                throw;
+                ViewBag.ErrorMessage = ex.Message;
+                return View();
+
             }
 
         }
 
+
+        [HttpGet]
+
+        public async Task<ActionResult> Payment(Guid OrderId)
+        {
+
+            try
+            {
+                var order = await dbContext.Orders.FindAsync(OrderId);
+
+                if (order == null)
+                {
+                    ViewBag.ErrorMessage = "No order Found!";
+                    return View();
+                }
+
+                var viewModel = new OrderView
+                {
+                    Order = order
+                };
+
+                return View(viewModel);
+            }
+            catch (System.Exception ex)
+            {
+
+                ViewBag.ErrorMessage = ex.Message;
+                return View();
+            }
+
+
+        }
+
+
+        [HttpGet]
+
+        public async Task<ActionResult> PaymentSuccess(Guid OrderId)
+        {
+            try
+            {
+                var order = await dbContext.Orders.FindAsync(OrderId);
+
+                if (order == null)
+                {
+                    ViewBag.ErrorMessage = "No order Found!";
+                    return View();
+                }
+                order.PaymentStatus = Types.PaymentStatus.Succesfull;
+                order.OrderStatus = Types.OrderStatus.confirmed;
+                order.PaymentMode = Types.PaymentMode.RazorPay;
+                await dbContext.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Your order Placed Succesfully!";
+                return RedirectToAction("Orders", "User", new { order?.UserId });
+
+            }
+            catch (System.Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View();
+            }
+        }
+
+
+         [HttpGet]
+
+        public async Task<ActionResult> PaymentFailure(Guid OrderId)
+        {
+            try
+            {
+                var order = await dbContext.Orders.FindAsync(OrderId);
+
+                if (order == null)
+                {
+                    ViewBag.ErrorMessage = "No order Found!";
+                    return View();
+                }
+                order.PaymentStatus = Types.PaymentStatus.Error;
+                order.OrderStatus = Types.OrderStatus.Pending;
+                order.PaymentMode = Types.PaymentMode.RazorPay;
+
+                await dbContext.SaveChangesAsync();
+
+                TempData["ErrorMessage"] = "Some Error in the Payment gateway !";
+
+                return RedirectToAction("Orders", "Users", new { order?.UserId });
+
+            }
+            catch (System.Exception ex)
+            {
+
+                ViewBag.ErrorMessage = ex.Message;
+                return View();
+            }
+
+
+        }
+
+
+
+
+
     }
+
 }

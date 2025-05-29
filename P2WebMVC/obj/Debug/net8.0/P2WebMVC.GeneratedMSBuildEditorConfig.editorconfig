@@ -54,6 +54,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvQ2hlY2tPdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Order/Payment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvUGF5bWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Product/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdC9EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -76,6 +80,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/User/Orders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9PcmRlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/User/Register.cshtml]
