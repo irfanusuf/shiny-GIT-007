@@ -120,6 +120,36 @@ namespace P2WebMVC.Controllers
         }
 
 
+      
+        [HttpGet]
+        public async Task<ActionResult> Recent()
+        {
+
+          Guid? userId = HttpContext.Items["UserId"] as Guid?;
+
+           var orders =  await dbContext.Orders.Where(o => o.UserId == userId).ToListAsync();
+
+            if (orders == null)
+            {
+                ViewBag.OrderCount = "No recent Orders!";
+                return View();
+           }
+
+
+            var viewModel = new OrderView
+            { 
+                Orders = orders
+            };
+
+
+
+            return View(viewModel);
+        }
+
+
+
+
+
         [HttpGet]
 
         public async Task<ActionResult> Payment(Guid OrderId)

@@ -167,10 +167,7 @@ else
             <a class="btn btn-outline-success " asp-controller="Order" asp-action="Create"
               asp-route-CartId="@Model?.Cart?.CartId"> complete Order </a>
 
-            <button onclick="payNow()" type="button">
-              Pay Now
-            </button>
-
+    
 
           </div>
         </div>
@@ -240,64 +237,7 @@ else
 
 
 
-    <script defer src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-
-    <script>
 
 
 
-async function payNow() {
-    console.log("pay button clicked ");
-    const OrderId = "484c8577-e454-497f-aa53-2228b78e23e3"; // guid hard code value for testing    // we need dynamic order Id 
-    // const Amount = document.getElementById("amount").innerText.trim();
-    const Amount = 300
-    const Currency = "INR";
-  
-    console.log(Amount);
-  
-    const formBody = { Amount, Currency, OrderId };
-    try {
-      const res = await fetch("/PaymentApi/CreatePaymentIntent", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formBody),
-      });
-  
-      if (res.ok) {
-  
-        const data = await res.json();
-        
-           const options = {
-                  key: 'rzp_test_RgG9AwfnysizZu',
-                  amount: data.amount,
-                  currency: data.currency,
-                  name: 'Irfan',
-                  description: 'Payment Transaction',
-                  order_id: data.OrderId,
-                  prefill: {
-                      name: "irfan",
-                      email: "irfanusuf33@gmail.com",
-                      contact:  "9906520959"
-                  },
-             
-                  theme: {
-                      color: '#F37254'
-                  }
-              };
-  
-        const razorPayApp = new Razorpay(options)
-  
-        razorPayApp.open()
-  
-      } else {
-        window.alert("something went Wrong");
-      }
-    } catch (error) {
-      console.log(error);
-    } 
-  }
-  
-    </script>
+   

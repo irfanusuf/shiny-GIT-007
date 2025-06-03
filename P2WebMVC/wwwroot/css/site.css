@@ -23,3 +23,20 @@ padding: 0;
   top: 80px;
   padding: 0;
 }
+
+
+
+
+.order_container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+
+
+  >.single_order{
+    width: 400px;
+    border: 1px solid greenyellow;
+    padding: 40px;
+  }
+}

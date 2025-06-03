@@ -132,7 +132,7 @@ namespace P2WebMVC.Controllers
       try
       {
 
-        if (HttpContext.Items["UserId"] is not  Guid userId)
+        if (HttpContext.Items["UserId"] is not Guid userId)
         {
           TempData["ErrorMessage"] = "User not Found!";
           return RedirectToAction("Login", "User");
@@ -184,6 +184,78 @@ namespace P2WebMVC.Controllers
 
         }
         cart.CartTotal += Quantity * product.ProductPrice;
+        await dbContext.SaveChangesAsync();
+
+
+        return RedirectToAction("Cart", "User");
+      }
+      catch (Exception ex)
+      {
+        ViewBag.ErrorMessage = ex.Message;
+        return View("Error");
+      }
+    }
+
+
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> AddToCart(Guid ProductId)
+    {
+      try
+      {
+
+        if (HttpContext.Items["UserId"] is not Guid userId)
+        {
+          TempData["ErrorMessage"] = "User not Found!";
+          return RedirectToAction("Login", "User");
+        }
+
+        var product = await dbContext.Products.FindAsync(ProductId);
+
+        if (product == null)
+        {
+          TempData["ErrorMessage"] = "Product Not Found!";
+          return RedirectToAction("Cart", "User");
+        }
+
+
+
+        var cart = await dbContext.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
+
+        if (cart == null)
+        {
+          cart = new Cart
+          {
+            UserId = (Guid)userId,
+            CartTotal = 0,
+            CartProducts = []
+          };
+          await dbContext.Carts.AddAsync(cart);
+        }
+
+
+        var existingItem = await dbContext.CartProducts
+            .FirstOrDefaultAsync(cp => cp.CartId == cart.CartId && cp.ProductId == ProductId);
+
+        if (existingItem == null)
+        {
+          var cartProduct = new CartProduct
+          {
+            CartId = cart.CartId,
+            ProductId = ProductId,
+            Quantity = 1,
+            Color = "default",
+            Size = "Size"
+          };
+          await dbContext.CartProducts.AddAsync(cartProduct);
+
+        }
+        else
+        {
+          existingItem.Quantity += 1;
+
+        }
+        cart.CartTotal += 1 * product.ProductPrice;
         await dbContext.SaveChangesAsync();
 
 
