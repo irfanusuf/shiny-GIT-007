@@ -9,35 +9,17 @@
 
 <div class="order_container">
 
-
-
-
     @if (Model.Orders != null)
     {
-
-
         @foreach (var order in Model.Orders)
         {
-
             <div class="single_order">
-
-                <h3> @order.OrderId </h3>
-                <h4> @order.TotalPrice </h4>
+                <h3>@order.OrderId </h3>
+                <h4>@order.TotalPrice </h4>
                 <p> @order.OrderStatus</p>
                 <p> @order.PaymentStatus</p>
                 <p> @order.PaymentMode</p>
-
-
             </div>
-
-
-
         }
-
-
-
-
     }
-
-
 </div>

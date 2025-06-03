@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets/P2WebMVC.bundle.scp.css"
     },
     {
+      "Id": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/css/input.css",
+      "PackagePath": "staticwebassets/css/input.css"
+    },
+    {
+      "Id": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/css/output.css",
+      "PackagePath": "staticwebassets/css/output.css"
+    },
+    {
       "Id": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

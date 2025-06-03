@@ -20,6 +20,12 @@
        
 
 
+
+# configuring tailwind
+
+	npx @tailwindcss/cli -i wwwroot/css/input.css -o wwwroot/css/output.css --watch
+
+
 # Installing Dotnet  tools globally 
 
 	dotnet tool install --global dotnet-ef
