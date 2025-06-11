@@ -198,7 +198,7 @@ namespace P2WebMVC.Controllers
 
 
     [Authorize]
-    [HttpPost]
+    [HttpGet]
     public async Task<IActionResult> AddToCart(Guid ProductId)
     {
       try

@@ -1,42 +1,8 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-
-
-body {
-margin: 0;
-padding: 0;
-
-}
 
 
 
 .notification_bar {
   position: absolute;
-  top: 80px;
-  padding: 0;
+
 }
 
-
-
-
-.order_container{
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-
-
-  >.single_order{
-    width: 400px;
-    border: 1px solid greenyellow;
-    padding: 40px;
-  }
-}

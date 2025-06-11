@@ -1,52 +1,60 @@
 ﻿@model P2WebMVC.Models.ViewModels.ProductView
 
-
 @{
     ViewData["Title"] = "Products";
 }
 
 
-<h1>@ViewBag.Category </h1>
+<div class="flex ">
 
 
 
-<div class="container d-flex flex-wrap justify-content-center" style="gap: 20px;">
 
-    @* Loop through the products and display them in a card format *@
+    <div class="container mx-auto px-4 ">
 
 
-            @if(!string.IsNullOrEmpty(ViewBag.Message)){
-                <div> @ViewBag.Message</div>
-            }
-else{
+        <h1 class="text-3xl font-bold text-center text-gray-800 mt-8 mb-10">@ViewBag.Category</h1>
 
- @foreach (var product in Model.Products)
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
         {
-
-            <div class="card" style="width: 18rem;">
-                <img src="@product.ProductImage" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title"> @product.ProductName</h5>
-                    <p class="card-text">@product.ProductDescription</p>
-
-                    <p class="card-text">Price: @product.ProductPrice <span class="text-muted">@product.ProductStock
-                            available</span></p>
-
-                    <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
-                        class="btn btn-success">Details</a>
-
-                        
-                    <a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId"
-                        class="btn btn-primary">Add To cart</a>
-                </div>
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 mb-6 max-w-xl mx-auto rounded">
+                <p>@ViewBag.Message</p>
             </div>
-
         }
-
-}
-
-
-       
+        else
+        {
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-6 rounded-xl ">
 
 
+                @foreach (var product in Model.Products)
+                {
+                    <div
+                        class="rounded-2xl shadow-lg overflow-hidden transition hover:shadow-2xl transform hover:-translate-y-1 duration-300 bg-gradient-to-br from-white via-purple-50 to-indigo-100 border border-gray-200">
+
+                        <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId" class="block">
+                            <img src="@product.ProductImage" alt="@product.ProductName"
+                                class="w-full h-48 object-cover transition duration-300 hover:scale-105" />
+
+                            <div class="p-4">
+                                <h5 class="text-lg font-semibold text-gray-800 mb-1">@product.ProductName</h5>
+                                <p class="text-sm text-gray-600 line-clamp-2">@product.ProductDescription</p>
+
+                                <div class="mt-4">
+                                    <p class="text-indigo-700 font-bold text-lg">₹@product.ProductPrice</p>
+                                    <p class="text-sm text-gray-500">@product.ProductStock available</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="px-4 pb-4">
+                            <a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId"
+                                class="w-full inline-block bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium py-2 px-4 rounded-lg text-center transition">
+                                Add to Cart
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
 </div>
