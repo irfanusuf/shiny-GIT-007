@@ -17,10 +17,13 @@ namespace P2WebMVC.Controllers
         private readonly SqlDbContext dbContext;    // encapsulated feilds
         private readonly ITokenService tokenService;
 
-        public OrderController(SqlDbContext dbContext, ITokenService tokenService)
+        private readonly IMailService mailService;
+
+        public OrderController(SqlDbContext dbContext, ITokenService tokenService, IMailService mailService)
         {
             this.dbContext = dbContext;
             this.tokenService = tokenService;
+            this.mailService = mailService;
         }
 
 
@@ -57,6 +60,8 @@ namespace P2WebMVC.Controllers
             try
             {
                 Guid? userId = HttpContext.Items["UserId"] as Guid?;
+
+                var user = await dbContext.Users.FindAsync(userId);
 
                 var address = await dbContext.Addresses.FirstOrDefaultAsync(a => a.UserId == userId);
 
@@ -99,6 +104,8 @@ namespace P2WebMVC.Controllers
 
                     await dbContext.SaveChangesAsync();
 
+                    await mailService.SendEmailAsync(user.Email, "Order Succesfull", $"Your Order of Rs {order.TotalPrice} has been created ", true);
+
 
                     TempData["SuccessMessage"] = "order created Succesfully";
                     return RedirectToAction("Payment", "Order", new { order.OrderId });
@@ -120,24 +127,24 @@ namespace P2WebMVC.Controllers
         }
 
 
-      
+
         [HttpGet]
         public async Task<ActionResult> Recent()
         {
 
-          Guid? userId = HttpContext.Items["UserId"] as Guid?;
+            Guid? userId = HttpContext.Items["UserId"] as Guid?;
 
-           var orders =  await dbContext.Orders.Where(o => o.UserId == userId).ToListAsync();
+            var orders = await dbContext.Orders.Where(o => o.UserId == userId).ToListAsync();
 
             if (orders == null)
             {
                 ViewBag.OrderCount = "No recent Orders!";
                 return View();
-           }
+            }
 
 
             var viewModel = new OrderView
-            { 
+            {
                 Orders = orders
             };
 
@@ -212,7 +219,7 @@ namespace P2WebMVC.Controllers
         }
 
 
-         [HttpGet]
+        [HttpGet]
 
         public async Task<ActionResult> PaymentFailure(Guid OrderId)
         {

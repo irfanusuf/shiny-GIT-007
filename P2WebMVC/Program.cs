@@ -18,7 +18,8 @@ builder.Services.AddAuthentication();    // policy add in future
 
 // dependency injection
 builder.Services.AddSingleton<ITokenService , TokenService>();
-builder.Services.AddSingleton<ICloudinaryService , CloudinaryService >();
+builder.Services.AddSingleton<ICloudinaryService, CloudinaryService>();
+builder.Services.AddSingleton<IMailService , EmailService>();
 
 // service injection 
 builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("main")));

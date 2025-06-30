@@ -17,91 +17,91 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = P2WebMVC
 build_property.RootNamespace = P2WebMVC
-build_property.ProjectDir = /home/irfan_usuf/ILS/GIT007/P2WebMVC/
+build_property.ProjectDir = /home/irfan_usuf/Coding/GIT007/P2WebMVC/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /home/irfan_usuf/ILS/GIT007/P2WebMVC
+build_property.MSBuildProjectDirectory = /home/irfan_usuf/Coding/GIT007/P2WebMVC
 build_property._RazorSourceGeneratorDebug = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Admin/CreateProduct.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Admin/CreateProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vQ3JlYXRlUHJvZHVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Admin/Dashboard.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Admin/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vRGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Admin/Index.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Home/About.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Home/About.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9BYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Home/Index.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Home/Privacy.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Order/CheckOut.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Order/CheckOut.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvQ2hlY2tPdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Order/Payment.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Order/Payment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvUGF5bWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Order/Recent.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Order/Recent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvUmVjZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Product/Details.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Product/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdC9EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Product/Index.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Product/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Shared/Error.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/User/Cart.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/User/Cart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9DYXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/User/Login.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/User/Orders.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/User/Orders.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9PcmRlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/User/Register.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/User/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/_ViewImports.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/_ViewStart.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/irfan_usuf/ILS/GIT007/P2WebMVC/Views/Shared/_Layout.cshtml]
+[/home/irfan_usuf/Coding/GIT007/P2WebMVC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-sr9bc0vv8n

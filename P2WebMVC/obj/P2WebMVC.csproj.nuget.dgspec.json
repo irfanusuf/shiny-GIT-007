@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/irfan_usuf/ILS/GIT007/P2WebMVC/P2WebMVC.csproj": {}
+    "/home/irfan_usuf/Coding/GIT007/P2WebMVC/P2WebMVC.csproj": {}
   },
   "projects": {
-    "/home/irfan_usuf/ILS/GIT007/P2WebMVC/P2WebMVC.csproj": {
+    "/home/irfan_usuf/Coding/GIT007/P2WebMVC/P2WebMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/P2WebMVC.csproj",
+        "projectUniqueName": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/P2WebMVC.csproj",
         "projectName": "P2WebMVC",
-        "projectPath": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/P2WebMVC.csproj",
+        "projectPath": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/P2WebMVC.csproj",
         "packagesPath": "/home/irfan_usuf/.nuget/packages/",
-        "outputPath": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/obj/",
+        "outputPath": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/irfan_usuf/.nuget/NuGet/NuGet.Config"
