@@ -16,10 +16,13 @@ namespace P2WebMVC.Controllers
         private readonly SqlDbContext sqlDbContext;    // encapsulated feilds
         private readonly ITokenService tokenService;
 
-        public UserController(SqlDbContext sqlDbContext, ITokenService tokenService)
+        private readonly IMailService mailService;
+
+        public UserController(SqlDbContext sqlDbContext, ITokenService tokenService, IMailService mailService)
         {
             this.sqlDbContext = sqlDbContext;
             this.tokenService = tokenService;
+            this.mailService = mailService;
         }
 
 
@@ -262,8 +265,26 @@ namespace P2WebMVC.Controllers
             return View();
 
 
-        } 
+        }
 
+
+
+        public async Task<ActionResult> ForgotPassWord()
+        {
+            try
+            {
+                 await mailService.SendEmailAsync("irfanusuf33@gmail.com", "Forgot Password", "Your otp is 1234", true);
+            return RedirectToAction("Login");
+            }
+            catch (System.Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Error");
+            }
+
+          
+
+        }
 
     }
 }

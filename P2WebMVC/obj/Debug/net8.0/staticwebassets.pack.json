@@ -1,27 +1,27 @@
 {
   "Files": [
     {
-      "Id": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/projectbundle/P2WebMVC.bundle.scp.css",
+      "Id": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/projectbundle/P2WebMVC.bundle.scp.css",
       "PackagePath": "staticwebassets/P2WebMVC.bundle.scp.css"
     },
     {
-      "Id": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/css/input.css",
+      "Id": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/css/input.css",
       "PackagePath": "staticwebassets/css/input.css"
     },
     {
-      "Id": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/css/output.css",
+      "Id": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/css/output.css",
       "PackagePath": "staticwebassets/css/output.css"
     },
     {
-      "Id": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/css/site.css",
+      "Id": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
-      "Id": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/favicon.ico",
+      "Id": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/js/site.js",
+      "Id": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
     {

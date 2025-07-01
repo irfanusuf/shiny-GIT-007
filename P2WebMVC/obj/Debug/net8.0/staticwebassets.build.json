@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iloJkPtW7ShwNMAE6Q/0f23gp/fEJ/swEaSqOaozq34=",
+  "Hash": "+mRQHhFVld1Ffd7Crn4BbL9yObkmNyDjouDYrreypBA=",
   "Source": "P2WebMVC",
   "BasePath": "_content/P2WebMVC",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "P2WebMVC/wwwroot",
       "Source": "P2WebMVC",
-      "ContentRoot": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/",
+      "ContentRoot": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/",
       "BasePath": "_content/P2WebMVC",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/bundle/P2WebMVC.styles.css",
+      "Identity": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/bundle/P2WebMVC.styles.css",
       "SourceId": "P2WebMVC",
       "SourceType": "Computed",
-      "ContentRoot": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/bundle/",
+      "ContentRoot": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/bundle/",
       "BasePath": "_content/P2WebMVC",
       "RelativePath": "P2WebMVC.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/bundle/P2WebMVC.styles.css"
+      "OriginalItemSpec": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/bundle/P2WebMVC.styles.css"
     },
     {
-      "Identity": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/projectbundle/P2WebMVC.bundle.scp.css",
+      "Identity": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/projectbundle/P2WebMVC.bundle.scp.css",
       "SourceId": "P2WebMVC",
       "SourceType": "Computed",
-      "ContentRoot": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/projectbundle/",
+      "ContentRoot": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/projectbundle/",
       "BasePath": "_content/P2WebMVC",
       "RelativePath": "P2WebMVC.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/projectbundle/P2WebMVC.bundle.scp.css"
+      "OriginalItemSpec": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/obj/Debug/net8.0/scopedcss/projectbundle/P2WebMVC.bundle.scp.css"
     },
     {
-      "Identity": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/css/input.css",
+      "Identity": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/css/input.css",
       "SourceId": "P2WebMVC",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/",
+      "ContentRoot": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/",
       "BasePath": "_content/P2WebMVC",
       "RelativePath": "css/input.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot/css/input.css"
     },
     {
-      "Identity": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/css/output.css",
+      "Identity": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/css/output.css",
       "SourceId": "P2WebMVC",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/",
+      "ContentRoot": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/",
       "BasePath": "_content/P2WebMVC",
       "RelativePath": "css/output.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot/css/output.css"
     },
     {
-      "Identity": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/css/site.css",
+      "Identity": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/css/site.css",
       "SourceId": "P2WebMVC",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/",
+      "ContentRoot": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/",
       "BasePath": "_content/P2WebMVC",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot/css/site.css"
     },
     {
-      "Identity": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/favicon.ico",
+      "Identity": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/favicon.ico",
       "SourceId": "P2WebMVC",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/",
+      "ContentRoot": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/",
       "BasePath": "_content/P2WebMVC",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot/favicon.ico"
     },
     {
-      "Identity": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/js/site.js",
+      "Identity": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/js/site.js",
       "SourceId": "P2WebMVC",
       "SourceType": "Discovered",
-      "ContentRoot": "/home/irfan_usuf/ILS/GIT007/P2WebMVC/wwwroot/",
+      "ContentRoot": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/wwwroot/",
       "BasePath": "_content/P2WebMVC",
       "RelativePath": "js/site.js",
       "AssetKind": "All",

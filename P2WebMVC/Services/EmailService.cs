@@ -33,7 +33,7 @@ public class EmailService : IMailService
 
         var mailMessage = new MailMessage
         {
-            From = new MailAddress("services@algoacademy.in"),
+            From = new MailAddress("contact@algoacademy.in"),
             Subject = subject,
             Body = body,
             IsBodyHtml = isHtml

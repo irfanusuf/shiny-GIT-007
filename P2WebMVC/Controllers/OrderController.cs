@@ -96,6 +96,9 @@ namespace P2WebMVC.Controllers
 
                     await dbContext.Orders.AddAsync(order);
 
+
+                     await mailService.SendEmailAsync(user.Email, "Order Succesfull", $"Your Order of Rs {order.TotalPrice} has been created ", true);
+
                     if (cart?.CartProducts != null)
                     {
                         dbContext.CartProducts.RemoveRange(cart.CartProducts);
@@ -104,7 +107,7 @@ namespace P2WebMVC.Controllers
 
                     await dbContext.SaveChangesAsync();
 
-                    await mailService.SendEmailAsync(user.Email, "Order Succesfull", $"Your Order of Rs {order.TotalPrice} has been created ", true);
+                  
 
 
                     TempData["SuccessMessage"] = "order created Succesfully";
@@ -120,7 +123,7 @@ namespace P2WebMVC.Controllers
             catch (System.Exception ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
-                return View();
+                return View("Error");
 
             }
 
