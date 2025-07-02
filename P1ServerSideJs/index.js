@@ -74,6 +74,8 @@ app.get("/user/profile", isAuthenticated, getUser);
 //blog Routes 
 
 app.get("/blog/create", isAuthenticated, (req, res) => {res.render("createBlog");});
+
+
 app.post("/blog/create", isAuthenticated, createBlog);
 
 
