@@ -1,0 +1,12 @@
+/home/irfan_usuf/Coding/GIT007/P0_Library/bin/Debug/net8.0/P0_Library.deps.json
+/home/irfan_usuf/Coding/GIT007/P0_Library/bin/Debug/net8.0/P0_Library.dll
+/home/irfan_usuf/Coding/GIT007/P0_Library/bin/Debug/net8.0/P0_Library.pdb
+/home/irfan_usuf/Coding/GIT007/P0_Library/obj/Debug/net8.0/P0_Library.GeneratedMSBuildEditorConfig.editorconfig
+/home/irfan_usuf/Coding/GIT007/P0_Library/obj/Debug/net8.0/P0_Library.AssemblyInfoInputs.cache
+/home/irfan_usuf/Coding/GIT007/P0_Library/obj/Debug/net8.0/P0_Library.AssemblyInfo.cs
+/home/irfan_usuf/Coding/GIT007/P0_Library/obj/Debug/net8.0/P0_Library.csproj.CoreCompileInputs.cache
+/home/irfan_usuf/Coding/GIT007/P0_Library/obj/Debug/net8.0/P0_Library.sourcelink.json
+/home/irfan_usuf/Coding/GIT007/P0_Library/obj/Debug/net8.0/P0_Library.dll
+/home/irfan_usuf/Coding/GIT007/P0_Library/obj/Debug/net8.0/refint/P0_Library.dll
+/home/irfan_usuf/Coding/GIT007/P0_Library/obj/Debug/net8.0/P0_Library.pdb
+/home/irfan_usuf/Coding/GIT007/P0_Library/obj/Debug/net8.0/ref/P0_Library.dll
