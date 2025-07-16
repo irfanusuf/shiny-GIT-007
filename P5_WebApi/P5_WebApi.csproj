@@ -11,4 +11,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\P0_ClassLibrary\P0_ClassLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

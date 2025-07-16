@@ -1,6 +1,0 @@
-@P5_WebApi_HostAddress = http://localhost:5294
-
-GET {{P5_WebApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
