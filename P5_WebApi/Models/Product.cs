@@ -5,6 +5,7 @@ namespace P5_WebApi.Models;
 public class Product
 {
 
-    public required string ProductName  { get; set; }
+    public Guid ProductId { get; set; } = Guid.NewGuid();
+    public required string ProductName { get; set; }
 
 }

@@ -9,7 +9,7 @@ namespace P5_WebApi.Controllers
     public class ProductController : ControllerBase
     {
 
-             [HttpPost("Add")]
+       [HttpPost("Add")]
         public async Task <IActionResult> AddAsync(Product req)
         {
             return Ok(new

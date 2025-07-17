@@ -1,6 +1,8 @@
 
+using Microsoft.EntityFrameworkCore;
 using P0_ClassLibrary;
 using P0_ClassLibrary.Interfaces;
+using P5_WebApi.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("cloud")));
 
 builder.Services.AddSingleton<ICalculatorService , CalculatorService>();
 // builder.Services.AddSingleton<ICloudinaryService , CloudinaryService>();

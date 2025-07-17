@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/irfan_usuf/Coding/GIT007/P5_WebApi/P5_WebApi.csproj": {}
+    "/home/irfan_usuf/Coding/GIT005/P5_WebApi/P5_WebApi.csproj": {}
   },
   "projects": {
-    "/home/irfan_usuf/Coding/GIT007/P0_ClassLibrary/P0_ClassLibrary.csproj": {
+    "/home/irfan_usuf/Coding/GIT005/P0_ClassLibrary/P0_ClassLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/irfan_usuf/Coding/GIT007/P0_ClassLibrary/P0_ClassLibrary.csproj",
+        "projectUniqueName": "/home/irfan_usuf/Coding/GIT005/P0_ClassLibrary/P0_ClassLibrary.csproj",
         "projectName": "P0_ClassLibrary",
-        "projectPath": "/home/irfan_usuf/Coding/GIT007/P0_ClassLibrary/P0_ClassLibrary.csproj",
+        "projectPath": "/home/irfan_usuf/Coding/GIT005/P0_ClassLibrary/P0_ClassLibrary.csproj",
         "packagesPath": "/home/irfan_usuf/.nuget/packages/",
-        "outputPath": "/home/irfan_usuf/Coding/GIT007/P0_ClassLibrary/obj/",
+        "outputPath": "/home/irfan_usuf/Coding/GIT005/P0_ClassLibrary/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/irfan_usuf/.nuget/NuGet/NuGet.Config"
@@ -75,14 +75,14 @@
         }
       }
     },
-    "/home/irfan_usuf/Coding/GIT007/P5_WebApi/P5_WebApi.csproj": {
+    "/home/irfan_usuf/Coding/GIT005/P5_WebApi/P5_WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/irfan_usuf/Coding/GIT007/P5_WebApi/P5_WebApi.csproj",
+        "projectUniqueName": "/home/irfan_usuf/Coding/GIT005/P5_WebApi/P5_WebApi.csproj",
         "projectName": "P5_WebApi",
-        "projectPath": "/home/irfan_usuf/Coding/GIT007/P5_WebApi/P5_WebApi.csproj",
+        "projectPath": "/home/irfan_usuf/Coding/GIT005/P5_WebApi/P5_WebApi.csproj",
         "packagesPath": "/home/irfan_usuf/.nuget/packages/",
-        "outputPath": "/home/irfan_usuf/Coding/GIT007/P5_WebApi/obj/",
+        "outputPath": "/home/irfan_usuf/Coding/GIT005/P5_WebApi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/irfan_usuf/.nuget/NuGet/NuGet.Config"
@@ -97,8 +97,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/irfan_usuf/Coding/GIT007/P0_ClassLibrary/P0_ClassLibrary.csproj": {
-                "projectPath": "/home/irfan_usuf/Coding/GIT007/P0_ClassLibrary/P0_ClassLibrary.csproj"
+              "/home/irfan_usuf/Coding/GIT005/P0_ClassLibrary/P0_ClassLibrary.csproj": {
+                "projectPath": "/home/irfan_usuf/Coding/GIT005/P0_ClassLibrary/P0_ClassLibrary.csproj"
               }
             }
           }
@@ -113,9 +113,27 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

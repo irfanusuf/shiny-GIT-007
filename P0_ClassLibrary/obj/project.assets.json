@@ -3672,11 +3672,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/irfan_usuf/Coding/GIT007/P0_ClassLibrary/P0_ClassLibrary.csproj",
+      "projectUniqueName": "/home/irfan_usuf/Coding/GIT005/P0_ClassLibrary/P0_ClassLibrary.csproj",
       "projectName": "P0_ClassLibrary",
-      "projectPath": "/home/irfan_usuf/Coding/GIT007/P0_ClassLibrary/P0_ClassLibrary.csproj",
+      "projectPath": "/home/irfan_usuf/Coding/GIT005/P0_ClassLibrary/P0_ClassLibrary.csproj",
       "packagesPath": "/home/irfan_usuf/.nuget/packages/",
-      "outputPath": "/home/irfan_usuf/Coding/GIT007/P0_ClassLibrary/obj/",
+      "outputPath": "/home/irfan_usuf/Coding/GIT005/P0_ClassLibrary/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/irfan_usuf/.nuget/NuGet/NuGet.Config"
