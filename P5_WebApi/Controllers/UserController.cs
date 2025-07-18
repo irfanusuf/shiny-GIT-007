@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using P0_ClassLibrary.Interfaces;
 using P5_WebApi.Data;
 using P5_WebApi.Models;
 
@@ -12,11 +13,15 @@ namespace P5_WebApi.Controllers
     public class UserController : ControllerBase
     {
 
-        private readonly SqlDbContext _dbcontext;
+        private readonly SqlDbContext dbcontext;
+        // private readonly ICloudinaryService cloudinaryService;
+        private readonly ITokenService tokenService;
 
-        public UserController(SqlDbContext dbContext)
+        public UserController(SqlDbContext dbContext, ITokenService tokenService)
         {
-            _dbcontext = dbContext;
+            this.dbcontext = dbContext;
+            // this.cloudinaryService = cloudinaryService;
+            this.tokenService = tokenService;
         }
 
 
@@ -33,7 +38,7 @@ namespace P5_WebApi.Controllers
                 });
             }
 
-            var user = await _dbcontext.Users.FirstOrDefaultAsync(u=> u.Email == req.Email);
+            var user = await dbcontext.Users.FirstOrDefaultAsync(u=> u.Email == req.Email);
 
             if (user != null)
             {
@@ -43,19 +48,28 @@ namespace P5_WebApi.Controllers
                 });
             }
 
+
             var passEncryt = BCrypt.Net.BCrypt.HashPassword(req.Password);
 
             req.Password = passEncryt;
 
-            await _dbcontext.Users.AddAsync(req);
+            await dbcontext.Users.AddAsync(req);
 
-            await _dbcontext.SaveChangesAsync();
+            await dbcontext.SaveChangesAsync();
+
+           var token =  tokenService.CreateToken(req.UserId, req.Email, req.Username ?? "Guest User", 24);
+
+
+            // token ko  cookies may send kerna hai  
 
 
 
+
+            // message and token ko json object may send kerdiya philhaal
             return Ok(new
             {
-                message = "Register Succesfull"
+                message = "Register Succesfull",
+                authToken = token
             });
         }
 
