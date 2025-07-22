@@ -1,6 +1,6 @@
 
 import { createRoot } from 'react-dom/client'
-import "./global.css"
+import "./global.scss"
 import App from './App.jsx'
 
 
@@ -9,7 +9,7 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
 
-<App/>    // componnet
+<App/>    //child componnet
 
 
 )

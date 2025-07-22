@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import loadingGif from "./assets/loading.gif"
+import loadingGif from "../assets/loading.gif"
 
-
-
-// funtion based  component 
-
-const App = () => {
+const Home = () => {
     const [count, setCount] = useState(0)
     const [username, setusername] = useState("")
     const [loading, setLoading] = useState(true)
@@ -53,12 +49,6 @@ const App = () => {
 
     )
 
-
-
 }
 
-
-
-
-
-export default App
+export default Home
