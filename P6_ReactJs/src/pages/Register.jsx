@@ -1,48 +1,50 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { MdLogin } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import userProfile from "../assets/user.png"
 
 const Register = () => {
+
+
+
   const [username, setUsername] = useState("");
 
   const [email, setEmail] = useState("");
 
   const [password, setPass] = useState("");
 
-
-const formBody = {
-
-  username , email , password
-}
+  const [ loading , setLoading] = useState(false)
 
 
-    const registerHandler =  async () =>{
+  const formBody = { username, email, password }
 
-      try {
-        const res = await axios.post("http://localhost:5288/user/register" , formBody)
 
-        if(res.status === 200){
-          window.alert(res.data.message)
-        }
-        
-      } catch (error) {
+  const registerHandler = async () => {
 
-        window.alert("network Error")
-        console.error(error)
+    try {
+      setLoading(true)
+      const res = await axios.post("http://localhost:5294/api/User/Register", formBody)
+
+      if (res.status === 200) {
+        setLoading(false)
+        toast.success(res.data.message)
       }
 
+    } catch (error) {
 
-
+      toast.error("Network Error")
+      setLoading(false)
+      console.error(error)
     }
+  }
 
-
-
-
-
-
-
-
+{/* <MdLogin style={{color : "green" }}/> */}
   return (
-    <div className="register">
+    <div className="register animate__animated animate__backInDown">
+
+     <h2 style={{textAlign : "center" }}> Register with us  <img src={userProfile} width={50}/> </h2>  
       <form>
 
 
@@ -82,7 +84,12 @@ const formBody = {
           />
         </div>
 
-        <button type="button" onClick={registerHandler}> Register </button>
+        <div className="links" >
+          <p>Already have an account go to <Link to= "/user/login"> Login </Link> </p>
+        <p> Checkout our <Link> user agreement policy  </Link>  & <Link> Terms and Conditions</Link> </p>
+        </div>
+
+        <button type="button" onClick={registerHandler} disabled ={loading} > { loading ? "Wait...." : "Register"} </button>
       </form>
     </div>
   );

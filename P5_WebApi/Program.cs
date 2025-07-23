@@ -17,7 +17,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("cloud")));
 
+// cors policy for allowing frontend to send request on this server 
 
+builder.Services.AddCors(Options => {Options.AddPolicy("AllowFrontend", policy => 
+policy.WithOrigins("http://localhost:5173").AllowAnyHeader().AllowAnyMethod().AllowCredentials());});
 
 // register or configure the  options needed by EmailService having type of EmailSettings present in P0 classlibarary   
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
@@ -50,6 +53,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+
+app.UseCors("AllowFrontend"); 
+
+// app.UseAuthorization(); 
 
 app.MapControllers();
 

@@ -69,7 +69,8 @@ namespace P5_WebApi.Controllers
             return Ok(new
             {
                 message = "Register Succesfull",
-                authToken = token
+                payload = req
+                // authToken = token
             });
         }
 
