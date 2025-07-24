@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import loadingGif from "../assets/loading.gif"
 
-const Home = () => {
+const Home = ({darkmode , setDarkMode}) => {
     const [count, setCount] = useState(0)
-    const [username, setusername] = useState("")
     const [loading, setLoading] = useState(true)
 
 
     useEffect(() => {
 
         setTimeout(() => {
-            setusername("Irfan sir")
             setLoading(false)
         }, 3000);
 
@@ -27,7 +25,7 @@ const Home = () => {
 
     return (
 
-        <div className='main'>
+        <div className={ darkmode ? "home-dark home"  : "home-light home"} >
             {
                 loading ?
                     <div>
@@ -35,7 +33,7 @@ const Home = () => {
                     </div>
                     :
                     <div>
-                        <h1>  Welcome from the app {username}  </h1>
+                        <h1>  Welcome from the app </h1>
                         <h2>   This is function based component  </h2>
                         <h2> This is the counter </h2>
                         <h2> {count} </h2>
