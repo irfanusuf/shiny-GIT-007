@@ -45,7 +45,6 @@ const Account = ({darkmode , setDarkMode}) => {
 
 
 
-
   const loginHandler = async () => {
 
     try {

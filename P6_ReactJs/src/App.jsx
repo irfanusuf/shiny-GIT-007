@@ -8,38 +8,52 @@ import Home from "./pages/Home";
 import Account from "./pages/Account";
 import About from "./pages/About";
 import { ToastContainer } from "react-toastify";
+import { linkArr } from "./data/data";
+import PageNotFound from "./pages/PageNotFound";
+import Gallery from "./pages/Gallery";
 
 // funtion based  component
 
 const App = () => {
 
 
- const username  = "Tajamul"
- const email = "email@gmail.com"
+  const username = "Tajamul"
+  const email = "email@gmail.com"
 
-    const [darkmode , setDarkMode] = useState(false)
+  const [darkmode, setDarkMode] = useState(false)
 
 
   return (
     <>
 
-      <ToastContainer/>
+      <ToastContainer />
 
       <BrowserRouter>
-        <Navbar  darkmode ={darkmode} setDarkMode={setDarkMode} />
-
-  
-          <Routes>
-            <Route path="/" element={<Home darkmode ={darkmode} setDarkMode={setDarkMode}/>} />
+        <Navbar darkmode={darkmode} setDarkMode={setDarkMode} />
 
 
+        <Routes>
 
-            <Route path="/about" element={<About />} />
-    
-            <Route path="/user/account" element={<Account darkmode ={darkmode} setDarkMode={setDarkMode} />} />
-         
-          </Routes>
-      
+          <Route path="*" element={<PageNotFound />} />
+
+          {/* {linkArr.map((element) => (
+            <Route
+              key={element.address}
+              path={element.address}
+              element={React.createElement(element.name, { darkmode, setDarkMode })}
+            />
+          ))} */}
+
+
+          <Route path="/" element={<Home />} />
+
+          <Route path="/about" element={<About />} />
+             <Route path="/gallery" element={<Gallery />} />
+
+          <Route path="/user/account" element={<Account darkmode={darkmode} setDarkMode={setDarkMode} />} /> 
+
+        </Routes>
+
 
         <Footer />
       </BrowserRouter>

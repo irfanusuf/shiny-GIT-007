@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { GiNightSleep } from "react-icons/gi";
 import { LuSun } from "react-icons/lu";
+import { linkArr } from '../../data/data';
 
-const Navbar = ({darkmode , setDarkMode}) => {
+const Navbar = ({ darkmode, setDarkMode }) => {
+
 
 
     return (
-        <div className={ darkmode ? " navbar-dark" : "navbar-light" }>
+        <div className={darkmode ? " navbar-dark" : "navbar-light"}>
 
 
             <div className='logo'>
@@ -15,13 +17,12 @@ const Navbar = ({darkmode , setDarkMode}) => {
             </div>
 
             <ul>
-                <li> <Link to='/'> Home  </Link>   </li>
-                <li> <Link to='/user/account'> Account  </Link>    </li>
-                <li> <Link to='/about'> About  </Link>    </li>
+                {linkArr.map((element) => <li> <Link to={element.address}> {element.name}  </Link>    </li>)}
+
             </ul>
 
             <div className='dark_mode_button'>
-                <button onClick={()=>{setDarkMode(!darkmode)}}>{!darkmode ?  <GiNightSleep/> :  <LuSun/>}  </button>
+                <button onClick={() => { setDarkMode(!darkmode) }}>{!darkmode ? <GiNightSleep /> : <LuSun />}  </button>
             </div>
 
         </div>
