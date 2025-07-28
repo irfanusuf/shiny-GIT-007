@@ -48,7 +48,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
 
           <Route path="/about" element={<About />} />
-             <Route path="/gallery" element={<Gallery />} />
+          <Route path="/gallery" element={<Gallery />} />
 
           <Route path="/user/account" element={<Account darkmode={darkmode} setDarkMode={setDarkMode} />} /> 
 
