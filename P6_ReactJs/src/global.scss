@@ -250,3 +250,42 @@ body {
     }
   }
 }
+
+
+.news_container{
+
+  margin: auto;
+  width: 60%;
+
+  > h2{
+    text-align: center;
+  }
+
+  >.news{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+
+
+    >.news_card{
+
+      width: 100%;
+
+         >.heading{
+      display: flex;
+      justify-content: space-between;
+          margin-top: 10px;
+          margin-bottom: 20px;
+    }
+
+
+    > img{
+      width: 100%;
+    }
+
+    }
+ 
+  }
+}

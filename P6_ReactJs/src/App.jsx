@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import { linkArr } from "./data/data";
 import PageNotFound from "./pages/PageNotFound";
 import Gallery from "./pages/Gallery";
+import News from "./pages/News";
 
 // funtion based  component
 
@@ -49,7 +50,7 @@ const App = () => {
 
           <Route path="/about" element={<About />} />
           <Route path="/gallery" element={<Gallery />} />
-
+          <Route path="/news" element={<News />} />
           <Route path="/user/account" element={<Account darkmode={darkmode} setDarkMode={setDarkMode} />} /> 
 
         </Routes>
