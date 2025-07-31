@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import loadingGif from "../assets/loading.gif"
+import HeroSection from '../components/molecules/HeroSection'
 
-const Home = ({darkmode , setDarkMode}) => {
+const Home = ({darkmode , username , email}) => {
+
+
     const [count, setCount] = useState(0)
     const [loading, setLoading] = useState(true)
 
@@ -32,8 +35,8 @@ const Home = ({darkmode , setDarkMode}) => {
                         <img src={loadingGif} alt='loading.....' />
                     </div>
                     :
-                    <div>
-                        <h1>  Welcome from the app </h1>
+                    <div className='test'>
+                        <h1>  Welcome from the app {username} </h1>
                         <h2>   This is function based component  </h2>
                         <h2> This is the counter </h2>
                         <h2> {count} </h2>
@@ -41,7 +44,19 @@ const Home = ({darkmode , setDarkMode}) => {
                             <button onClick={handleDecrement}> decrement  </button>
                             <button onClick={handleIncrement}> increment  </button>
                         </div>
+
+
+
+
+
+                        
+                        <HeroSection username = {username}/>
                     </div>
+
+
+
+
+
             }
         </div>
 

@@ -32,7 +32,6 @@ const App = () => {
       <BrowserRouter>
         <Navbar darkmode={darkmode} setDarkMode={setDarkMode} />
 
-
         <Routes>
 
           <Route path="*" element={<PageNotFound />} />
@@ -46,12 +45,16 @@ const App = () => {
           ))} */}
 
 
-          <Route path="/" element={<Home />} />
-
+          <Route path="/" element={<Home darkmode={darkmode} username = {username} email = {email} />} />
           <Route path="/about" element={<About />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/news" element={<News />} />
+
+
           <Route path="/user/account" element={<Account darkmode={darkmode} setDarkMode={setDarkMode} />} /> 
+
+
+          
 
         </Routes>
 

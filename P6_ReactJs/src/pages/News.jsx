@@ -26,26 +26,15 @@ const News = () => {
     }
   };
 
-
-
-
-
   const handleChange = (e) => {
-
     const value = e.target.value;
     setSeacrhQuery (value)
 
   };
 
-
-
-
   useEffect(() => {
     fetchNews();
   }, []);
-
-
-
 
 
 
