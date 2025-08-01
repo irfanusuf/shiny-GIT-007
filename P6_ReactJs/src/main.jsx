@@ -1,15 +1,10 @@
+import { createRoot } from "react-dom/client";
+import "./global.scss";
+import { BrowserRouter } from "react-router-dom";
+import { Store } from "./Store";
 
-import { createRoot } from 'react-dom/client'
-import "./global.scss"
-import App from './App.jsx'
-
-
-
-
-
-createRoot(document.getElementById('root')).render(
-
-<App/>    //child componnet
-
-
-)
+createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <Store/> 
+  </BrowserRouter>
+);

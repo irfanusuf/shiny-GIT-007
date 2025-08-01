@@ -12,55 +12,25 @@ import { linkArr } from "./data/data";
 import PageNotFound from "./pages/PageNotFound";
 import Gallery from "./pages/Gallery";
 import News from "./pages/News";
+import { createContext } from "react";
 
 // funtion based  component
 
 const App = () => {
 
-
-  const username = "Tajamul"
-  const email = "email@gmail.com"
-
-  const [darkmode, setDarkMode] = useState(false)
-
-
   return (
     <>
-
       <ToastContainer />
-
-      <BrowserRouter>
-        <Navbar darkmode={darkmode} setDarkMode={setDarkMode} />
-
+        <Navbar/>
         <Routes>
-
           <Route path="*" element={<PageNotFound />} />
-
-          {/* {linkArr.map((element) => (
-            <Route
-              key={element.address}
-              path={element.address}
-              element={React.createElement(element.name, { darkmode, setDarkMode })}
-            />
-          ))} */}
-
-
-          <Route path="/" element={<Home darkmode={darkmode} username = {username} email = {email} />} />
+          <Route path="/" element={ <Home/>} />
           <Route path="/about" element={<About />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/news" element={<News />} />
-
-
-          <Route path="/user/account" element={<Account darkmode={darkmode} setDarkMode={setDarkMode} />} /> 
-
-
-          
-
+          <Route path="/user/account" element={<Account/>} /> 
         </Routes>
-
-
         <Footer />
-      </BrowserRouter>
     </>
   );
 };
