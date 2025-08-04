@@ -1,19 +1,24 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Register from "../components/molecules/Register";
 import Login from "../components/molecules/Login";
+import { Context } from "../Store";
 
-const Account = ({ darkmode }) => {
+const Account = () => {
+
+
   const [showRegister, setShowRegister] = useState(true);
+
+  const {darkMode} = useContext(Context)
 
   return (
     <div
-      className={darkmode ? "account-dark account" : "account-light account"}
+      className={darkMode ? "account-dark account" : "account-light account"}
     >
       {showRegister ? (
-        <Register darkmode={darkmode} setShowRegister={setShowRegister} />
+        <Register  setShowRegister={setShowRegister} />
       ) : (
-        <Login darkmode={darkmode} setShowRegister={setShowRegister} />
+        <Login  setShowRegister={setShowRegister} />
       )}
     </div>
   );

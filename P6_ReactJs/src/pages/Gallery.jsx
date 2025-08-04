@@ -1,35 +1,19 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../Store";
 
 const Gallery = () => {
-  const [pics, setPics] = useState([]);
+  
   const [page, setPage] = useState(1);
+
   const [loadNewData , setLoadNewData] = useState(false)
 
-  const fetchPics = async () => {
-    try {
-      const res = await axios.get("https://api.pexels.com/v1/curated", {
-        headers: {
-          Authorization:
-            "A18L6UPAOtZeFZ4vLDzj2fO4wTeto2iIb2aqtyo2EA3agRXRdEN6YFRV",
-        },
-        params: {
-          per_page: 80,
-          page: page,
-        },
-      });
 
-      if (res.status === 200) {
-        setPics(res.data.photos);
-        console.log(res.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
+   const {pics , fetchPics} = useContext(Context)
 
   useEffect(() => {
-    fetchPics();
+    fetchPics(page);
   }, [loadNewData]);
 
 
