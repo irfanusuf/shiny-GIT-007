@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { GiNightSleep } from "react-icons/gi";
 import { LuSun } from "react-icons/lu";
 import { linkArr } from '../../data/data';
-import { Context } from '../../Store';
+import { Context } from '../../context/Store';
+
 
 const Navbar = () => {
 

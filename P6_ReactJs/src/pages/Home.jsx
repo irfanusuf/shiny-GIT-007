@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import loadingGif from "../assets/loading.gif"
 import HeroSection from '../components/molecules/HeroSection'
-import { Context } from '../Store'
+import { Context } from '../context/Store'
+
 
 
 const Home = () => {

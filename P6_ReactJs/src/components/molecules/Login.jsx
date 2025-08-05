@@ -2,7 +2,8 @@
 import{ useContext, useState } from 'react'
 import userProfile from "../../assets/user.png";
 import { Link } from 'react-router-dom';
-import { Context } from '../../Store';
+import { Context } from '../../context/Store';
+
 
 const Login = ({ setShowRegister }) => {
 

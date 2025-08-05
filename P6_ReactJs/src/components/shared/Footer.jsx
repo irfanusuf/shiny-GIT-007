@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { Context } from '../../Store'
+import { Context } from '../../context/Store'
+
 
 
 const Footer = () => {

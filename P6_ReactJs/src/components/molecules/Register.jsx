@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import userProfile from "../../assets/user.png";
 
-const Register = ({darkmode , setShowRegister}) => {
+const Register = ({ setShowRegister}) => {
 
 
     const [username, setUsername] = useState("");

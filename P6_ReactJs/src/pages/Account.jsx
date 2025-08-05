@@ -2,7 +2,8 @@
 import { useContext, useState } from "react";
 import Register from "../components/molecules/Register";
 import Login from "../components/molecules/Login";
-import { Context } from "../Store";
+import { Context } from "../context/Store";
+
 
 const Account = () => {
 
