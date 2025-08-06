@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom'
 import { GiNightSleep } from "react-icons/gi";
 import { LuSun } from "react-icons/lu";
 import { linkArr } from '../../data/data';
-import { Context } from '../../context/Store';
+import {  useDispatch } from '../../context/Store';
 
 
 const Navbar = () => {
 
-    const {darkMode , setDarkMode} = useContext(Context)
+          const {state } =    useDispatch()
+
 
     return (
-        <div className={darkMode ? " navbar-dark" : "navbar-light"}>
+        <div className={state.darkMode ? " navbar-dark" : "navbar-light"}>
 
 
             <div className='logo'>

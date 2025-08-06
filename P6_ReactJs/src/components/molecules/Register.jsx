@@ -3,42 +3,16 @@ import  { useState } from 'react'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import userProfile from "../../assets/user.png";
+import { registerHandler } from '../../context/Actions';
+import { useDispatch } from '../../context/Store';
 
 const Register = ({ setShowRegister}) => {
 
-
     const [username, setUsername] = useState("");
-
     const [email, setEmail] = useState("");
-
     const [password, setPass] = useState("");
-
-
-    const [loading, setLoading] = useState(false)
-
     const formBody = { username, email, password }
-
-
-    const registerHandler = async () => {
-
-        try {
-            setLoading(true)
-            const res = await axios.post("http://localhost:5294/api/User/Register", formBody)
-
-            if (res.status === 200) {
-                setLoading(false)
-                toast.success(res.data.message)
-            }
-
-        } catch (error) {
-
-            toast.error("Network Error")
-            setLoading(false)
-            console.error(error)
-        }
-    }
-
-
+    const {state, dispatch} = useDispatch()
 
     return (
         <div className={darkmode ? "regsiter-dark register " : "register-light register "} >
@@ -88,7 +62,7 @@ const Register = ({ setShowRegister}) => {
                     <p> Checkout our <Link> user agreement policy  </Link>  & <Link> Terms and Conditions</Link> </p>
                 </div>
 
-                <button type="button" onClick={registerHandler} disabled={loading} > {loading ? "Wait...." : "Register"} </button>
+                <button type="button" onClick={   ()=>{registerHandler(formBody , dispatch)} } disabled={state.loading} > {state.loading ? "Wait...." : "Register"} </button>
             </form>
         </div>
     )

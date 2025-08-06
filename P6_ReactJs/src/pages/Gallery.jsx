@@ -1,6 +1,7 @@
 
-import { useContext, useEffect, useState } from "react";
-import { Context } from "../context/Store";
+import {useEffect, useState } from "react";
+import { useDispatch } from "../context/Store";
+import { fetchPics } from "../context/Actions";
 
 
 const Gallery = () => {
@@ -9,12 +10,15 @@ const Gallery = () => {
 
   const [loadNewData , setLoadNewData] = useState(false)
 
+   const [state , dispatch] = useDispatch()
 
 
-   const {pics , fetchPics} = useContext(Context)
+
 
   useEffect(() => {
-    fetchPics(page);
+
+    fetchPics(page , dispatch);
+
   }, [loadNewData]);
 
 
@@ -54,7 +58,7 @@ const Gallery = () => {
       </div>
 
       <div className="pics_container">
-        {pics.map((pic) => (
+        {state.pics.map((pic) => (
           <div className="pic_card">
             <img src={pic.src.medium} alt={pic.alt} />
             <h4>{pic.photographer}</h4>

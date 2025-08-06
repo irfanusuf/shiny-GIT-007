@@ -3,12 +3,13 @@ import{ useContext, useState } from 'react'
 import userProfile from "../../assets/user.png";
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Store';
+import { loginHandler } from '../../context/Actions';
 
 
 const Login = ({ setShowRegister }) => {
 
 
-    const {loading , loginHandler } = useContext(Context)
+    const {state , dispatch} = useContext(Context)
 
     const [email, setEmail] = useState("");
     const [password, setPass] = useState("");
@@ -44,7 +45,7 @@ const Login = ({ setShowRegister }) => {
                     <p>Dont have an accound <Link onClick={() => { setShowRegister(true) }}> Regeister Here </Link> </p>
                     <p> Checkout our <Link> user agreement policy  </Link>  & <Link> Terms and Conditions</Link> </p>
                 </div>
-                <button type="button" onClick={() => { loginHandler(formBody) }} disabled={loading} > {loading ? "Wait...." : "Login"} </button>
+                <button type="button" onClick={() => { loginHandler(formBody , dispatch) }} disabled={state.loading} > {state.loading ? "Wait...." : "Login"} </button>
             </form>
         </div>
 
