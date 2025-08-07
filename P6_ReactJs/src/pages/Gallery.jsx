@@ -1,25 +1,34 @@
 
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "../context/Store";
 import { fetchPics } from "../context/Actions";
 
 
 const Gallery = () => {
-  
+
   const [page, setPage] = useState(1);
 
-  const [loadNewData , setLoadNewData] = useState(false)
+  const [loadNewData, setLoadNewData] = useState(false)
 
-   const [state , dispatch] = useDispatch()
-
-
+  const { state, dispatch } = useDispatch()
 
 
   useEffect(() => {
 
-    fetchPics(page , dispatch);
+    if (state.pics.length === 0) {
+      fetchPics(page, dispatch);
+    }
+  }, []);
 
-  }, [loadNewData]);
+
+
+  useEffect(()=>{
+
+    if(page>1){
+          fetchPics(page, dispatch);
+    }
+
+  }, [loadNewData])
 
 
 
@@ -46,10 +55,10 @@ const Gallery = () => {
           <p>{page} </p>
           <button
             onClick={() => {
-                if(page<100){
-                setPage((page) => page + 1);      
+              if (page < 100) {
+                setPage((page) => page + 1);
                 setLoadNewData(!loadNewData)
-                }
+              }
             }}
           >
             Next
@@ -59,10 +68,13 @@ const Gallery = () => {
 
       <div className="pics_container">
         {state.pics.map((pic) => (
-          <div className="pic_card">
+
+          <div className="pic_card" key={pic.id} >
             <img src={pic.src.medium} alt={pic.alt} />
             <h4>{pic.photographer}</h4>
           </div>
+
+
         ))}
       </div>
     </div>

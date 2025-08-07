@@ -1,14 +1,15 @@
-import React, { useContext, useState } from 'react'
+
 import { Link } from 'react-router-dom'
 import { GiNightSleep } from "react-icons/gi";
 import { LuSun } from "react-icons/lu";
 import { linkArr } from '../../data/data';
 import {  useDispatch } from '../../context/Store';
+import { setDarkMode } from '../../context/Actions';
 
 
 const Navbar = () => {
 
-          const {state } =    useDispatch()
+    const {state , dispatch } =    useDispatch()
 
 
     return (
@@ -20,11 +21,11 @@ const Navbar = () => {
             </div>
 
             <ul>
-                {linkArr.map((element) => <li> <Link to={element.address}> {element.name}  </Link>  </li>)}
+                {linkArr.map((element) => <li key={element.name}> <Link to={element.address}> {element.name}  </Link>  </li>)}
             </ul>
 
             <div className='dark_mode_button'>
-                <button onClick={setDarkMode}>{!darkMode ? <GiNightSleep /> : <LuSun />}  </button>
+                <button onClick={  ()=>{ setDarkMode(dispatch)  } }>{!state.darkMode ? <GiNightSleep /> : <LuSun />}  </button>
             </div>
 
         </div>

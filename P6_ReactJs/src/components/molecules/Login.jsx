@@ -1,15 +1,15 @@
 
-import{ useContext, useState } from 'react'
+import{  useState } from 'react'
 import userProfile from "../../assets/user.png";
 import { Link } from 'react-router-dom';
-import { Context } from '../../context/Store';
+import {  useDispatch } from '../../context/Store';
 import { loginHandler } from '../../context/Actions';
 
 
 const Login = ({ setShowRegister }) => {
 
 
-    const {state , dispatch} = useContext(Context)
+    const {state , dispatch} = useDispatch()
 
     const [email, setEmail] = useState("");
     const [password, setPass] = useState("");

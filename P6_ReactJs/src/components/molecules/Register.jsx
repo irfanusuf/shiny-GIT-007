@@ -15,7 +15,7 @@ const Register = ({ setShowRegister}) => {
     const {state, dispatch} = useDispatch()
 
     return (
-        <div className={darkmode ? "regsiter-dark register " : "register-light register "} >
+        <div className={state.darkmode ? "regsiter-dark register " : "register-light register "} >
 
             <h2 style={{ textAlign: "center", color: "grey" }}> Register with us  <img src={userProfile} width={50} /> </h2>
             <form>

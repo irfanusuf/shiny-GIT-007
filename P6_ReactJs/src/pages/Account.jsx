@@ -1,8 +1,8 @@
 
-import { useContext, useState } from "react";
+import {useState } from "react";
 import Register from "../components/molecules/Register";
 import Login from "../components/molecules/Login";
-import { Context } from "../context/Store";
+import {  useDispatch } from "../context/Store";
 
 
 const Account = () => {
@@ -10,11 +10,11 @@ const Account = () => {
 
   const [showRegister, setShowRegister] = useState(true);
 
-  const {darkMode} = useContext(Context)
+  const {state} = useDispatch()
 
   return (
     <div
-      className={darkMode ? "account-dark account" : "account-light account"}
+      className={state.darkMode ? "account-dark account" : "account-light account"}
     >
       {showRegister ? (
         <Register  setShowRegister={setShowRegister} />

@@ -5,5 +5,5 @@
         { address: "/about", name: "About" },
         { address: "/services", name: "Services" },
         { address: "/contact", name: "Contact" },
-        { address: "/legal", name: "Legal" },
+        { address: "/gallery", name: "Gallery" },
     ]
