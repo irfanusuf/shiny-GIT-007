@@ -76,13 +76,79 @@ namespace P5_WebApi.Controllers
 
 
         [HttpPost("Login")]
-        public IActionResult Login(User req)
+        public async Task<IActionResult> Login(User req)
         {
-            return Ok(new
+            try
             {
-                message = "Login Succesfull"
-            });
+                if (!ModelState.IsValid)
+                {
+                    return StatusCode(400, new { message = "All credentials required!" });
+                }
+
+                var existingUser = await dbcontext.Users.FirstOrDefaultAsync(u => u.Email == req.Email);
+
+
+                if (existingUser == null)
+                {
+                      return StatusCode (404 , new  {  message = "User not Found!"} );
+                }
+
+                var checkPass = BCrypt.Net.BCrypt.Verify(req.Password, existingUser.Password);
+
+                if (checkPass)
+                {
+                    var token = tokenService.CreateToken(existingUser.UserId, req.Email, existingUser.Username, 60 * 24);
+
+                    HttpContext.Response.Cookies.Append("Authorization_Token_React", token, new CookieOptions
+                    {
+                        HttpOnly = true,
+                        Secure = false,
+                        SameSite = SameSiteMode.None,
+                        Expires = DateTimeOffset.UtcNow.AddHours(24)
+                    });
+
+
+                    return Ok(new {message = "Login SuccesFull !"  , payload = token });
+
+                    // var returnUrl = HttpContext.Session.GetString("ReturnUrl");
+
+                    // HttpContext.Session.Remove("ReturnUrl");
+
+                    // // token ko cookies may save kerna .... // done 9 april 
+                    // if (string.IsNullOrEmpty(returnUrl))
+                    // {
+                    //     return RedirectToAction("Dashboard", "Admin");
+                    // }
+                    // else
+                    // {
+                    //     // redirect to return Url 
+                    //     return Redirect(returnUrl);
+                    // }
+
+                }
+
+                else
+                {
+                    return StatusCode(400, new { message = "Password inccorrect" });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, new { message = "Internal server Error!" });
+            }
+
         }
+
+
+
+
+
+
+
+
+
+
 
 
         [HttpGet("ForgotPass")]

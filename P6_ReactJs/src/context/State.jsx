@@ -1,5 +1,7 @@
 
 
+// in memory state     // after relaod all the data will be lost then we have to refetch the fresh data from server 
+
 export const initialState = {
     user: {},
     darkMode: false,
