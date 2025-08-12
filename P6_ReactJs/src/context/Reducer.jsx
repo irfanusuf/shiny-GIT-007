@@ -14,7 +14,7 @@
         return { ...state, pics: action.payload };
 
       case "SET_USER":
-        return { ...state, user: action.payload };
+        return { ...state, userId: action.payload };
 
       case "SET_ORDERS":
         return { ...state, orders: action.payload };

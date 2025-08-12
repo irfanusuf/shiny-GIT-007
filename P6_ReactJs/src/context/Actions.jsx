@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { axiosInstance } from "../utils/axiosInstance";
 
 // actions
 export const setDarkMode = (dispatch) => {
@@ -80,3 +81,24 @@ export const registerHandler = async (formBody, dispatch) => {
     console.error(error);
   }
 };
+
+
+export const verifyUser = async (token , dispatch) =>{
+try {
+  const res = await axiosInstance.get(`/user/verify?token=${token}`)
+  if(res.status === 200){
+    dispatch({type : "SET_USER" , payload : res.data.payload})
+    return true
+  }else{
+    return false
+  }
+  
+
+} catch (error) {
+  console.error(error)
+  return false
+}
+
+
+
+}

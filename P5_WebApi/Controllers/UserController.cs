@@ -142,12 +142,24 @@ namespace P5_WebApi.Controllers
 
 
 
+        [HttpGet("Verify")]
+        public IActionResult Verify(string token)
+        {
+            if (token == null)
+            {
+                return StatusCode(401, new { message = "Unauthorized to access !" });
+            }
+            var VerifiedUserId = tokenService.VerifyTokenAndGetId(token);
 
-
-
-
-
-
+            if (Guid.Empty != VerifiedUserId)
+            {
+                return StatusCode(200, new { message = "Verified Succesfully", payload = VerifiedUserId });
+            }
+            else
+            {
+                return StatusCode(403 , new {message = "Forbidden to access !" });
+            }
+        }
 
 
 

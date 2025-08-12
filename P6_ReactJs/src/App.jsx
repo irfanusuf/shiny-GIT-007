@@ -20,28 +20,18 @@ const App = () => {
   return (
     <>
       <ToastContainer />
-        <Navbar/>
-        <Routes>
-          <Route path="*" element={<PageNotFound />} />
-          <Route path="/" element={ <Home/>} />
-          <Route path="/about" element={<About />} />
+      <Navbar />
+      <Routes>
+        <Route path="*" element={<PageNotFound/>} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/about" element={<About/>} />
+        <Route path="/gallery" element={<IsAuthorised><Gallery/></IsAuthorised>} />
+        <Route path="/news" element={<News />} />
+        <Route path="/user/account" element={<Account />}/>
+        <Route path="/user/dashboard" element={<IsAuthorised><Dashboard/></IsAuthorised>} />
 
-          
-          <Route path="/gallery" element={  <IsAuthorised><Gallery/></IsAuthorised>  } />
-          <Route path="/news" element={<News />} />
-
-
-
-
-
-          <Route path="/user/account" element={<Account/>} /> 
-
-
-
-          <Route path="/user/dashboard" element={<IsAuthorised><Dashboard/></IsAuthorised>}/> 
-
-        </Routes>
-        <Footer />
+      </Routes>
+      <Footer />
     </>
   );
 };
