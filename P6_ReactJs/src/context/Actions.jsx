@@ -102,3 +102,13 @@ try {
 
 
 }
+
+
+export const logout = (dispatch) =>{
+
+
+localStorage.clear()
+dispatch({type : "CLEAR_USER"  , payload : "" })
+
+
+}

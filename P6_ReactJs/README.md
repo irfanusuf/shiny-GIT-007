@@ -36,3 +36,4 @@ for updation of store
     // setStore((prev) => ({ ...prev, pics: res.data.photos, loading: false }));   // ensures state immutabilty
 
 
+ npx create-react-app p7_reactjs_redux

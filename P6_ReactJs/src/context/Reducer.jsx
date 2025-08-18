@@ -16,6 +16,9 @@
       case "SET_USER":
         return { ...state, userId: action.payload };
 
+      case "CLEAR_USER":
+        return { ...state, userId: action.payload };
+
       case "SET_ORDERS":
         return { ...state, orders: action.payload };
 

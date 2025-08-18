@@ -9,7 +9,6 @@ const IsAuthorised = ({ children }) => {
 
   const token = localStorage.getItem("Authorization_Token");
   const navigate = useNavigate();
-
   const [auth, setAuth] = useState(false);
   const {dispatch} = useDispatch()
 
