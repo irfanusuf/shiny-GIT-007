@@ -5,6 +5,9 @@ const userIntialState = {
     email: "",
     loading: false,
 };
+
+
+
 const productIntialState = {
     loading: false,
     productName: "",
@@ -14,6 +17,12 @@ const productIntialState = {
 
 
 
+const orderIntialState ={
+    loading : false,
+    orderId : "",
+    addressId : "",
+    orderValue : 0
+}
 
 
 export const userReducer = createReducer(userIntialState, (builder) => {
@@ -58,3 +67,20 @@ export const productReducer = createReducer(productIntialState, (builder) => {
 
 
 });
+
+
+
+export const orderReducer =  createReducer(orderIntialState  , (builder)=>{
+
+    builder.addCase("GET_ORDER" , (state , action)=>{
+        state.loading = true
+        
+        state.orderId = "kjasdhjssiuyqweiodcxhkchasidgasidu"
+    })
+
+
+    builder.addCase("RESET_ORDER_LOADER" , (state , action)=>{
+        state.loading = false
+    
+    })
+})

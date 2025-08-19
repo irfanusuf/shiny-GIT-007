@@ -25,3 +25,22 @@ export const handlProduct = () => (action) => {
         action({ type: "RESET_PRODUCT_LOADER" });
     }
 };
+
+
+
+
+//redux thunk 
+export const handleGetOrder = () => (action)=>{
+
+try {
+    
+    action({type : "GET_ORDER" })
+
+} catch (error) {
+    console.log(error)
+}finally{
+    action({type : "RESET_ORDER_LOADER"})
+}
+
+
+}

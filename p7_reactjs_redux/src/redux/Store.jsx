@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { productReducer, userReducer } from "./Reducers";
+import { orderReducer, productReducer, userReducer } from "./Reducers";
 
 
 
@@ -7,10 +7,10 @@ const store = configureStore({
 
     reducer : {
         user : userReducer,
-        product : productReducer
+        product : productReducer,
+        order : orderReducer
     }
 })
-
 
 
 export default store
