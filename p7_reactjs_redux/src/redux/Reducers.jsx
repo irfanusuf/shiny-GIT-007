@@ -26,13 +26,17 @@ const orderIntialState ={
 
 
 export const userReducer = createReducer(userIntialState, (builder) => {
+    builder.addCase("REQ_USER_API" , (state , action) =>{
+        state.loading = true
+    })
+
     builder.addCase("SET_USER", (state, action) => {
-        state.loading = true;
-        state.username = "irfan ";
-        state.email = "irfanusuf33@gmail.com";
+        state.loading = false
+        state.username =  action.username
+        state.email = action.email
     });
 
-    builder.addCase("RESET_USER_LOADER", (state, action) => {
+    builder.addCase("USER_API_FAILURE", (state, action) => {
         state.loading = false
     })
 

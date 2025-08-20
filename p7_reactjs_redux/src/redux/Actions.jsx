@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+import { axiosInstance } from "../utils/axiosInstance";
 
 
 export const handlUser = () => (action) => {
@@ -41,6 +43,39 @@ try {
 }finally{
     action({type : "RESET_ORDER_LOADER"})
 }
+
+
+}
+
+
+
+
+export const registerHandler = (formBody) => async (action)=>{
+
+    try {
+        action({type : "REQ_USER_API"})
+
+        const res = await axiosInstance.post("/user/register" , formBody)
+        if(res.status === 200){
+            toast.success(res.data.message)
+            action({type :"SET_USER" ,  username : formBody.username , email : formBody.email })
+        }
+    } catch (error) {
+
+
+        action({type : "USER_API_FAILURE"})
+        console.error(error)
+        if(error.status){
+            toast.error(error.response.data.message)
+        }
+  
+    }
+
+}
+
+export const loginHandler = (formBody) => async (action)=>{
+
+
 
 
 }
