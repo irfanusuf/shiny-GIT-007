@@ -4,6 +4,7 @@ const userIntialState = {
     username: "",
     email: "",
     loading: false,
+    errorMessage: ""
 };
 
 
@@ -17,29 +18,41 @@ const productIntialState = {
 
 
 
-const orderIntialState ={
-    loading : false,
-    orderId : "",
-    addressId : "",
-    orderValue : 0
+const orderIntialState = {
+    loading: false,
+    orderId: "",
+    addressId: "",
+    orderValue: 0
 }
 
 
 export const userReducer = createReducer(userIntialState, (builder) => {
-    builder.addCase("REQ_USER_API" , (state , action) =>{
+
+    
+    builder.addCase("INIT_LOADER", (state, action) => {
         state.loading = true
     })
 
     builder.addCase("SET_USER", (state, action) => {
         state.loading = false
-        state.username =  action.username
+        state.username = action.username
         state.email = action.email
     });
 
-    builder.addCase("USER_API_FAILURE", (state, action) => {
+    builder.addCase("REQUEST_FAILURE", (state, action) => {
+        state.loading = false
+        state.errorMessage = action.errorMessage
+    })
+
+
+    builder.addCase("RESET_LOADER", (state, action) => {
         state.loading = false
     })
 
+
+    builder.addCase("CLEAR_ERR_MSG", (state, action) => {
+        state.errorMessage = ""
+    })
 });
 
 
@@ -74,17 +87,17 @@ export const productReducer = createReducer(productIntialState, (builder) => {
 
 
 
-export const orderReducer =  createReducer(orderIntialState  , (builder)=>{
+export const orderReducer = createReducer(orderIntialState, (builder) => {
 
-    builder.addCase("GET_ORDER" , (state , action)=>{
+    builder.addCase("GET_ORDER", (state, action) => {
         state.loading = true
-        
+
         state.orderId = "kjasdhjssiuyqweiodcxhkchasidgasidu"
     })
 
 
-    builder.addCase("RESET_ORDER_LOADER" , (state , action)=>{
+    builder.addCase("RESET_ORDER_LOADER", (state, action) => {
         state.loading = false
-    
+
     })
 })

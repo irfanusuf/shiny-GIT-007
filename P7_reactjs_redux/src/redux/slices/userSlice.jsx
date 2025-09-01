@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../utils/axiosInstance";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
 
 
 
@@ -17,6 +18,31 @@ export const handleLogin = createAsyncThunk("user/login", async (formBody) => {
 })
 
 
+
+export const getUser = createAsyncThunk("user/get" , async (userId)=>{
+
+const res = await fetch (`/user/getuser?userId=${userId}` , {
+    method : "GET"
+})
+
+const data = await res.json()
+
+return data
+
+})
+
+
+
+export const getProducts = createApi({
+    reducerPath : "api",
+    baseQuery : fetchBaseQuery({baseUrl : "http://localhost:5294/api"}),
+    endpoints : (builder) =>({
+       getAll : builder.query("/product/getAll"),
+       getProductByID : builder.query("/product/getProduct/72453012980927398")
+
+    })
+})
+               
 
 const userSlice = createSlice({
     name: "user",
@@ -37,6 +63,8 @@ const userSlice = createSlice({
             state.loading = false
             state.errorMessage = action.error.message
         })
+
+
         builder.addCase(handleLogin.pending, (state) => {
             state.loading = true
         })

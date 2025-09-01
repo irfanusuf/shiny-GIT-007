@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "/home/irfan_usuf/Coding/GIT007/P2WebMVC/P2WebMVC.csproj": {}
+    "/home/irfanyousuf/coding/shiny-GIT-007/P2WebMVC/P2WebMVC.csproj": {}
   },
   "projects": {
-    "/home/irfan_usuf/Coding/GIT007/P0_Library/P0_Library.csproj": {
+    "/home/irfanyousuf/coding/shiny-GIT-007/P2WebMVC/P2WebMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/irfan_usuf/Coding/GIT007/P0_Library/P0_Library.csproj",
-        "projectName": "P0_Library",
-        "projectPath": "/home/irfan_usuf/Coding/GIT007/P0_Library/P0_Library.csproj",
-        "packagesPath": "/home/irfan_usuf/.nuget/packages/",
-        "outputPath": "/home/irfan_usuf/Coding/GIT007/P0_Library/obj/",
+        "projectUniqueName": "/home/irfanyousuf/coding/shiny-GIT-007/P2WebMVC/P2WebMVC.csproj",
+        "projectName": "P2WebMVC",
+        "projectPath": "/home/irfanyousuf/coding/shiny-GIT-007/P2WebMVC/P2WebMVC.csproj",
+        "packagesPath": "/home/irfanyousuf/.nuget/packages/",
+        "outputPath": "/home/irfanyousuf/coding/shiny-GIT-007/P2WebMVC/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/irfan_usuf/.nuget/NuGet/NuGet.Config"
+          "/home/irfanyousuf/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "/usr/lib64/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,64 +33,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
-      },
-      "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/8.0.111/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/home/irfan_usuf/Coding/GIT007/P2WebMVC/P2WebMVC.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/P2WebMVC.csproj",
-        "projectName": "P2WebMVC",
-        "projectPath": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/P2WebMVC.csproj",
-        "packagesPath": "/home/irfan_usuf/.nuget/packages/",
-        "outputPath": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/irfan_usuf/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net8.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
         },
-        "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
-            "projectReferences": {
-              "/home/irfan_usuf/Coding/GIT007/P0_Library/P0_Library.csproj": {
-                "projectPath": "/home/irfan_usuf/Coding/GIT007/P0_Library/P0_Library.csproj"
-              }
-            }
-          }
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -141,6 +91,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[8.0.19, 8.0.19]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -149,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/8.0.111/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -2419,16 +2419,6 @@
             "rid": "win"
           }
         }
-      },
-      "P0_Library/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/P0_Library.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/P0_Library.dll": {}
-        }
       }
     }
   },
@@ -7541,11 +7531,6 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
-    },
-    "P0_Library/1.0.0": {
-      "type": "project",
-      "path": "../P0_Library/P0_Library.csproj",
-      "msbuildProject": "../P0_Library/P0_Library.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7555,48 +7540,50 @@
       "Microsoft.EntityFrameworkCore >= 9.0.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.1",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.1",
-      "P0_Library >= 1.0.0",
       "Razorpay >= 3.1.4",
       "System.IdentityModel.Tokens.Jwt >= 8.3.1",
       "dotenv.net >= 3.2.1"
     ]
   },
   "packageFolders": {
-    "/home/irfan_usuf/.nuget/packages/": {}
+    "/home/irfanyousuf/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/P2WebMVC.csproj",
+      "projectUniqueName": "/home/irfanyousuf/coding/shiny-GIT-007/P2WebMVC/P2WebMVC.csproj",
       "projectName": "P2WebMVC",
-      "projectPath": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/P2WebMVC.csproj",
-      "packagesPath": "/home/irfan_usuf/.nuget/packages/",
-      "outputPath": "/home/irfan_usuf/Coding/GIT007/P2WebMVC/obj/",
+      "projectPath": "/home/irfanyousuf/coding/shiny-GIT-007/P2WebMVC/P2WebMVC.csproj",
+      "packagesPath": "/home/irfanyousuf/.nuget/packages/",
+      "outputPath": "/home/irfanyousuf/coding/shiny-GIT-007/P2WebMVC/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/irfan_usuf/.nuget/NuGet/NuGet.Config"
+        "/home/irfanyousuf/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "/usr/lib64/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {
-            "/home/irfan_usuf/Coding/GIT007/P0_Library/P0_Library.csproj": {
-              "projectPath": "/home/irfan_usuf/Coding/GIT007/P0_Library/P0_Library.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -7648,6 +7635,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "version": "[8.0.19, 8.0.19]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -7656,7 +7649,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/8.0.111/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
