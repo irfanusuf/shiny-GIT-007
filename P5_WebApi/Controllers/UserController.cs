@@ -1,10 +1,10 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P0_ClassLibrary.Interfaces;
 using P5_WebApi.Data;
-using P5_WebApi.Models;
+using P5_WebApi.Models.DomainModels;
+
 
 namespace P5_WebApi.Controllers
 {
@@ -61,16 +61,12 @@ namespace P5_WebApi.Controllers
 
 
             // token ko  cookies may send kerna hai  
-
-
-
-
             // message and token ko json object may send kerdiya philhaal
             return Ok(new
             {
                 message = "Register Succesfull",
-                payload = req
-                // authToken = token
+                payload = req,
+                authToken = token
             });
         }
 

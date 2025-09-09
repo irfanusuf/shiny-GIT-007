@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
-using P5_WebApi.Models;
+using P5_WebApi.Models.DomainModels;
+
 
 namespace P5_WebApi.Controllers
 {

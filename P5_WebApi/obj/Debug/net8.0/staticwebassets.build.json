@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "mx5oXhRgRZy/jtY/8kwhdIlPMRECBlAMhYpV489qi6s=",
+  "Hash": "MzkhDjkAPjA5STtHnGcYouX2aklbWFI46rI5J53OFYo=",
   "Source": "P5_WebApi",
   "BasePath": "_content/P5_WebApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
