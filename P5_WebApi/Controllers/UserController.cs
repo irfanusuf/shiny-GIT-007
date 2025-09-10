@@ -93,7 +93,7 @@ namespace P5_WebApi.Controllers
 
                 if (checkPass)
                 {
-                    var token = tokenService.CreateToken(existingUser.UserId, req.Email, existingUser.Username, 60 * 24);
+                    var token = tokenService.CreateToken(existingUser.UserId, req.Email, existingUser.Username ?? "John Doe" , 60 * 24);
 
                     HttpContext.Response.Cookies.Append("Authorization_Token_React", token, new CookieOptions
                     {

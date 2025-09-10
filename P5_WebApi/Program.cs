@@ -12,8 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// builder.Services.AddEndpointsApiExplorer();
+// builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("cloud")));
 
@@ -38,9 +38,6 @@ builder.Services.AddSingleton<ITokenService>(_ => new TokenService(SecretKey));
 builder.Services.AddSingleton<ICalculatorService, CalculatorService>();
 // regular as usual   // but complexity behind
 builder.Services.AddSingleton<IMailService, EmailService>();
-
-
-
 
 
 var app = builder.Build();
