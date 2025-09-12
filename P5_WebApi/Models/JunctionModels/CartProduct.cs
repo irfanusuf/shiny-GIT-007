@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using P5_WebApi.Models.DomainModels;
 
 
@@ -13,6 +14,8 @@ public class CartProduct
 
     public required Guid CartId { get; set; } // Fk
     [ForeignKey("CartId")]
+
+    [JsonIgnore]
     public Cart? Cart { get; set; } // navigation property //  belonging to a cart
 
 
