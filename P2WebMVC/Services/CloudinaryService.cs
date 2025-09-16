@@ -52,7 +52,8 @@ public class CloudinaryService : ICloudinaryService
         var uploadParams = new ImageUploadParams
         {
             File = new FileDescription(image.FileName, stream),
-            UseFilename = true,
+    
+
             UniqueFilename = false,
             Overwrite = true,
             Folder = "Trinkle"

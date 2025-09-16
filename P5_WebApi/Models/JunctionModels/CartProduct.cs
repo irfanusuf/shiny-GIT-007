@@ -21,6 +21,8 @@ public class CartProduct
 
     public required Guid ProductId { get; set; } // Fk
     [ForeignKey("ProductId")]
+
+    [JsonIgnore]
     public Product? Product { get; set; } // navigation property //  belonging to a product
 
 

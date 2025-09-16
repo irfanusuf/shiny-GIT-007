@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using P5_WebApi.Models.JunctionModels;
 
 
@@ -12,6 +13,9 @@ public class Cart
     public Guid CartId { get; set; } = Guid.NewGuid();
     public required Guid UserId { get; set; }  // Fk
     [ForeignKey("UserId")]
+
+
+    [JsonIgnore]
     public User? Buyer { get; set; }  // navigation property //  belonging to a user
 
 
