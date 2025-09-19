@@ -49,14 +49,12 @@ namespace P5_WebApi.Controllers
                 }
 
                 // finding product with its id
-                var product = await sqlDb.Products.FindAsync(productId);
+                var product = await sqlDb.Products.FindAsync(productId);   // O(1)
 
                 if (product == null)
                 {
                     return NotFound(new { message = "Product not found !" });
                 }
-
-                // var user = await sqlDb.Users.Include(user => user.Cart).ThenInclude(cart => cart.CartProducts).FirstOrDefaultAsync(user => user.UserId == userId);
 
                 var cart = await sqlDb.Carts.Include(cart => cart.CartProducts).FirstOrDefaultAsync(cart => cart.UserId == userId);
 
@@ -73,20 +71,20 @@ namespace P5_WebApi.Controllers
                         CartId = newCart.CartId,
                         ProductId = productId,
                         Quantity = qty,
+                        ProductPrice = product.ProductPrice
                     };
 
                     await sqlDb.Carts.AddAsync(newCart);
                     await sqlDb.CartProducts.AddAsync(cartProduct);
-
                     await sqlDb.SaveChangesAsync();
                     return Ok(new { message = "cart created", payload = newCart });
                 }
                 else
                 {
                     var existingCartProduct = await sqlDb.CartProducts.FirstOrDefaultAsync(cp => cp.ProductId == productId && cp.CartId == cart.CartId);
+                 
                     if (existingCartProduct != null)
                     {
-
                         existingCartProduct.Quantity += qty;
                     }
                     else
@@ -95,11 +93,10 @@ namespace P5_WebApi.Controllers
                         {
                             CartId = cart.CartId,
                             ProductId = productId,
-                            Quantity = qty
+                            Quantity = qty,
+                            ProductPrice = product.ProductPrice
 
                         };
-
-
                         await sqlDb.CartProducts.AddAsync(cartProduct);
                     }
 
@@ -107,7 +104,6 @@ namespace P5_WebApi.Controllers
                     cart.CartTotal += product.ProductPrice * qty;
                     await sqlDb.SaveChangesAsync();
                     // updation pending
-
                     return Ok(new { messsage = "Cart updated succesfully", payload = cart });
                 }
             }
@@ -120,14 +116,12 @@ namespace P5_WebApi.Controllers
 
 
 
+        [HttpPost("RemoveFromCart")]
         public async Task<ActionResult> RemovefromCart(Guid productid)
         {
-
-
-
             try
             {
-                var token = HttpContext.Request.Cookies["Auth_token"];
+                var token = HttpContext.Request.Cookies["Authorization_Token_React"];
 
                 if (token == null)
                 {
@@ -140,16 +134,49 @@ namespace P5_WebApi.Controllers
                     return StatusCode(404, new { message = "please login" });
                 }
 
-                var cart = await sqlDb.Carts.FirstOrDefaultAsync(cart => cart.UserId == userId);
+                // var product = await sqlDb.Products.FindAsync(productid);
+
+                // if (product == null)
+                // {
+                //     return NotFound(new { message = "Product not Found !" });
+                // }
+
+                // cart fetch    // sub query cartproducts fetch
+                var cart = await sqlDb.Carts.Include(cart => cart.CartProducts).FirstOrDefaultAsync(cart => cart.UserId == userId);
+
+                if (cart == null)
+                {
+                    return NotFound(new { message = "Cart not Found !" });
+                }
 
 
-                if (cart.CartProducts.Where(cp => cp.ProductId == productid) != null)
+                // buffer // List  // query is very fast 
+                var cartproduct = cart.CartProducts.FirstOrDefault(cp => cp.CartId == cart.CartId && cp.ProductId == productid);
+
+                // async db query slow
+                // var cartProduct = await sqlDb.CartProducts.FirstOrDefaultAsync(cp => cp.CartId == cart.CartId && cp.ProductId == productid);
+
+
+                if (cartproduct == null)
+                {
+                    return NotFound(new { message = "Cart Item Not Found !" });
+                }
+
+                var remove = sqlDb.CartProducts.Remove(cartproduct);
+
+                if (remove != null)
                 {
 
-                }
-                //var product = sqlDb.Products.FindAsync(productid);
+                    cart.CartTotal -= cartproduct.ProductPrice * cartproduct.Quantity;
+                    await sqlDb.SaveChangesAsync();
 
-                //var cartproduct = await sqlDb.CartProducts.FirstOrDefaultAsync(cp => cp.ProductId == productid);
+                    return Ok(new { message = "Item removed From the Cart !", payload = cart });
+                }
+                else
+                {
+                    return BadRequest(new { message = "Something Went Wrong !" });
+                }
+
 
 
             }
@@ -160,7 +187,7 @@ namespace P5_WebApi.Controllers
             }
 
 
-            return Ok();
+
 
         }
 
