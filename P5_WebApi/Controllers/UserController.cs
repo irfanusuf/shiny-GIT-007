@@ -70,7 +70,6 @@ namespace P5_WebApi.Controllers
             });
         }
 
-
         [HttpPost("Login")]
         public async Task<IActionResult> Login(User req)
         {
@@ -136,8 +135,6 @@ namespace P5_WebApi.Controllers
 
         }
 
-
-
         [HttpGet("Verify")]
         public IActionResult Verify(string token)
         {
@@ -156,8 +153,6 @@ namespace P5_WebApi.Controllers
                 return StatusCode(403 , new {message = "Forbidden to access !" });
             }
         }
-
-
 
         [HttpGet("ForgotPass")]
         public IActionResult ForgotPass(string email)

@@ -1,10 +1,10 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+
+using CloudinaryDotNet.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P0_ClassLibrary.Interfaces;
 using P5_WebApi.Data;
+using P5_WebApi.Middlewares;
 using P5_WebApi.Models.DomainModels;
 using P5_WebApi.Models.JunctionModels;
 
@@ -26,27 +26,20 @@ namespace P5_WebApi.Controllers
         }
 
 
-        // [Authorize]
+        [Authorize]
         [HttpPost("addtocart")]
         public async Task<ActionResult> AddtoCart(Guid productId, int qty)
         {
 
             try
             { // fetch token
-                var token = HttpContext.Request.Cookies["Authorization_Token_React"];
 
-                if (string.IsNullOrEmpty(token))
-                {
-                    return StatusCode(403, new { message = "Session Expired .kindly Login again ! " });
-                }
 
-                // verify token 
-                var userId = tokenService.VerifyTokenAndGetId(token);
+                var fetchUserIDFromItems = HttpContext.Items["userId"].ToString();
 
-                if (userId == Guid.Empty)
-                {
-                    return Unauthorized(new { message = "Unauthorized to access , kindly login again !" });
-                }
+           
+
+                var userId =  Guid.Parse(fetchUserIDFromItems);
 
                 // finding product with its id
                 var product = await sqlDb.Products.FindAsync(productId);   // O(1)

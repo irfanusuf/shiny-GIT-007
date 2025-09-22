@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P5_WebApi.Data;
+using P5_WebApi.Middlewares;
 using P5_WebApi.Models.DomainModels;
 
 
@@ -22,23 +23,19 @@ namespace P5_WebApi.Controllers
         }
 
 
+        [Authorize]
         [HttpPost("create")]
         public async Task<IActionResult> CreateProduct(Product product)
         {
-
             try
             {
-
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(new { message = "All the product data is required !" });
                 }
 
-
                 await sqlDb.Products.AddAsync(product);
                 await sqlDb.SaveChangesAsync();
-
-
                 return Ok(new
                 {
                     message = "Product added to the list succesfully !"
@@ -47,15 +44,13 @@ namespace P5_WebApi.Controllers
             }
             catch (System.Exception)
             {
-
                 return StatusCode(500, new { message = "Internal server Error" });
-
             }
 
         }
 
+        [Authorize]
         [HttpGet("archive")]
-
         public async Task<IActionResult> ArchiveProduct(Guid productId)
         {
             try
@@ -96,9 +91,8 @@ namespace P5_WebApi.Controllers
 
         }
 
-
+        [Authorize]
         [HttpGet("unarchive")]
-
         public async Task<IActionResult> UnArchiveProduct(Guid productId)
         {
             try
@@ -138,10 +132,9 @@ namespace P5_WebApi.Controllers
             }
 
         }
-
-
+       
+        [Authorize]
         [HttpGet("delete")]
-
         public async Task<ActionResult> DeleteProduct(Guid productId)
         {
             
@@ -178,17 +171,14 @@ namespace P5_WebApi.Controllers
             }
 
         }
-
-
-
+      
+        [Authorize]
         [HttpPut("update")]
-
         public async Task<IActionResult> UpdateProduct(Guid productId, Product product)
         {
             try
             {
                 var existingproduct = await sqlDb.Products.FindAsync(productId);
-
 
                 if (existingproduct == null)
                 {
@@ -222,14 +212,11 @@ namespace P5_WebApi.Controllers
 
         }
 
-
-
         [HttpGet("getAll")]
         public async Task<ActionResult> GetProducts()
         {
             try
             {
-
                 var products = await sqlDb.Products.Where(p => p.IsAvailable == true).ToListAsync();
 
                 return Ok(new { message = $"{products.Count} products are found !", payload = products });
@@ -244,7 +231,6 @@ namespace P5_WebApi.Controllers
 
 
         [HttpGet("getById")]
-
         public async Task<ActionResult> GetProductById(Guid productId)
         {
 
