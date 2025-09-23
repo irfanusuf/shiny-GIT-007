@@ -12,10 +12,10 @@ namespace P5_WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
+    [Authorize]
     public class CartController : ControllerBase
     {
-
-
         private readonly SqlDbContext sqlDb;
         private readonly ITokenService tokenService;
         public CartController(SqlDbContext dbContext, ITokenService tokenService)
@@ -26,7 +26,6 @@ namespace P5_WebApi.Controllers
         }
 
 
-        [Authorize]
         [HttpPost("addtocart")]
         public async Task<ActionResult> AddtoCart(Guid productId, int qty)
         {
@@ -35,11 +34,8 @@ namespace P5_WebApi.Controllers
             { // fetch token
 
 
-                var fetchUserIDFromItems = HttpContext.Items["userId"].ToString();
+                var userId = Guid.Parse(HttpContext.Items["userId"].ToString());
 
-           
-
-                var userId =  Guid.Parse(fetchUserIDFromItems);
 
                 // finding product with its id
                 var product = await sqlDb.Products.FindAsync(productId);   // O(1)
@@ -75,7 +71,7 @@ namespace P5_WebApi.Controllers
                 else
                 {
                     var existingCartProduct = await sqlDb.CartProducts.FirstOrDefaultAsync(cp => cp.ProductId == productId && cp.CartId == cart.CartId);
-                 
+
                     if (existingCartProduct != null)
                     {
                         existingCartProduct.Quantity += qty;
@@ -107,32 +103,12 @@ namespace P5_WebApi.Controllers
 
         }
 
-
-
         [HttpPost("RemoveFromCart")]
         public async Task<ActionResult> RemovefromCart(Guid productid)
         {
             try
             {
-                var token = HttpContext.Request.Cookies["Authorization_Token_React"];
-
-                if (token == null)
-                {
-                    return StatusCode(403, new { message = "please login" });
-                }
-
-                var userId = tokenService.VerifyTokenAndGetId(token);
-                if (userId == Guid.Empty)
-                {
-                    return StatusCode(404, new { message = "please login" });
-                }
-
-                // var product = await sqlDb.Products.FindAsync(productid);
-
-                // if (product == null)
-                // {
-                //     return NotFound(new { message = "Product not Found !" });
-                // }
+                Guid userId = (Guid)(HttpContext.Items["userId"] as Guid?);
 
                 // cart fetch    // sub query cartproducts fetch
                 var cart = await sqlDb.Carts.Include(cart => cart.CartProducts).FirstOrDefaultAsync(cart => cart.UserId == userId);
@@ -183,9 +159,30 @@ namespace P5_WebApi.Controllers
 
 
         }
+      
+        [HttpGet("increaseQuantity")]
+        public ActionResult IncreaseQuantity(Guid productId)
+        {
 
 
+            return Ok();
+        }
 
+        [HttpGet("decreaseQuantity")]
+        public ActionResult DescreaseQuantity(Guid productId)
+        {
+
+
+            return Ok();
+        }
+
+        [HttpGet("clearCart")]
+        public ActionResult ClearCart(Guid cartId)
+        {
+
+
+            return Ok();
+        }
 
     }
 }

@@ -1,28 +1,22 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
+import Home from './components/pages/Home'
 import Navbar from './components/shared/Navbar'
-import Account from './pages/Account'
 import { ToastContainer } from 'react-toastify'
 
-
-
-
+import Login from './components/pages/Login'
+import Register from './components/pages/Register'
 
 
 const App = () => {
-
-
     return (
         <BrowserRouter>
         <ToastContainer/>
         <Navbar/>
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/user/account' element={<Account />} />
-                <Route path='/user/dashboard' element={<Home />} />
-
-    
+                <Route path='/user/register' element={<Register/>} />
+                <Route path='/user/login' element={<Login />} />
             </Routes>
         </BrowserRouter>
     )

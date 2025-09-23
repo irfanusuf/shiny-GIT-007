@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Link } from "react-router-dom";
 import userProfile from "../../assets/user.png";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { handleRegister } from '../../redux/slices/userSlice';
 
 
@@ -16,10 +16,15 @@ const Register = ({ setShowRegister, userState }) => {
     
     const formBody = { username, email, password }
 
+    const {loading} = useSelector(state => state.userStore)
+
+
+
+
     const dispatch = useDispatch()
 
     return (
-        <div className={userState.darkmode ? "regsiter-dark register " : "register-light register "} >
+        <div className={true ? "regsiter-dark register " : "register-light register "} >
 
             <h2 style={{ textAlign: "center", color: "grey" }}> Register with us  <img src={userProfile} width={50} /> </h2>
             <form>
@@ -62,14 +67,18 @@ const Register = ({ setShowRegister, userState }) => {
                 </div>
 
                 <div className="links" >
-                    <p>Already have an account go to <Link onClick={() => { setShowRegister(false) }}>  Login </Link> </p>
+                    <p>Already have an account go to <Link to={"/user/login"}>  Login </Link> </p>
                     <p> Checkout our <Link> user agreement policy  </Link>  & <Link> Terms and Conditions</Link> </p>
                 </div>
 
                 <button 
                 type="button" 
-                onClick={() => {dispatch(handleRegister(formBody))}} 
-                disabled ={userState.loading}  > {userState.loading ? "Wait...." : "Register"} 
+                onClick={() => {dispatch(handleRegister(formBody))}} disabled ={loading} > 
+                
+                
+                {loading ? "Wait...." : "Register"} 
+
+
                 </button>
                 
             </form>

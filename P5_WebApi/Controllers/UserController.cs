@@ -30,7 +30,7 @@ namespace P5_WebApi.Controllers
         {
             // register logic
 
-            if (!ModelState.IsValid)
+            if (string.IsNullOrEmpty(req.Username) || string.IsNullOrEmpty(req.Email) || string.IsNullOrEmpty(req.Password))
             {
                 return BadRequest(new
                 {
@@ -38,7 +38,7 @@ namespace P5_WebApi.Controllers
                 });
             }
 
-            var user = await dbcontext.Users.FirstOrDefaultAsync(u=> u.Email == req.Email);
+            var user = await dbcontext.Users.FirstOrDefaultAsync(u => u.Email == req.Email);
 
             if (user != null)
             {
@@ -57,11 +57,17 @@ namespace P5_WebApi.Controllers
 
             await dbcontext.SaveChangesAsync();
 
-           var token =  tokenService.CreateToken(req.UserId, req.Email, req.Username ?? "Guest User", 24);
+            var token = tokenService.CreateToken(req.UserId, req.Email, req.Username ?? "Guest User", 60*24*7);
+
+            HttpContext.Response.Cookies.Append("Authorization_Token_React", token, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = false,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.UtcNow.AddHours(24*7)
+            });
 
 
-            // token ko  cookies may send kerna hai  
-            // message and token ko json object may send kerdiya philhaal
             return Ok(new
             {
                 message = "Register Succesfull",
@@ -75,50 +81,41 @@ namespace P5_WebApi.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
+                if (string.IsNullOrEmpty(req.Email) || string.IsNullOrEmpty(req.Password))
                 {
-                    return StatusCode(400, new { message = "All credentials required!" });
+                    return BadRequest(new
+                    {
+                        message = "All the feilds are required!"
+                    });
                 }
 
                 var existingUser = await dbcontext.Users.FirstOrDefaultAsync(u => u.Email == req.Email);
 
-
                 if (existingUser == null)
                 {
-                      return StatusCode (404 , new  {  message = "User not Found!"} );
+                    return StatusCode(404, new { message = "User not Found!" });
                 }
-
                 var checkPass = BCrypt.Net.BCrypt.Verify(req.Password, existingUser.Password);
 
                 if (checkPass)
                 {
-                    var token = tokenService.CreateToken(existingUser.UserId, req.Email, existingUser.Username ?? "John Doe" , 60 * 24);
+                    var token = tokenService.CreateToken(existingUser.UserId, req.Email, existingUser.Username ?? "John Doe", 60 * 24 *7);
 
                     HttpContext.Response.Cookies.Append("Authorization_Token_React", token, new CookieOptions
                     {
                         HttpOnly = true,
                         Secure = false,
                         SameSite = SameSiteMode.None,
-                        Expires = DateTimeOffset.UtcNow.AddHours(24)
+                        Expires = DateTime.UtcNow.AddHours(24 *7)
                     });
 
 
-                    return Ok(new {message = "Login SuccesFull !"  , payload = token });
-
-                    // var returnUrl = HttpContext.Session.GetString("ReturnUrl");
-
-                    // HttpContext.Session.Remove("ReturnUrl");
-
-                    // // token ko cookies may save kerna .... // done 9 april 
-                    // if (string.IsNullOrEmpty(returnUrl))
-                    // {
-                    //     return RedirectToAction("Dashboard", "Admin");
-                    // }
-                    // else
-                    // {
-                    //     // redirect to return Url 
-                    //     return Redirect(returnUrl);
-                    // }
+                    return Ok(new
+                    {
+                        message = "Login SuccesFull !",
+                        payload = existingUser,
+                        authToken = token,
+                    });
 
                 }
 
@@ -150,7 +147,7 @@ namespace P5_WebApi.Controllers
             }
             else
             {
-                return StatusCode(403 , new {message = "Forbidden to access !" });
+                return StatusCode(403, new { message = "Forbidden to access !" });
             }
         }
 
